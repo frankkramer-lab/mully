@@ -9,7 +9,6 @@
 #'
 #' @return The node as igraph.vs
 #' @export
-#'
 getNode <- function(g, nameNode) {
   if (missing(g) ||
       missing(nameNode) || nameNode == "" ||
@@ -30,7 +29,6 @@ getNode <- function(g, nameNode) {
 #'
 #' @return The id of the specified node
 #' @export
-#'
 getIDNode <- function(g, nameNode) {
   if (missing(g) ||
       missing(nameNode) || nameNode == "" ||
@@ -53,7 +51,6 @@ getIDNode <- function(g, nameNode) {
 #'
 #' @return The graph, with the new node.
 #' @export
-#'
 addNode <- function(g, nodeName, layerName, attributes = NA) {
   #Check Arguments
   if (missing(g) ||
@@ -97,10 +94,6 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
 #'
 #' @return The graph, with the nodes deleted.
 #' @export
-#'
-#' @examples
-#' removeNode(g,"A")
-#' removeNode(g,c("A","D"))
 removeNode <- function(g, name,trans=F) {
   #Check arguments
   if (missing(g) ||
@@ -134,7 +127,6 @@ removeNode <- function(g, name,trans=F) {
 #'
 #' @return A framework containing the attributes of the specified node
 #' @export
-#'
 getNodeAttributes<-function(g,nameNode){
 
   if(missing(g) || missing(nameNode)|| !is.igraph(g) || !is.character(nameNode)){

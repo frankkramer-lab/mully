@@ -10,7 +10,6 @@
 #'
 #' @return The graph, with the layers added.
 #' @export
-#'
 addLayer <- function(g, nameLayer) {
   if (missing(g) || missing(nameLayer) || nameLayer == "") {
     stop("Invalid Argument")
@@ -38,7 +37,6 @@ addLayer <- function(g, nameLayer) {
 #'
 #' @return A boolean value.
 #' @export
-#'
 isLayer <- function(g, name) {
   nameLayerLowerCase = casefold(name, upper = FALSE)
   if (nameLayerLowerCase %in% g$layers$NameLower) {
@@ -54,7 +52,6 @@ isLayer <- function(g, name) {
 #'
 #' @return The count of the layers.
 #' @export
-#'The first endpoint of the edge
 getLayersCount <- function(g) {
   return(dim(g$layers)[1])
 }
@@ -81,7 +78,6 @@ getIDLayer <- function(g, nameLayer) {
 #'
 #' @return A List of the nodes on the given layer.
 #' @export
-#'
 getLayer <- function(g, nameLayer) {
   if (missing(g) || missing(nameLayer)) {
     stop("Invalid Argument")
@@ -99,7 +95,6 @@ getLayer <- function(g, nameLayer) {
 #'
 #' @return The graph, with the given layer and its corresponding nodes and edges removed.
 #' @export
-#'
 removeLayer <- function(g, name,trans=F) {
   if (missing(g) ||
       missing(name) || name == "" ||

@@ -19,8 +19,4 @@ The graph, with the nodes deleted.
 \description{
 Delete a node or a set of nodes from a graph
 }
-\examples{
-removeNode(g,"A")
-removeNode(g,c("A","D"))
-}
 

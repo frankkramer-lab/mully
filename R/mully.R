@@ -7,7 +7,6 @@
 #'
 #' @return The created multilayered graph.
 #' @export
-#'
 mully <- function(name = NA, direct = TRUE) {
   #Create the layers Indexation Table
   #Vector for the layers indexation

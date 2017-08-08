@@ -10,7 +10,6 @@
 #'
 #' @return A list containing the ids of the edges connecting the nodes
 #' @export
-#'
 getIDEdge <- function(g, nodeStart, nodeDest) {
   if(missing(g) || missing(nodeStart) || missing(nodeDest) || !is.igraph(g)){
     stop("Invalid Arguments")
@@ -41,7 +40,6 @@ getIDEdge <- function(g, nodeStart, nodeDest) {
 #'
 #' @return A framework containing the edges with their attributes
 #' @export
-#'
 getEdgeAttributes<-function(g,nodeStart,nodeDest){
 
   if(missing(g) || !is.igraph(g)){
@@ -115,7 +113,6 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
 #'
 #' @return The graph with the deleted edges
 #' @export
-#'
 removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
 
   if (!are.connected(g,nodeStart,nodeDest)) {
