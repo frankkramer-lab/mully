@@ -32,6 +32,12 @@ mully <- function(name = NA, direct = TRUE) {
   return(g)
 }
 
+is.mully<-function(g){
+  if(!is.igraph(g) || is.na(g$layers) || is.na(g$iLayer))
+    return(F)
+  return(T)
+}
+
 getLayout<-function(g,layout){
   if(layout=="random")
     return(getRandomLayout(g))
