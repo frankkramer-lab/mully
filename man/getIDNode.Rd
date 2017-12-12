@@ -7,7 +7,7 @@
 getIDNode(g, nameNode)
 }
 \arguments{
-\item{g}{The inout graph}
+\item{g}{The input graph}
 
 \item{nameNode}{The name of the node}
 }

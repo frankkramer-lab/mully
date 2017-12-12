@@ -14,7 +14,7 @@ getEdgeAttributes(g, nodeStart, nodeDest)
 \item{nodeDest}{The second endpoint of the edge}
 }
 \value{
-A framework containing the edges with their attributes
+A dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns all the edges with their attributes.
 }
 \description{
 Get the attributes of the edges connecting two nodes
