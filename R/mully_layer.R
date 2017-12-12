@@ -11,7 +11,7 @@
 #' @return The graph, with the layers added.
 #' @export
 addLayer <- function(g, nameLayer) {
-  if (missing(g) || missing(nameLayer) || nameLayer == "") {
+  if (missing(g) || !is.mully(g) || missing(nameLayer) || nameLayer == "") {
     stop("Invalid Argument")
   }
   for (layer in nameLayer) {
@@ -58,7 +58,7 @@ getLayersCount <- function(g) {
 
 
 getIDLayer <- function(g, nameLayer) {
-  if (missing(g) ||
+  if (missing(g) || !is.mully(g) ||
       missing(nameLayer) || nameLayer == "" ||
       !is.character(nameLayer)) {
     stop("Invalid Argument")
@@ -79,7 +79,7 @@ getIDLayer <- function(g, nameLayer) {
 #' @return A List of the nodes on the given layer.
 #' @export
 getLayer <- function(g, nameLayer) {
-  if (missing(g) || missing(nameLayer)) {
+  if (missing(g) || !is.mully(g) || missing(nameLayer)) {
     stop("Invalid Argument")
   }
   id = getIDLayer(g, nameLayer)
@@ -87,7 +87,7 @@ getLayer <- function(g, nameLayer) {
 }
 
 getLayerByID <- function(g, id) {
-  if (missing(g) || missing(id)) {
+  if (missing(g) || !is.mully(g) || missing(id)) {
     stop("Invalid Argument")
   }
   return(V(g)[which(V(g)$n == id)])
@@ -103,8 +103,7 @@ getLayerByID <- function(g, id) {
 #' @export
 removeLayer <- function(g, name,trans=F) {
   if (missing(g) ||
-      missing(name) || name == "" ||
-      !is.igraph(g)) {
+      missing(name) || name == "" || !is.mully(g)) {
     stop("Invalid Arguments")
   }
   for (layer in name) {

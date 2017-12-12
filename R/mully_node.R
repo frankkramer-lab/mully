@@ -10,9 +10,7 @@
 #' @return The node as igraph.vs
 #' @export
 getNode <- function(g, nameNode) {
-  if (missing(g) ||
-      missing(nameNode) || nameNode == "" ||
-      !is.character(nameNode) || !is.igraph(g)) {
+  if (missing(g) || !is.mully(g) || missing(nameNode)) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
@@ -24,7 +22,7 @@ getNode <- function(g, nameNode) {
 
 #' Get the id of a node
 #'
-#' @param g The inout graph
+#' @param g The input graph
 #' @param nameNode The name of the node
 #'
 #' @return The id of the specified node
@@ -32,7 +30,7 @@ getNode <- function(g, nameNode) {
 getIDNode <- function(g, nameNode) {
   if (missing(g) ||
       missing(nameNode) || nameNode == "" ||
-      !is.character(nameNode) || !is.igraph(g)) {
+      !is.character(nameNode) || !is.mully(g)) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
@@ -56,10 +54,10 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
   if (missing(g) ||
       missing(nodeName) ||
       missing(layerName) ||
-      nodeName == "" || !is.character(nodeName) || !is.igraph(g)) {
+      nodeName == "" || !is.character(nodeName) || !is.mully(g)) {
     stop("Invalid Arguments")
   }
-
+  #FIXME it shouldn't be like this; check both layer and name; we can have the same name on two different layers
   #Check if the node exists
   if (nodeName %in% V(g)$name) {
     stop("Node already exists")
@@ -97,8 +95,7 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
 removeNode <- function(g, name,trans=F) {
   #Check arguments
   if (missing(g) ||
-      missing(name) ||
-      !is.igraph(g)) {
+      missing(name) || !is.mully(g)) {
     stop("Invalid Arguments")
   }
   for (node in name) {
@@ -129,7 +126,7 @@ removeNode <- function(g, name,trans=F) {
 #' @export
 getNodeAttributes<-function(g,nameNode){
 
-  if(missing(g) || missing(nameNode)|| !is.igraph(g) || !is.character(nameNode)){
+  if(missing(g) || missing(nameNode) || !is.mully(g) || !is.character(nameNode)){
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){

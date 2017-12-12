@@ -11,7 +11,7 @@
 #' @return A list containing the ids of the edges connecting the nodes
 #' @export
 getIDEdge <- function(g, nodeStart, nodeDest) {
-  if(missing(g) || missing(nodeStart) || missing(nodeDest) || !is.igraph(g)){
+  if(missing(g) || !is.mully(g) || missing(nodeStart) || missing(nodeDest)){
     stop("Invalid Arguments")
   }
   v1 = getNode(g, nodeStart)
@@ -38,11 +38,11 @@ getIDEdge <- function(g, nodeStart, nodeDest) {
 #' @param nodeStart The first endpoint of the edge
 #' @param nodeDest The second endpoint of the edge
 #'
-#' @return A framework containing the edges with their attributes
+#' @return A dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns all the edges with their attributes.
 #' @export
 getEdgeAttributes<-function(g,nodeStart,nodeDest){
 
-  if(missing(g) || !is.igraph(g)){
+  if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")
   }
   edgeList=as.data.frame(get.edgelist(g))
@@ -57,7 +57,6 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
   }
   return(edgeAttributes[edge,])
 }
-
 
 
 #' Add an edge
@@ -161,7 +160,7 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
 
 addTransEdges<-function(g,nodes){
 
-  if(missing(g) || missing(nodes) || !is.igraph(g)){
+  if(missing(g) || missing(nodes) || !is.mully(g)){
     stop("Invalid Arguments")
   }
   allEdges=as.data.frame(get.edgelist(g))
