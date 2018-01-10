@@ -14,6 +14,7 @@ getNode <- function(g, nameNode) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
+    print("Node Does not Exist")
     return(NULL)
   }
   return(V(g)[which(V(g)$name == nameNode)])
@@ -34,7 +35,8 @@ getIDNode <- function(g, nameNode) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
-    stop("Node Does not Exist")
+    print("Node Does not Exist")
+    return(NULL)
   }
   return(which(V(g)$name == nameNode))
 }
@@ -57,9 +59,9 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
       nodeName == "" || !is.character(nodeName) || !is.mully(g)) {
     stop("Invalid Arguments")
   }
-  #FIXME it shouldn't be like this; check both layer and name; we can have the same name on two different layers
   #Check if the node exists
-  if (nodeName %in% V(g)$name) {
+  nodeToAdd=getNode(g,nodeName)
+  if (!is.null(nodeToAdd) && nodeToAdd$n==getIDLayer(g,layerName)) {
     stop("Node already exists")
   }
 
