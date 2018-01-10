@@ -48,6 +48,9 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
   edgeList=as.data.frame(get.edgelist(g))
   attributes=as.data.frame(get.edge.attribute(g))
   edgeAttributes=cbind(edgeList,attributes)
+  if(missing(nodeStart) && missing(nodeDest)){
+    return(edgeAttributes)
+  }
   edge=c(1:dim(edgeAttributes)[1])
   if(!missing(nodeStart) && !missing(nodeDest)){
     if(!nodeStart%in%V(g)$name || !nodeDest%in%V(g)$name){
