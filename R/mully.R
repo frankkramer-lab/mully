@@ -37,3 +37,9 @@ is.mully<-function(g){
     return(F)
   return(T)
 }
+
+
+# #TODO overwrite igraph.print
+# mully.print<-function(g){
+#
+# }

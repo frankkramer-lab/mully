@@ -58,6 +58,7 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
     }
     edge=getIDEdge(g,nodeStart,nodeDest)
   }
+  #TODO if one of the arguments is missing, return with the other node's edges only
   return(edgeAttributes[edge,])
 }
 
