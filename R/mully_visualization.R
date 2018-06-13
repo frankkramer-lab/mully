@@ -14,8 +14,13 @@ getRandomLayout<-function(g){
     if(is.null(layer) || is.na(layer))
       next
 
-    xs=runif(length(as.vector(layer)),-4,4)
-    V(g2)[which(V(g)$n==i)]$x=xs
+    repeat{
+      xs=runif(length(as.vector(layer)),-4,4)
+      if(!TRUE%in%duplicated(xs)){
+      V(g2)[which(V(g)$n==i)]$x=xs
+      break
+      }
+    }
   }
   return(cbind(V(g2)$x,y))
 }
@@ -44,5 +49,57 @@ getMarkGroups<-function(g){
 }
 
 plot.mully<-function(g,layout){
-  plot.igraph(g,mark.groups = getMarkGroups(g),layout=getLayout(g,layout))
+  gps=getMarkGroups(g)
+  cols=randomColor(count=length(g$layers))
+  for(i in 1:length(cols))
+    V(g)[which(V(g)$n==i)]$color=cols[i]
+  V(g)$color
+  plot.new()
+  # filledrectangle(wx = 1, wy = 0.5, col = "gray",mid = c(0, 0), angle = 0)
+  plot.igraph(g,vertex.color=V(g)$color,layout=getLayout(g,layout))
 }
+
+#Create 3d coordinates of the network layout
+circpos=function(n,r=1){#Coordinates on a circle
+  rad=seq(0,2*pi,length.out=n+1)[-1];x=cos(rad)*r;y=sin(rad)*r
+  return(cbind(x,y))
+}
+
+
+plot.mully.3d<-function(g){
+  rgl.open()
+  rgl.bg(sphere=TRUE, color=c("grey","blue"), lit=FALSE, back="lines" )
+  gps=getMarkGroups(g)
+  # zmin=1
+  # for(i in 1:length(gps)){
+  #   #shapelist3d(cube3d(),x=-5,y=-10,z=2*i+1,size=2,color="pink")
+  #   #rgl.quads(x=c(4,4,-4,-4),y=c(2,-2,2,-2),z=c(zmin,zmin+2,zmin,zmin+2))
+  #   rgl.spheres(x=0,y=0,z=zmin+1,r=1)
+  #   zmin=zmin+6
+  #   }
+  cols=randomColor(count=length(g$layers))
+  for(i in 1:length(cols))
+    V(g)[which(V(g)$n==i)]$color=cols[i]
+  layout=get3DLayout(g)
+  rglplot(g,vertex.color=V(g)$color,layout=layout,vertex.size=8,vertex.label=NA,grouplist=unlist(gps))
+}
+
+get3DLayout<-function(g){
+  zinit=1
+  layers=getMarkGroups(g)
+  layout=list()
+  for(i in 1:length(layers)){
+    nodesID=unlist(layers[i])
+    nodesInLayerCount=length(nodesID)
+    xy=circpos(nodesInLayerCount,r=i)
+    z=runif(n=length(nodesInLayerCount),zinit,zinit+2)
+    xyz=cbind(nodesID,xy,z)
+    layout=rbind(layout,xyz)
+    zinit=zinit+6
+  }
+  dfLayout=as.data.frame(layout)
+  dfLayout=dfLayout[order(unlist(dfLayout$nodesID)),]
+  return(cbind(x=unlist(dfLayout$x),y=unlist(dfLayout$y),z=unlist(dfLayout$z)))
+}
+
+
