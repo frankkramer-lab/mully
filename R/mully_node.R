@@ -128,13 +128,16 @@ removeNode <- function(g, name,trans=F) {
 #' @export
 getNodeAttributes<-function(g,nameNode){
 
-  if(missing(g) || missing(nameNode) || !is.mully(g) || !is.character(nameNode)){
+  if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")
   }
-  if(!nameNode%in%V(g)$name){
+  attributes=as.data.frame(get.vertex.attribute(g))
+  if(missing(nameNode)){
+    return(attributes)
+  }
+  if(!nameNode%in%V(g)$name || !is.character(nameNode)){
     stop("Node Does not Exist")
   }
-  attributes=as.data.frame(get.vertex.attribute(g))
   return(attributes[which(attributes$name==nameNode),])
 
 }
