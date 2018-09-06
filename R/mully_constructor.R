@@ -33,7 +33,7 @@ mully <- function(name = NA, direct = TRUE) {
 }
 
 is.mully<-function(g){
-  if(!is.igraph(g) || is.na(g$layers) || is.na(g$iLayer))
+  if(!is.igraph(g) || is.null(g$layers) || is.null(g$iLayer))
     return(F)
   return(T)
 }
