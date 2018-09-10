@@ -11,7 +11,7 @@ exportCSV<-function(g,target){
     stop("invalid argument")
   }
   if(missing(target)){
-    target=setwd()
+    target=getwd()
   }
   if(!dir.exists(target)){
     stop("target directory doesn't exist")
