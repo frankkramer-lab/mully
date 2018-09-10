@@ -3,7 +3,6 @@
 #' @param g The input graph
 #' @param target The target file in which the files will be generated. By default the WD.
 #'
-#' @return
 #' @export
 #'
 exportCSV<-function(g,target){
