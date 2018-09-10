@@ -1,6 +1,6 @@
 
 importGraph<-function(name,direct="F",layers,nodes,edges){
-  if(missing(name) || name="" ||
+  if(missing(name) || name=="" ||
      missing(layers) || !file.exists(layers) ||
      missing(nodes) || !file.exists(nodes) ||
      missing(edges) || !file.exists(edges)){
