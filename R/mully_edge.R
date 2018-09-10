@@ -22,7 +22,7 @@ getIDEdge <- function(g, nodeStart, nodeDest) {
   if(!are.connected(g,v1,v2)){
     return(0)
   }
-  edgeList=as.data.frame(get.edgelist(g))
+  edgeList=as.data.frame(get.edgelist(g),stringsAsFactors = FALSE)
   if(is.directed(g)){
     e=which(edgeList$V1==nodeStart & edgeList$V2==nodeDest)
   }
@@ -45,8 +45,8 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
   if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")
   }
-  edgeList=as.data.frame(get.edgelist(g))
-  attributes=as.data.frame(get.edge.attribute(g))
+  edgeList=as.data.frame(get.edgelist(g),stringsAsFactors = FALSE)
+  attributes=as.data.frame(get.edge.attribute(g),stringsAsFactors = FALSE)
   edgeAttributes=cbind(edgeList,attributes)
   if(missing(nodeStart) && missing(nodeDest)){
     return(edgeAttributes)
@@ -84,8 +84,8 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
     if(missing(attributes)){
       stop("Nodes are already Connected. Please provide attributes for the new Edge")
     }
-    df=cbind(as.data.frame(list(V1=nodeStart,V2=nodeDest)),as.data.frame(attributes))
-    df1=cbind(as.data.frame(list(V1=nodeDest,V2=nodeStart)),as.data.frame(attributes))
+    df=cbind(as.data.frame(list(V1=nodeStart,V2=nodeDest),stringsAsFactors = FALSE),as.data.frame(attributes))
+    df1=cbind(as.data.frame(list(V1=nodeDest,V2=nodeStart),stringsAsFactors = FALSE),as.data.frame(attributes))
     allEdges=getEdgeAttributes(g,nodeStart,nodeDest)
     if(is.directed(g) && !is.null(getIDCommonDF(allEdges,df))){
       stop("Edge Already Exists ")
@@ -132,8 +132,8 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
     stop()
   }
 
-  df=cbind(as.data.frame(list(V1=nodeStart,V2=nodeDest)),as.data.frame(attributes))
-  df1=cbind(as.data.frame(list(V1=nodeDest,V2=nodeStart)),as.data.frame(attributes))
+  df=cbind(as.data.frame(list(V1=nodeStart,V2=nodeDest),stringsAsFactors = FALSE),as.data.frame(attributes))
+  df1=cbind(as.data.frame(list(V1=nodeDest,V2=nodeStart),stringsAsFactors = FALSE),as.data.frame(attributes))
   allEdges=getEdgeAttributes(g,nodeStart,nodeDest)
 
   c1=getIDCommonDF(allEdges,df)
@@ -169,7 +169,7 @@ addTransEdges<-function(g,nodes){
   if(missing(g) || missing(nodes) || !is.mully(g)){
     stop("Invalid Arguments")
   }
-  allEdges=as.data.frame(get.edgelist(g))
+  allEdges=as.data.frame(get.edgelist(g),stringsAsFactors = FALSE)
   inN=c()
   outN=c()
 

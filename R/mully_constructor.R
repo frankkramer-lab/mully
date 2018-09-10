@@ -13,7 +13,8 @@ mully <- function(name = NA, direct = TRUE) {
   #One row is not enough (in case we delete layers)
   layersVect = data.frame(ID = is.numeric(c()),
                           Name = is.character(c()),
-                          NameLower = is.character(c()))
+                          NameLower = is.character(c()),
+                          stringsAsFactors = FALSE)
   #Delete first entry F F F
   layersVect = layersVect[-1,]
 

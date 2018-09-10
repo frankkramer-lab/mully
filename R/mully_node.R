@@ -131,7 +131,7 @@ getNodeAttributes<-function(g,nameNode){
   if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")
   }
-  attributes=as.data.frame(get.vertex.attribute(g))
+  attributes=as.data.frame(get.vertex.attribute(g),stringsAsFactors = FALSE)
   if(missing(nameNode)){
     return(attributes)
   }
@@ -145,7 +145,7 @@ getNodeAttributes<-function(g,nameNode){
 
 getIDCommonDF<-function(df,df1){
   #Get the common rows
-  common=merge.data.frame(df,df1)
+  common=merge.data.frame(df,df1,stringsAsFactors = FALSE)
 
   dfNames=colnames(df)
   df1Names=colnames(df1)
