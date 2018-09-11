@@ -32,5 +32,7 @@ merge<-function(g1,g2){
     g1=addEdge(g1,nodeStart = as.character(edge$V1),nodeDest = as.character(edge$V2),attributes = attr)
   }
 
+  #name the class
+  class(g) = c("mully",class(g))
   return(g1)
 }

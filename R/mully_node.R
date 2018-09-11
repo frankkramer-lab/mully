@@ -70,18 +70,28 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
     stop("Layer does not exist")
   }
   g <- g + vertices(nodeName)
+
+  #name the class
+  class(g) = c("mully",class(g))
   idNode = getIDNode(g, nodeName)
   #Assign the layer to the node
   idLayer = getIDLayer(g, layerName)
   g <- set.vertex.attribute(g, "n", index = idNode, idLayer)
 
+  #name the class
+  class(g) = c("mully",class(g))
   if (!is.null(attributes)) {
     #Assign attributes to the created edge
     for (key in names(attributes)) {
       g <- set.vertex.attribute(g, key, index = idNode, attributes[[key]])
+
+      #name the class
+      class(g) = c("mully",class(g))
     }
   }
 
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 
@@ -115,6 +125,9 @@ removeNode <- function(g, name,trans=F) {
       next
     }
   }
+
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 

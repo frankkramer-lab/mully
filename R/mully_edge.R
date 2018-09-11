@@ -103,6 +103,9 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
   for (key in names(attributes)) {
     g <- set.edge.attribute(g, key, index = idEdge, attributes[[key]])
   }
+
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 
@@ -160,6 +163,10 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
 
   #TODO create subgraph and save it
   g <- g - edge(as.numeric(comAll))
+
+
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 
@@ -203,6 +210,9 @@ addTransEdges<-function(g,nodes){
       }
     }
   }
+
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 

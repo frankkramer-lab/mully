@@ -20,6 +20,9 @@ importGraphCSV<-function(name,direct="F",layers,nodes,edges){
   g=importLayers(g,layers)
   g=importNodes(g,nodes)
   g=importEdges(g,edges)
+
+  #name the class
+  class(g) = c("mully",class(g))
   return(g)
 }
 
