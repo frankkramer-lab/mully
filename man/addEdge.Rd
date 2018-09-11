@@ -21,4 +21,3 @@ The graph, with the added edge
 \description{
 Add an edge
 }
-

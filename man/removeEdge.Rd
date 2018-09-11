@@ -23,4 +23,3 @@ The graph with the deleted edges
 \description{
 Delete an edge
 }
-

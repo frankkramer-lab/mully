@@ -17,4 +17,3 @@ A List of the nodes on the given layer.
 \description{
 Get the nodes on a layer in a graph
 }
-

@@ -17,4 +17,3 @@ A framework containing the attributes of the specified node
 \description{
 Get the attributes of a node
 }
-

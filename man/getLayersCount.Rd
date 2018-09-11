@@ -15,4 +15,3 @@ The count of the layers.
 \description{
 Get the number of layers in a graph
 }
-

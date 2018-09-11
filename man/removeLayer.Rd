@@ -19,4 +19,3 @@ The graph, with the given layer and its corresponding nodes and edges removed.
 \description{
 Delete a layer or a set of layers from a graph
 }
-

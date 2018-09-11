@@ -19,4 +19,3 @@ A dataframe containing the edges with their attributes. If both nodes' arguments
 \description{
 Get the attributes of the edges connecting two nodes
 }
-

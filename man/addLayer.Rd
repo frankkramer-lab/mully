@@ -17,4 +17,3 @@ The graph, with the layers added.
 \description{
 Add a layer or a set of layers to a graph
 }
-

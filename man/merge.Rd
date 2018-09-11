@@ -17,4 +17,3 @@ The merge of the two graphs. The merge is based on the first given graph
 \description{
 Merge or unite two graphs
 }
-

@@ -21,4 +21,3 @@ The graph, with the new node.
 \description{
 Add a node with assigned layer and attributes to a graph
 }
-

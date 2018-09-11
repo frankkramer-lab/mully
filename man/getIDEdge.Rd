@@ -19,4 +19,3 @@ A list containing the ids of the edges connecting the nodes
 \description{
 Get the ids of the edges connecting two nodes
 }
-

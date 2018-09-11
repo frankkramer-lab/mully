@@ -2,8 +2,8 @@
 % Please edit documentation in R/mully.R
 \docType{package}
 \name{mully-package}
-\alias{mully}
 \alias{mully-package}
+\alias{mully}
 \title{The mully package}
 \description{
 R package to create, modify and visualize graphs with multiple layers.

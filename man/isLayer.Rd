@@ -17,4 +17,3 @@ A boolean value.
 \description{
 Verify if the layer exists in a graph
 }
-

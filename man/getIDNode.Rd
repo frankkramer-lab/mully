@@ -17,4 +17,3 @@ The id of the specified node
 \description{
 Get the id of a node
 }
-

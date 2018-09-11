@@ -17,4 +17,3 @@ The created multilayered graph.
 \description{
 Create an empty multilayered graph
 }
-
