@@ -46,8 +46,18 @@ In this section, we provide a demo to test the package by calling some of the fu
   print("Node g2 added as gene")
 
   #See vertices attributes
-  as.data.frame(get.vertex.attribute(g))
-
+  print(getNodeAttributes(g))
+  
+  #The Result:
+  # name n type   effect desc
+  #   1   d1 3   t1     <NA> <NA>
+  #   2   d2 3   t1     <NA> <NA>
+  #   3   d3 3   t1     <NA> <NA>
+  #   4  dr1 2 <NA>   strong <NA>
+  #   5  dr2 2 <NA>   strong <NA>
+  #   6  dr3 2 <NA> moderate <NA>
+  #   7   g1 1 <NA>     <NA>   AF
+  #   8   g2 1 <NA>     <NA>   BE
 
   g=addEdge(g,"dr1","d2",list(name="treats"))
   g=addEdge(g,"dr1","d2",list(name="extraEdge"))
@@ -55,14 +65,92 @@ In this section, we provide a demo to test the package by calling some of the fu
   g=addEdge(g,"g2","dr3",list(name="mutates and causes"))
   g=addEdge(g,"dr3","d3",list(name="treats"))
   
-  print(getEdgeAttributes(g))
-
+  print(getEdgeAttributes(g)
+  
+  #The Result:
+     # V1  V2               name
+  # 1  d2 dr1             treats
+  # 2  d2 dr1          extraEdge
+  # 3  d2  g1            targets
+  # 4 dr3  g2 mutates and causes
+  # 5  d3 dr3             treats
+  
   removeEdge(g,"d2","dr1",multi=T)
   
-  plot.mully.3d(g)
+  #Create a Second graph
+  g1=mully()
 
-  plot.mully(g,layout = "scaled")
+  g1=addLayer(g1,c("protein","drug","gene"))
+
+  g1=addNode(g1,"dr4","drug",attributes=list(effect="strong"))
+  g1=addNode(g1,"dr5","drug",attributes=list(effect="strong"))
+  g1=addNode(g1,"dr6","drug",attributes=list(effect="moderate"))
+
+  g1=addNode(g1,"p1","protein")
+  g1=addNode(g1,"p2","protein")
+  g1=addNode(g1,"p3","protein")
+
+  g1=addNode(g1,"g3","gene")
+  g1=addNode(g1,"g4","gene")
+
+
+  g1=addEdge(g1,nodeStart = "p2",nodeDest = "p3",attributes = list(name="interacts"))
+  g1=addEdge(g1,nodeStart = "dr6",nodeDest = "g4",attributes = list(name="targets"))
+
+  #Merge both graphs
+  g12=merge(g,g1)
+
+  #Print the graph
+  print.mully(g12)
+  
+  # Printing this graph gives this result:
+  #   mully --  MyFirstMully
+  # 4 Layers:
+  #   ID    Name NameLower
+  # 1  1    Gene      gene
+  # 2  2    Drug      drug
+  # 3  3 Disease   disease
+  # 4  4 protein   protein
+  # 
+  # 16 Nodes:
+  #   name n type   effect desc
+  #   1    d1 3   t1     <NA> <NA>
+  #   2    d2 3   t1     <NA> <NA>
+  #   3    d3 3   t1     <NA> <NA>
+  #   4   dr1 2 <NA>   strong <NA>
+  #   5   dr2 2 <NA>   strong <NA>
+  #   6   dr3 2 <NA> moderate <NA>
+  #   7    g1 1 <NA>     <NA>   AF
+  #   8    g2 1 <NA>     <NA>   BE
+  #   9   dr4 2 <NA>   strong <NA>
+  #   10  dr5 2 <NA>   strong <NA>
+  #   11  dr6 2 <NA> moderate <NA>
+  #   12   p1 4 <NA>     <NA> <NA>
+  #   13   p2 4 <NA>     <NA> <NA>
+  #   14   p3 4 <NA>     <NA> <NA>
+  #   15   g3 1 <NA>     <NA> <NA>
+  #   16   g4 1 <NA>     <NA> <NA>
+  #   
+  # 7 Edges:
+  #   V1  V2               name
+  # 1  d2 dr1             treats
+  # 2  d2 dr1          extraEdge
+  # 3  d2  g1            targets
+  # 4 dr3  g2 mutates and causes
+  # 5  d3 dr3             treats
+  # 6  p2  p3          interacts
+  # 7 dr6  g4            targets
+
+  plot.mully(g12,layout = "scaled")
 ```
+  <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/2DVisualizer_Scaled.png "2D Visualization Scaled")</span>
+
+  ```R
+  plot.mully.3d(g12)
+```
+
+  <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/3DVisualizer.png "3D Visualization")</span>
+
 ### Available Functions
 mully functions are divided into four categories:
 mully functions are divided into different files depending on their functionnality range:
