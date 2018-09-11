@@ -58,13 +58,29 @@ In this section, we provide a demo to test the package by calling some of the fu
   print(getEdgeAttributes(g))
 
   removeEdge(g,"d2","dr1",multi=T)
+  
+  plot.mully.3d(g)
+
+  plot.mully(g,layout = "scaled")
 ```
 ### Available Functions
-mully functions are divided into four categories: [Constructor](https://github.com/frankkramer-lab/mully/blob/master/R/mully.R) , [Layers Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_layer.R) , [Node Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_node.R) , and [Edge Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_edge.R) .
+mully functions are divided into four categories:
+mully functions are divided into different files depending on their functionnality range:
+[Constructor](https://github.com/frankkramer-lab/mully/blob/master/R/mully_constructor.R) ,
+[Layers Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_layer.R) ,
+[Node Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_node.R) ,
+[Edge Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_edge.R) ,
+[Merge Function](https://github.com/frankkramer-lab/mully/blob/master/R/mully_merge.R) ,
+[Visualization Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_visualization.R) ,
+[Import Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_import.R) ,
+[Export Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_export.R) ,
+[Demo](https://github.com/frankkramer-lab/mully/blob/master/R/mully_demo.R).
+
 
 | Function |Description|
 | --------------- |-----------|
 |`mully(name,direct)`|Constructor Function, Create an empty multilayered graph|
+|`print.mully(g)`|Print function|
 |`addLayer(g, nameLayer)`| Add a layer or a set of layers to a graph|
 |`removeLayer(g, name,trans)`|Delete a layer or a set of layers from a graph|
 |`isLayer(g, name)`|Verify if the layer exists in a graph|
@@ -74,8 +90,16 @@ mully functions are divided into four categories: [Constructor](https://github.c
 |`getIDNode(g,nameNode)`|Get the id of a node|
 |`addNode(g, nodeName, layerName, attributes)`|Add a node with assigned layer and attributes to a graph|
 |`removeNode(g, name,trans)`|Delete a node or a set of nodes from a graph|
-|`getNodeAttributes(g,nameNode)`|Get the attributes of a node|
+|`getNodeAttributes(g,nameNode)`|Get the attributes of one or all nodes|
 |`addEdge(g, nodeStart, nodeDest, attributes)`|Add an edge|
 |`removeEdge(g, nodeStart, nodeDest,attributes, multi)`|Delete an edge|
-|`getEdgeAttributes(g,nodeStart,nodeDest)`|Get the attributes of the edges connecting two nodes|
+|`getEdgeAttributes(g,nodeStart,nodeDest)`|Get the attributes of the edges connecting two nodes or all the edges in the graph|
 |`getIDEdge(g,nodeStart,nodeDest)`|Get the ids of the edges connecting two nodes|
+|`merge(g1,g2)`|Merge or unite two graphs|
+|`plot.mully(g,layout)`|Plot the graph in 2D|
+|`plot.mully.3d(g)`|Plot the graph in 3D using rgl|
+|`importGraphCSV(name,direct,layers,nodes,edges)`|Import a mully graph from csv files|
+|`importLayersCSV(g,file)`|Import layers to a mully graph from a CSV file|
+|`importNodesCSV(g,file)`|Import nodes to a mully graph from a CSV file|
+|`importEdgesCSV(g,file)`|Import edges to a mully graph from a CSV file|
+
