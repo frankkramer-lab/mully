@@ -29,7 +29,7 @@ mully <- function(name = NA, direct = TRUE) {
   g$layers = layersVect
 
   #name the class
-  class(g) = c("mully", class(g))
+  class(g) = c("mully",class(g))
   return(g)
 }
 
@@ -40,7 +40,49 @@ is.mully<-function(g){
 }
 
 
-# #TODO overwrite igraph.print
-# mully.print<-function(g){
-#
-# }
+#' Print function
+#'
+#' @param g The input graph
+#'
+#' @export
+#'
+print.mully<-function(g){
+  if(missing(g) || !is.mully(g)){
+   stop("Invalid Arguments")
+  }
+  cat("mully")
+  if(!is.na(g$name)){
+    cat(paste(" -- ",g$name))
+  }
+  if(g$iLayer==0){
+    cat("\nEmpty Graph")
+    return()
+  }
+  else{
+    olayers=capture.output(print.data.frame(g$layers))
+    olayers <- paste(olayers, "\n", sep="")
+    cat("\n",g$iLayer ,"Layers:\n")
+    cat(olayers)
+  }
+
+  if(length(V(g))!=0){
+    nodes=getNodeAttributes(g)
+    onodes=capture.output(print.data.frame(nodes))
+    onodes <- paste(onodes, "\n", sep="")
+    cat("\n",dim(nodes)[1],"Nodes:\n")
+    cat(onodes)
+  }
+  else{
+    cat("\nNo Nodes\n")
+  }
+  if(length(E(g))!=0){
+    edges=getEdgeAttributes(g)
+    oedges=capture.output(print.data.frame(edges))
+    oedges <- paste(oedges, "\n", sep="")
+    cat("\n",dim(edges)[1],"Edges:\n")
+    cat(oedges)
+  }
+  else{
+    cat("\nNo Edges")
+  }
+}
