@@ -48,6 +48,13 @@ getMarkGroups<-function(g){
   return(l)
 }
 
+#' Plot the graph in 2D
+#'
+#' @param g The input graph
+#' @param layout The layout. Can either be random or scaled
+#'
+#' @export
+#'
 plot.mully<-function(g,layout){
   gps=getMarkGroups(g)
   cols=randomColor(count=length(g$layers))
@@ -66,6 +73,12 @@ circpos=function(n,r=1){#Coordinates on a circle
 }
 
 
+#' Plot the graph in 3D using rgl
+#'
+#' @param g The input graph
+#'
+#' @export
+#'
 plot.mully.3d<-function(g){
   rgl.open()
   rgl.bg(sphere=TRUE, color=c("grey","blue"), lit=FALSE, back="lines" )
