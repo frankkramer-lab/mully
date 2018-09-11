@@ -106,14 +106,14 @@ In this section, we provide a demo to test the package by calling some of the fu
   # Printing this graph gives this result:
   #   mully --  MyFirstMully
   # 4 Layers:
-  #   ID    Name NameLower
-  # 1  1    Gene      gene
-  # 2  2    Drug      drug
-  # 3  3 Disease   disease
-  # 4  4 protein   protein
+  #     ID    Name NameLower
+  #   1  1    Gene      gene
+  #   2  2    Drug      drug
+  #   3  3 Disease   disease
+  #   4  4 protein   protein
   # 
   # 16 Nodes:
-  #   name n type   effect desc
+  #     name n type   effect desc
   #   1    d1 3   t1     <NA> <NA>
   #   2    d2 3   t1     <NA> <NA>
   #   3    d3 3   t1     <NA> <NA>
@@ -132,14 +132,14 @@ In this section, we provide a demo to test the package by calling some of the fu
   #   16   g4 1 <NA>     <NA> <NA>
   #   
   # 7 Edges:
-  #   V1  V2               name
-  # 1  d2 dr1             treats
-  # 2  d2 dr1          extraEdge
-  # 3  d2  g1            targets
-  # 4 dr3  g2 mutates and causes
-  # 5  d3 dr3             treats
-  # 6  p2  p3          interacts
-  # 7 dr6  g4            targets
+  #      V1  V2               name
+  #   1  d2 dr1             treats
+  #   2  d2 dr1          extraEdge
+  #   3  d2  g1            targets
+  #   4 dr3  g2 mutates and causes
+  #   5  d3 dr3             treats
+  #   6  p2  p3          interacts
+  #   7 dr6  g4            targets
 
   plot.mully(g12,layout = "scaled")
 ```
@@ -152,7 +152,6 @@ In this section, we provide a demo to test the package by calling some of the fu
   <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/3DVisualizer.png "3D Visualization")</span>
 
 ### Available Functions
-mully functions are divided into four categories:
 mully functions are divided into different files depending on their functionnality range:
 [Constructor](https://github.com/frankkramer-lab/mully/blob/master/R/mully_constructor.R) ,
 [Layers Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_layer.R) ,
