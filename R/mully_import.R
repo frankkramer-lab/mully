@@ -66,7 +66,7 @@ importNodesCSV<-function(g,file){
   return(g)
 }
 
-#' Title
+#' Import Edges to a mully graph from a CSV file
 #'
 #' @param g The mully graph to which the nodes will be added. The graph should already have the layers and the nodes.
 #' @param file The path to the CSV file containing the edges' information
