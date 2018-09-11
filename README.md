@@ -15,12 +15,16 @@ library(mully)
 ```
 ## Test the package
 In this section, we provide a demo to test the package by calling some of the function. After running this script, you will have a graph g with 3 layers and 8 nodes. the graph can also be modified by calling other functions. Please refer to help to see the available functions.
-
+### Create new mully graph
 ```R
   g <- mully("MyFirstMully",direct = F)
-
+```
+### Add Layers
+```R
   g <- addLayer(g, c("Gene", "Drug", "Drug", "Disease"))
-
+```
+### Add/print Nodes
+```R
   g=addNode(g,"d1","disease",attributes=list(type="t1"))
   print("Node d1 added as disease")
   
@@ -59,6 +63,9 @@ In this section, we provide a demo to test the package by calling some of the fu
   #   7   g1 1 <NA>     <NA>   AF
   #   8   g2 1 <NA>     <NA>   BE
 
+```
+### Add/print/remove Edges
+```R
   g=addEdge(g,"dr1","d2",list(name="treats"))
   g=addEdge(g,"dr1","d2",list(name="extraEdge"))
   g=addEdge(g,"d2","g1",list(name="targets"))
@@ -68,15 +75,18 @@ In this section, we provide a demo to test the package by calling some of the fu
   print(getEdgeAttributes(g)
   
   #The Result:
-     # V1  V2               name
-  # 1  d2 dr1             treats
-  # 2  d2 dr1          extraEdge
-  # 3  d2  g1            targets
-  # 4 dr3  g2 mutates and causes
-  # 5  d3 dr3             treats
+  #      V1  V2               name
+  #   1  d2 dr1             treats
+  #   2  d2 dr1          extraEdge
+  #   3  d2  g1            targets
+  #   4 dr3  g2 mutates and causes
+  #   5  d3 dr3             treats
   
   removeEdge(g,"d2","dr1",multi=T)
   
+```
+### Merge two graphs
+```R
   #Create a Second graph
   g1=mully()
 
@@ -141,6 +151,9 @@ In this section, we provide a demo to test the package by calling some of the fu
   #   6  p2  p3          interacts
   #   7 dr6  g4            targets
 
+```
+### Visualization
+```R
   plot.mully(g12,layout = "scaled")
 ```
   <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/2DVisualizer_Scaled.png "2D Visualization Scaled")</span>
@@ -151,7 +164,7 @@ In this section, we provide a demo to test the package by calling some of the fu
 
   <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/3DVisualizer.png "3D Visualization")</span>
 
-### Available Functions
+## Available Functions
 mully functions are divided into different files depending on their functionnality range:
 [Constructor](https://github.com/frankkramer-lab/mully/blob/master/R/mully_constructor.R) ,
 [Layers Functions](https://github.com/frankkramer-lab/mully/blob/master/R/mully_layer.R) ,
