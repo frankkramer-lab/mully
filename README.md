@@ -180,7 +180,7 @@ mully functions are divided into different files depending on their functionnali
 | Function |Description|
 | --------------- |-----------|
 |`mully(name,direct)`|Constructor Function, Create an empty multilayered graph|
-|`print.mully(g)`|Print function|
+|`print(g)`|Print function|
 |`addLayer(g, nameLayer)`| Add a layer or a set of layers to a graph|
 |`removeLayer(g, name,trans)`|Delete a layer or a set of layers from a graph|
 |`isLayer(g, name)`|Verify if the layer exists in a graph|
