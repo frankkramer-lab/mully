@@ -111,7 +111,7 @@ In this section, we provide a demo to test the package by calling some of the fu
   g12=merge(g,g1)
 
   #Print the graph
-  print.mully(g12)
+  print(g12)
   
   # Printing this graph gives this result:
   #   mully --  MyFirstMully
