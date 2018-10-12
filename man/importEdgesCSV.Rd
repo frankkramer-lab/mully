@@ -2,7 +2,7 @@
 % Please edit documentation in R/mully_import.R
 \name{importEdgesCSV}
 \alias{importEdgesCSV}
-\title{Title}
+\title{Import Edges to a mully graph from a CSV file}
 \usage{
 importEdgesCSV(g, file)
 }
@@ -15,5 +15,5 @@ importEdgesCSV(g, file)
 The mully graph with the added edges
 }
 \description{
-Title
+Import Edges to a mully graph from a CSV file
 }

@@ -4,12 +4,14 @@
 \alias{getNodeAttributes}
 \title{Get the attributes of a node}
 \usage{
-getNodeAttributes(g, nameNode)
+getNodeAttributes(g, nameNode, layerByName = F)
 }
 \arguments{
 \item{g}{The input graph}
 
 \item{nameNode}{The name of the node}
+
+\item{layerByName}{A boolean to specify whether to export the layers by name or by ID}
 }
 \value{
 A framework containing the attributes of the specified node
