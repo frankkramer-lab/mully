@@ -47,22 +47,31 @@ importLayersCSV<-function(g,file){
 #'
 #' @param g The mully graph to which the nodes will be added. The graph should already have the layers.
 #' @param file The path to the CSV file containing the nodes' information
+#' @param name The name of the column containing the names of the nodes
 #'
 #' @return The mully graph with the added nodes
 #' @export
 #'
-importNodesCSV<-function(g,file){
+importNodesCSV<-function(g,file,name="name"){
   if(missing(g) || missing(file) || !file.exists(file)){
     stop("Invalid arguments")
   }
   nodes=read.csv(file,header=TRUE,stringsAsFactors = FALSE)
-  nodes$n=g$layers$Name[nodes$n]
   rows=dim(nodes)[1]
   for(i in 1:rows){
     node=nodes[i,]
-    attr=as.list(node[-1][-1])
+    attr=node
+    attr$n=NULL
+    attr$name=NULL
+    attr=as.list(attr)
+    if(!isLayer(g,node$n)){
+      next
+      g=addLayer(g,node$n)
+    }
     g=addNode(g,nodeName = as.character(node$name),layerName = node$n,attributes = attr)
   }
+  V(g)$n=g$layers[V(g)$n]
+  class(g)=c("mully",class(g))
   return(g)
 }
 
