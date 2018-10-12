@@ -14,7 +14,7 @@ getNode <- function(g, nameNode) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
-    print("Node Does not Exist")
+    #print("Node Does not Exist")
     return(NULL)
   }
   return(V(g)[which(V(g)$name == nameNode)])
@@ -136,15 +136,19 @@ removeNode <- function(g, name,trans=F) {
 #'
 #' @param g The input graph
 #' @param nameNode The name of the node
+#' @param layerByName A boolean to specify whether to export the layers by name or by ID
 #'
 #' @return A framework containing the attributes of the specified node
 #' @export
-getNodeAttributes<-function(g,nameNode){
+getNodeAttributes<-function(g,nameNode,layerByName=F){
 
   if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")
   }
   attributes=as.data.frame(get.vertex.attribute(g),stringsAsFactors = FALSE)
+  if(layerByName==TRUE){
+    attributes$n=g$layers$Name[attributes$n]
+  }
   if(missing(nameNode)){
     return(attributes)
   }
