@@ -79,7 +79,7 @@ circpos=function(n,r=1){#Coordinates on a circle
 #'
 #' @export
 #'
-plot.mully.3d<-function(g){
+plot3d.mully<-function(g){
   rgl.open()
   rgl.bg(sphere=TRUE, color=c("grey","blue"), lit=FALSE, back="lines" )
   gps=getMarkGroups(g)
