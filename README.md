@@ -154,12 +154,12 @@ In this section, we provide a demo to test the package by calling some of the fu
 ```
 ### Visualization
 ```R
-  plot.mully(g12,layout = "scaled")
+  plot(g12,layout = "scaled")
 ```
   <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/2DVisualizer_Scaled.png "2D Visualization Scaled")</span>
 
   ```R
-  plot.mully.3d(g12)
+  plot3d(g12)
 ```
 
   <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/3DVisualizer.png "3D Visualization")</span>
@@ -196,8 +196,8 @@ mully functions are divided into different files depending on their functionnali
 |`getEdgeAttributes(g,nodeStart,nodeDest)`|Get the attributes of the edges connecting two nodes or all the edges in the graph|
 |`getIDEdge(g,nodeStart,nodeDest)`|Get the ids of the edges connecting two nodes|
 |`merge(g1,g2)`|Merge or unite two graphs|
-|`plot.mully(g,layout)`|Plot the graph in 2D|
-|`plot.mully.3d(g)`|Plot the graph in 3D using rgl|
+|`plot(g,layout)`|Plot the graph in 2D|
+|`plot3d(g)`|Plot the graph in 3D using rgl|
 |`importGraphCSV(name,direct,layers,nodes,edges)`|Import a mully graph from csv files|
 |`importLayersCSV(g,file)`|Import layers to a mully graph from a CSV file|
 |`importNodesCSV(g,file)`|Import nodes to a mully graph from a CSV file|
