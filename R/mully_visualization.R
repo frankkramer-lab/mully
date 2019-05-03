@@ -57,10 +57,27 @@ getMarkGroups<-function(g){
 #'
 plot.mully<-function(g,layout){
   gps=getMarkGroups(g)
-  cols=randomColor(count=length(g$layers))
-  for(i in 1:length(cols))
-    V(g)[which(V(g)$n==i)]$color=cols[i]
-  V(g)$color
+
+  cols=randomColor(count=g$iLayer)
+  usedCols=unique(V(g)$color)
+  if(is.null(V(g)$color))
+    V(g)$color=NA
+  for(i in 1:g$iLayer){
+    if(is.na(V(g)[which(V(g)$n==i)]$color)){
+      if(!cols[i]%in%usedCols){
+        V(g)[which(V(g)$n==i)]$color=cols[i]
+        usedCols=c(usedCols,cols[i])
+      }
+      else{
+        c=randomColor(count=1)
+        while(c%in%usedCols){
+          c=randomColor(count=1)
+        }
+        usedCols=c(usedCols,c)
+        V(g)[which(V(g)$n==i)]$color=c
+      }
+    }
+  }
   plot.new()
   # filledrectangle(wx = 1, wy = 0.5, col = "gray",mid = c(0, 0), angle = 0)
   plot.igraph(g,vertex.color=V(g)$color,layout=getLayout(g,layout))
@@ -82,7 +99,6 @@ circpos=function(n,r=1){#Coordinates on a circle
 plot3d.mully<-function(g){
   rgl.open()
   rgl.bg(sphere=TRUE, color=c("grey","blue"), lit=FALSE, back="lines" )
-  gps=getMarkGroups(g)
   # zmin=1
   # for(i in 1:length(gps)){
   #   #shapelist3d(cube3d(),x=-5,y=-10,z=2*i+1,size=2,color="pink")
@@ -90,9 +106,29 @@ plot3d.mully<-function(g){
   #   rgl.spheres(x=0,y=0,z=zmin+1,r=1)
   #   zmin=zmin+6
   #   }
-  cols=randomColor(count=length(g$layers))
-  for(i in 1:length(cols))
-    V(g)[which(V(g)$n==i)]$color=cols[i]
+  gps=getMarkGroups(g)
+
+  cols=randomColor(count=g$iLayer)
+  usedCols=unique(V(g)$color)
+  if(is.null(V(g)$color))
+    V(g)$color=NA
+  for(i in 1:g$iLayer){
+    if(is.na(V(g)[which(V(g)$n==i)]$color)){
+      if(!cols[i]%in%usedCols){
+        V(g)[which(V(g)$n==i)]$color=cols[i]
+        usedCols=c(usedCols,cols[i])
+      }
+      else{
+        c=randomColor(count=1)
+        while(c%in%usedCols){
+          c=randomColor(count=1)
+        }
+        usedCols=c(usedCols,c)
+        V(g)[which(V(g)$n==i)]$color=c
+      }
+    }
+  }
+
   layout=get3DLayout(g)
   rglplot(g,vertex.color=V(g)$color,layout=layout,vertex.size=8,vertex.label=NA,grouplist=unlist(gps))
 }
