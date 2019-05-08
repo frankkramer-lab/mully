@@ -158,6 +158,16 @@ In this section, we provide a demo to test the package by calling some of the fu
 
 ```
 ### Visualization
+```R
+  plot(g12,layout = "scaled")
+```
+  <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/2DVisualizer_Scaled.png "2D Visualization Scaled")</span>
+
+  ```R
+  plot3d(g12)
+```
+
+  <span style="display:block;text-align:center">![alt text](https://github.com/frankkramer-lab/mully/blob/master/R/img/3DVisualizer.png "3D Visualization")</span>
 
 ## Available Functions
 mully functions are divided into different files depending on their functionnality range:
