@@ -3,7 +3,7 @@ Type: Package
 Title: Create, modify and visualize multilayered networks
 Version: 1.0
 Author: Zaynab Hammoud
-Maintainer: Zaynab Hammoud <zaynab.hammoud@med.uni-goettingen.de>
+Maintainer: Zaynab Hammoud <zaynabhassanhammoud@gmail.com>
 Description: This package allows the user to create graph with multiple layers. The user can also modify the layers, the nodes, and the edges. The graph can also be visualized.
 URL: https://github.com/frankkramer-lab/mully
 BugReports: https://github.com/frankkramer-lab/mully/issues
