@@ -5,6 +5,11 @@ Network theory has been used for many years in the modeling and analysis of comp
 **Mully**, **mul**ti**l**a**y**er networks, is an R package that provides a multilayer network framework.
 Using this package, the user can create, modify and visualize graphs with multiple layers. This package is an extension to the [igraph package](https://github.com/igraph/rigraph) that provides a monolayer graph framework.
 The package is implemented as a part of [the Multipath Project](http://www.ams.med.uni-goettingen.de/p-mgmt/Multih.html)  directed by [Dr. Frank Kramer](http://www.ams.med.uni-goettingen.de/kramer.shtml) .
+## Publication
+More information and references can be found in the mully paper:
+
+https://www.mdpi.com/2073-4425/9/11/519
+
 ## Installation
 ### Installation via Github
 
