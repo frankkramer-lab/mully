@@ -98,7 +98,7 @@ circpos=function(n,r=1){#Coordinates on a circle
 #'
 plot3d.mully<-function(g){
   rgl.open()
-  rgl.bg(sphere=TRUE, color=c("grey","blue"), lit=FALSE, back="lines" )
+  rgl.bg(sphere=TRUE, color=c("white","blue"), lit=FALSE, back="lines" )
   # zmin=1
   # for(i in 1:length(gps)){
   #   #shapelist3d(cube3d(),x=-5,y=-10,z=2*i+1,size=2,color="pink")
@@ -130,6 +130,18 @@ plot3d.mully<-function(g){
   }
 
   layout=get3DLayout(g)
+
+
+  # for(i in 1:g$iLayer){
+  #   gp=gps[[i]]
+  #   xx=layout[gp,1]
+  #   yy=layout[gp,2]
+  #   zz=layout[gp,3]
+  #   ellips <- ellipse3d(cov(cbind(xx,yy,zz)),
+  #                       centre=c(mean(xx), mean(yy), mean(zz)), level = 0.95)
+  #   shade3d(ellips, col = usedCols[i], alpha = 0.1, lit = FALSE)
+  # }
+
   rglplot(g,vertex.color=V(g)$color,layout=layout,vertex.size=8,vertex.label=NA,grouplist=unlist(gps))
 }
 
