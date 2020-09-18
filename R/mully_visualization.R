@@ -85,8 +85,8 @@ plot.mully<-function(g,layout){
 
 #Create 3d coordinates of the network layout
 circpos=function(n,r=1){#Coordinates on a circle
-  rad=seq(0,2*pi,length.out=n+1)[-1];x=cos(rad)*r;y=sin(rad)*r
-  return(cbind(x,y))
+  rad=seq(0,2*pi,length.out=n+1)[-1];x=cos(rad)*r;z=sin(rad)*r
+  return(cbind(x,z))
 }
 
 
@@ -146,17 +146,21 @@ plot3d.mully<-function(g){
 }
 
 get3DLayout<-function(g){
-  zinit=1
+  yinit=1
   layers=getMarkGroups(g)
   layout=list()
   for(i in 1:length(layers)){
     nodesID=unlist(layers[i])
     nodesInLayerCount=length(nodesID)
-    xy=circpos(nodesInLayerCount,r=i)
-    z=runif(n=length(nodesInLayerCount),zinit,zinit+2)
-    xyz=cbind(nodesID,xy,z)
+    xz=circpos(nodesInLayerCount,r=i)
+    x=xz[,1]
+    z=xz[,2]
+    y=runif(n=length(nodesInLayerCount),yinit,yinit+2)
+    xyz=cbind(x,y)
+    xyz=cbind(xyz,z)
+    xyz=cbind(nodesID,xyz)
     layout=rbind(layout,xyz)
-    zinit=zinit+6
+    yinit=yinit-6
   }
   dfLayout=as.data.frame(layout)
   dfLayout=dfLayout[order(unlist(dfLayout$nodesID)),]
