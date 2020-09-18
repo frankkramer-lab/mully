@@ -187,7 +187,9 @@ addTransEdges<-function(g,nodes){
     #Unique or Not???
     inN=unique(as.character(allEdges[which(allEdges$V2==node),]$V1))
     outN=unique(as.character(allEdges[which(allEdges$V1==node),]$V2))
-
+    #No Transitive edges to add
+    if(length(inN)==0 | length(outN)==0)
+      next
     if(is.directed(g)){
     for(inNode in inN){
       for(outNode in outN){
