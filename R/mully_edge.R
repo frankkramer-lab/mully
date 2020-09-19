@@ -179,8 +179,11 @@ addTransEdges<-function(g,nodes){
   allEdges=as.data.frame(get.edgelist(g),stringsAsFactors = FALSE)
   inN=c()
   outN=c()
-
-  attributes=list(type="trans",via="")
+  allAttributes=getEdgeAttributes(g)
+  attributes=as.list(allAttributes[1,])[-1][-1]
+  attributes[]=NA
+  attributes$"type"="trans"
+  attributes$"via"=""
 
   for(node in nodes){
     attributes$via=node
