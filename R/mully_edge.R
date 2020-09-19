@@ -179,12 +179,7 @@ addTransEdges<-function(g,nodes){
   allEdges=as.data.frame(get.edgelist(g),stringsAsFactors = FALSE)
   inN=c()
   outN=c()
-  allAttributes=getEdgeAttributes(g)
-  attributes=as.list(allAttributes[1,])[-1][-1]
-  attributes[]=NA
-  attributes$"type"="trans"
-  attributes$"via"=""
-
+  attributes=list("type"="trans","via"="")
   for(node in nodes){
     attributes$via=node
     #Unique or Not???
@@ -196,8 +191,7 @@ addTransEdges<-function(g,nodes){
     if(is.directed(g)){
     for(inNode in inN){
       for(outNode in outN){
-        print(inNode)
-        print(outNode)
+        print(paste("The edge ",inN,"-->",outN," will be added.",sep=""))
         g<-addEdge(g,inNode,outNode,attributes)
       }
     }
@@ -210,6 +204,7 @@ addTransEdges<-function(g,nodes){
           if(j>length(all)){
             break
           }
+          print(paste("The edge ",all[i],"--",all[j]," will be added.",sep=""))
           g<-addEdge(g,all[i],all[j],attributes)
         }
       }

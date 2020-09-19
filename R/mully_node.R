@@ -161,23 +161,27 @@ getNodeAttributes<-function(g,nameNode,layerByName=F){
 
 
 getIDCommonDF<-function(df,df1){
-  #Get the common rows
-  common=merge.data.frame(df,df1,stringsAsFactors = FALSE)
-
   dfNames=colnames(df)
   df1Names=colnames(df1)
   for(name in dfNames){
     if(!name%in%df1Names){
-      df1=cbind(df1,list(name=NA))
+      ltemp=list(NA)
+      names(ltemp)=c(name)
+      dftemp=as.data.frame(ltemp)
+      df1=cbind(df1,dftemp)
     }
   }
 
   for(name in df1Names){
     if(!name%in%dfNames){
-      df=cbind(df,list(name=NA))
+      ltemp=list(NA)
+      names(ltemp)=c(name)
+      dftemp=as.data.frame(ltemp)
+      df=cbind(df,dftemp)
     }
   }
-
+  #Get the common rows
+  common=merge.data.frame(df,df1,stringsAsFactors = FALSE)
   #No Common Rows
   if(dim(common)[1]==0){
     return(NULL)
