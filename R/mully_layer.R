@@ -83,14 +83,16 @@ getLayer <- function(g, nameLayer) {
     stop("Invalid Argument")
   }
   id = getIDLayer(g, nameLayer)
-  return(V(g)[which(V(g)$n == id)])
+  l=which(V(g)$n == id)
+  return(V(g)[l])
 }
 
 getLayerByID <- function(g, id) {
   if (missing(g) || !is.mully(g) || missing(id)) {
     stop("Invalid Argument")
   }
-  return(V(g)[which(V(g)$n == id)])
+  l=which(V(g)$n == id)
+  return(V(g)[l])
 }
 
 #' Delete a layer or a set of layers from a graph
