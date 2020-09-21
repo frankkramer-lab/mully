@@ -21,5 +21,6 @@
 Plot the graph in 3D using rgl
 }
 \note{
-
+This function can take all arguments supported and not ignored by \link[igraph]{rglplot} which are:
+vertex.shape, vertex.label, edge.width. All others are set in the function and cannot be modified.
 }
