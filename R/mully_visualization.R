@@ -102,7 +102,13 @@ circpos = function(n, r = 1) {
 #'
 #' @export
 #'
-plot3d.mully <- function(g, layers = T) {
+#' @note
+#' This function can take all arguments supported and not ignored by \{igraph}{rglplot} which are:
+#' vertex.shape, vertex.label, edge.width. All others are set in the function and cannot be modified.
+#'
+plot3d.mully <- function(g, layers = T,
+                         vertex.shape="circle",vertex.label=NA
+                         ,edge.width=1) {
   rgl.open()
   rgl.bg(
     sphere = TRUE,
@@ -153,9 +159,12 @@ plot3d.mully <- function(g, layers = T) {
     vertex.color = V(g)$color,
     layout = layout,
     rescale = F,
-    vertex.label = V(g)$name,
+    vertex.label=vertex.label,
+    vertex.shape=vertex.shape,
     label.color = V(g)$color,
-    label.dist = 0,
+    edge.color=edgecolors,
+    edge.width=edge.width,
+    vertex.label.dist = 0,
     grouplist = unlist(gps)
   )
   aspect3d(1, 1, 1)
@@ -198,7 +207,7 @@ get3DLayout <- function(g) {
   for (i in 1:length(layers)) {
     nodesID = unlist(layers[i])
     nodesInLayerCount = length(nodesID)
-    xz = circpos(nodesInLayerCount, r = i)
+    xz = circpos(nodesInLayerCount, r = length(layers))
     x = xz[, 1]
     z = xz[, 2]
     y = runif(n = length(nodesInLayerCount), yinit, yinit + 2)

@@ -4,11 +4,22 @@
 \alias{plot3d.mully}
 \title{Plot the graph in 3D using rgl}
 \usage{
-\method{plot3d}{mully}(g)
+\method{plot3d}{mully}(
+  g,
+  layers = T,
+  vertex.shape = "circle",
+  vertex.label = NA,
+  edge.width = 1
+)
 }
 \arguments{
 \item{g}{The input graph}
+
+\item{layers}{A boolean whether to add the layers or not}
 }
 \description{
 Plot the graph in 3D using rgl
+}
+\note{
+
 }
