@@ -103,7 +103,7 @@ circpos = function(n, r = 1) {
 #' @export
 #'
 #' @note
-#' This function can take all arguments supported and not ignored by \{igraph}{rglplot} which are:
+#' This function can take all arguments supported and not ignored by \link[igraph]{rglplot} which are:
 #' vertex.shape, vertex.label, edge.width. All others are set in the function and cannot be modified.
 #'
 plot3d.mully <- function(g, layers = T,
