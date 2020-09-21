@@ -177,7 +177,6 @@ plot3d.mully <- function(g, layers = T,
       nNodes = length(which(V(g)$n == i))
       coord = layout1[temp:(temp + length(which(V(g)$n == i)) - 1), ]
       plane = get3DPlane(coord, g$iLayer)
-      print(plane)
       rgl.planes(
         0,
         b = plane[2],
@@ -189,7 +188,7 @@ plot3d.mully <- function(g, layers = T,
       #Add layers' names
       text3d(
         x = -max(abs(layout[, 1])),
-        y = coord[i, 2],
+        y = coord[1, 2],
         z = min(abs(layout[, 3])) - 1,
         texts = paste0(g$layers$Name[i]," Layer",sep=""),
         color = clrs[i],
