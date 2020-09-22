@@ -115,12 +115,10 @@ removeLayer <- function(g, name,trans=F) {
       )))
       next
     }
-    #TODO create subgraph and save it
     nodes = getLayer(g, layer)$name
-    print(nodes)
     for(j in 1:length(nodes))
       g <- removeNode(g, nodes[j],trans)
-    g$layers=g$layers[-getIDLayer(g,name),]
+    g$layers=g$layers[-which(g$layers$Name==name),]
   }
   return(g)
 }

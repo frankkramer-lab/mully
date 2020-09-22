@@ -7,20 +7,35 @@
 \method{plot3d}{mully}(
   g,
   layers = T,
-  vertex.shape = "circle",
   vertex.label = NA,
-  edge.width = 1
+  vertex.label.color = NA,
+  edge.color = NA,
+  edge.width = 5,
+  edge.arrow.size = 10,
+  edge.arrow.width = 1
 )
 }
 \arguments{
 \item{g}{The input graph}
 
 \item{layers}{A boolean whether to add the layers or not}
+
+\item{vertex.label}{The vertices' labels}
+
+\item{vertex.label.color}{The vertices' colors. If not specified, the colors will be chosen randomly}
+
+\item{edge.color}{The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer}
+
+\item{edge.width}{The edge width. Default set to 5.}
+
+\item{edge.arrow.size}{The edges' arrow size. Default set to 10}
+
+\item{edge.arrow.width}{The  edges' arrow width. Default set to 1}
 }
 \description{
 Plot the graph in 3D using rgl
 }
 \note{
-This function can take all arguments supported and not ignored by \link[igraph]{rglplot} which are:
-vertex.shape, vertex.label, edge.width. All others are set in the function and cannot be modified.
+This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
+vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
 }

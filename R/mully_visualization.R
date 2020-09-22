@@ -62,7 +62,7 @@ plot.mully <- function(g, layout) {
   usedCols = unique(V(g)$color)
   if (is.null(V(g)$color))
     V(g)$color = NA
-  for (i in 1:g$iLayer) {
+  for (i in 1:dim(g$layers)[1]) {
     if (is.na(V(g)[which(V(g)$n == i)]$color)) {
       if (!cols[i] %in% usedCols) {
         V(g)[which(V(g)$n == i)]$color = cols[i]
@@ -99,16 +99,23 @@ circpos = function(n, r = 1) {
 #'
 #' @param g The input graph
 #' @param layers A boolean whether to add the layers or not
+#' @param vertex.label The vertices' labels
+#' @param vertex.label.color The vertices' colors. If not specified, the colors will be chosen randomly
+#' @param edge.color The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
+#' @param edge.width The edge width. Default set to 5.
+#' @param edge.arrow.size The edges' arrow size. Default set to 10
+#' @param edge.arrow.width The  edges' arrow width. Default set to 1
 #'
 #' @export
 #'
 #' @note
-#' This function can take all arguments supported and not ignored by \link[igraph]{rglplot} which are:
-#' vertex.shape, vertex.label, edge.width. All others are set in the function and cannot be modified.
+#' This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
+#' vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
 #'
 plot3d.mully <- function(g, layers = T,
-                         vertex.shape="circle",vertex.label=NA
-                         ,edge.width=1) {
+                         vertex.label=NA,vertex.label.color = NA,
+                         edge.color=NA,edge.width=5,
+                         edge.arrow.size=10,edge.arrow.width=1) {
   rgl.open()
   rgl.bg(
     sphere = TRUE,
@@ -118,15 +125,16 @@ plot3d.mully <- function(g, layers = T,
   )
   gps = getMarkGroups(g)
 
-  cols = randomColor(count = g$iLayer)
+  colrs = randomColor(count = g$iLayer)
   usedCols = unique(V(g)$color)
   if (is.null(V(g)$color))
     V(g)$color = NA
-  for (i in 1:g$iLayer) {
-    if (is.na(V(g)[which(V(g)$n == i)]$color)) {
-      if (!cols[i] %in% usedCols) {
-        V(g)[which(V(g)$n == i)]$color = cols[i]
-        usedCols = c(usedCols, cols[i])
+  for (i in 1:dim(g$layers)[1]) {
+    idLayer=as.integer(g$layers$ID[i])
+    if (is.na(V(g)[which(V(g)$n == idLayer)]$color)) {
+      if (!colrs[idLayer] %in% usedCols) {
+        V(g)[which(V(g)$n == idLayer)]$color = colrs[idLayer]
+        usedCols = c(usedCols, colrs[idLayer])
       }
       else{
         c = randomColor(count = 1)
@@ -134,20 +142,23 @@ plot3d.mully <- function(g, layers = T,
           c = randomColor(count = 1)
         }
         usedCols = c(usedCols, c)
-        V(g)[which(V(g)$n == i)]$color = c
+        V(g)[which(V(g)$n == idLayer)]$color = c
       }
     }
   }
   #Add edge colors
-  edgecolors = c()
-  AllEdges = getEdgeAttributes(g)
-  for (i in 1:dim(AllEdges)[1]) {
-    V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
-    V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
-    if (V1$n == V2$n)
-      edgecolors = c(edgecolors, V1$color)
-    else
-      edgecolors = c(edgecolors, "black")
+  if(is.na(edge.color)){
+    edgecolors = c()
+    AllEdges = getEdgeAttributes(g)
+    for (i in 1:dim(AllEdges)[1]) {
+      V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
+      V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
+      if (V1$n == V2$n)
+        edgecolors = c(edgecolors, V1$color)
+      else
+        edgecolors = c(edgecolors, "black")
+    }
+    edge.color=edgescolors
   }
 
   layout = get3DLayout(g)
@@ -161,10 +172,12 @@ plot3d.mully <- function(g, layers = T,
     rescale = F,
     vertex.label=vertex.label,
     vertex.shape=vertex.shape,
-    label.color = V(g)$color,
+    vertex.label.color = V(g)$color,
+    vertex.label.dist = 0,
     edge.color=edgecolors,
     edge.width=edge.width,
-    vertex.label.dist = 0,
+    edge.arrow.size=edge.arrow.size,
+    edge.arrow.width=edge.arrow.width,
     grouplist = unlist(gps)
   )
   aspect3d(1, 1, 1)
@@ -173,9 +186,11 @@ plot3d.mully <- function(g, layers = T,
     layout1 = layout[order(V(g)$n), ]
     clrs = unique(V(g)$color[order(V(g)$n)])
     temp = 1
-    for (i in 1:g$iLayer) {
-      nNodes = length(which(V(g)$n == i))
-      coord = layout1[temp:(temp + length(which(V(g)$n == i)) - 1), ]
+    for (i in 1:dim(g$layers)[1]) {
+      idLayer=as.integer(g$layers$ID[i])
+      nameLayer=g$layers$Name[i]
+      nNodes = length(which(V(g)$n == idLayer))
+      coord = layout1[temp:(temp + length(which(V(g)$n == idLayer)) - 1), ]
       plane = get3DPlane(coord, g$iLayer)
       rgl.planes(
         0,
@@ -183,14 +198,14 @@ plot3d.mully <- function(g, layers = T,
         0,
         d = plane[4],
         col = clrs[i],
-        alpha = 0.3
+        alpha = 0.2
       )
       #Add layers' names
       text3d(
-        x = -max(abs(layout[, 1])),
+        x = -max(abs(layout[, 1]))-1,
         y = coord[1, 2],
-        z = min(abs(layout[, 3])) - 1,
-        texts = paste0(g$layers$Name[i]," Layer",sep=""),
+        z = min(abs(layout[, 3])) - 2,
+        texts = paste0(nameLayer," Layer",sep=""),
         color = clrs[i],
         alpha = 1
       )
@@ -205,6 +220,9 @@ get3DLayout <- function(g) {
   layout = list()
   for (i in 1:length(layers)) {
     nodesID = unlist(layers[i])
+    #layer deleted
+    if(length(nodesID)==0)
+      next
     nodesInLayerCount = length(nodesID)
     xz = circpos(nodesInLayerCount, r = length(layers))
     x = xz[, 1]

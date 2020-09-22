@@ -161,7 +161,6 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
     stop()
   }
 
-  #TODO create subgraph and save it
   g <- g - edge(as.numeric(comAll))
 
 

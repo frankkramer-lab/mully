@@ -115,7 +115,6 @@ removeNode <- function(g, name,trans=F) {
       if(isTRUE(trans)){
         g=addTransEdges(g,node)
       }
-      #TODO create subgraph and save it
       g <- g - vertices(node)
     }
     else{
