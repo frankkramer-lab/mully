@@ -158,7 +158,7 @@ plot3d.mully <- function(g, layers = T,
       else
         edgecolors = c(edgecolors, "black")
     }
-    edge.color=edgescolors
+    edge.color=edgecolors
   }
 
   layout = get3DLayout(g)
@@ -171,7 +171,6 @@ plot3d.mully <- function(g, layers = T,
     layout = layout,
     rescale = F,
     vertex.label=vertex.label,
-    vertex.shape=vertex.shape,
     vertex.label.color = V(g)$color,
     vertex.label.dist = 0,
     edge.color=edgecolors,
