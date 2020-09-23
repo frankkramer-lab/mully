@@ -85,7 +85,8 @@ plot.mully <- function(g, layout) {
               layout = getLayout(g, layout))
 }
 
-#Create 3d coordinates of the network layout
+#Create 3d coordinates of the network layout on a circle
+#Function copied from: https://www.blopig.com/blog/2016/10/plotting-and-storing-a-3d-network-in-r/
 circpos = function(n, r = 1) {
   #Coordinates on a circle
   rad = seq(0, 2 * pi, length.out = n + 1)[-1]
@@ -94,6 +95,16 @@ circpos = function(n, r = 1) {
   return(cbind(x, z))
 }
 
+#Create 3d coordinates of the network layout on a circle
+#Function inspired by: https://www.blopig.com/blog/2016/10/plotting-and-storing-a-3d-network-in-r/
+discpos = function(n, r = 1) {
+  #Coordinates on a circle
+  rad = seq(0, 2 * pi, length.out = n + 1)[-1]
+  rad1 = runif(n+1,0, r)[-1]
+  x = cos(rad) * rad1
+  z = sin(rad) * rad1
+  return(cbind(x, z))
+}
 
 #' Plot the graph in 3D using rgl
 #'
@@ -101,6 +112,7 @@ circpos = function(n, r = 1) {
 #' @param layers A boolean whether to add the layers or not
 #' @param vertex.label The vertices' labels
 #' @param vertex.label.color The vertices' colors. If not specified, the colors will be chosen randomly
+#' @param vertex.plac The placement form of the vertices on the layer. Can either be "circle" which will place them on a circle, or "disc" which will place them randomly on a disc. The default is "circle"
 #' @param edge.color The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
 #' @param edge.width The edge width. Default set to 5.
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
@@ -113,7 +125,7 @@ circpos = function(n, r = 1) {
 #' vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
 #'
 plot3d.mully <- function(g, layers = T,
-                         vertex.label=NA,vertex.label.color = NA,
+                         vertex.label=NA,vertex.label.color = NA,vertex.plac="circle",
                          edge.color=NA,edge.width=5,
                          edge.arrow.size=10,edge.arrow.width=1) {
   rgl.open()
@@ -161,7 +173,7 @@ plot3d.mully <- function(g, layers = T,
     edge.color=edgecolors
   }
 
-  layout = get3DLayout(g)
+  layout = get3DLayout(g,vertex.plac)
 
   open3d()
 
@@ -213,7 +225,7 @@ plot3d.mully <- function(g, layers = T,
   }
 }
 
-get3DLayout <- function(g) {
+get3DLayout <- function(g,plac) {
   yinit = 4
   layers = getMarkGroups(g)
   layout = list()
@@ -223,7 +235,9 @@ get3DLayout <- function(g) {
     if(length(nodesID)==0)
       next
     nodesInLayerCount = length(nodesID)
-    xz = circpos(nodesInLayerCount, r = length(layers))
+    xz= circpos(nodesInLayerCount, r = length(layers))
+    if(plac=="disc")
+      xz = discpos(nodesInLayerCount, r = length(layers))
     x = xz[, 1]
     z = xz[, 2]
     y = runif(n = length(nodesInLayerCount), yinit, yinit + 2)
