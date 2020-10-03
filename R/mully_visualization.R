@@ -88,6 +88,11 @@ plot.mully <- function(g, layout) {
 #Create 3d coordinates of the network layout on a circle
 #Function copied from: https://www.blopig.com/blog/2016/10/plotting-and-storing-a-3d-network-in-r/
 circpos = function(n, r = 1) {
+  if(n==1){
+    x=cos(runif(1,0, r)*r)
+    z=sin(runif(1,0, r)*r)
+    return(cbind(x,z))
+  }
   #Coordinates on a circle
   rad = seq(0, 2 * pi, length.out = n + 1)[-1]
   x = cos(rad) * r
@@ -98,6 +103,11 @@ circpos = function(n, r = 1) {
 #Create 3d coordinates of the network layout on a circle
 #Function inspired by: https://www.blopig.com/blog/2016/10/plotting-and-storing-a-3d-network-in-r/
 discpos = function(n, r = 1) {
+  if(n==1){
+    x=cos(runif(1,0, r)*r)
+    z=sin(runif(1,0, r)*r)
+    return(cbind(x,z))
+  }
   #Coordinates on a circle
   rad = seq(0, 2 * pi, length.out = n + 1)[-1]
   rad1 = runif(n+1,0, r)[-1]
@@ -143,9 +153,12 @@ plot3d.mully <- function(g, layers = T,
     V(g)$color = NA
   for (i in 1:dim(g$layers)[1]) {
     idLayer=as.integer(g$layers$ID[i])
-    if (is.na(V(g)[which(V(g)$n == idLayer)]$color)) {
+    nodesid=which(V(g)$n == idLayer)
+    if(is.null(nodesid) || is.na(nodesid) || length(nodesid)==0)
+      next
+    if (is.na(V(g)[nodesid]$color)) {
       if (!colrs[idLayer] %in% usedCols) {
-        V(g)[which(V(g)$n == idLayer)]$color = colrs[idLayer]
+        V(g)[nodesid]$color = colrs[idLayer]
         usedCols = c(usedCols, colrs[idLayer])
       }
       else{
@@ -154,7 +167,7 @@ plot3d.mully <- function(g, layers = T,
           c = randomColor(count = 1)
         }
         usedCols = c(usedCols, c)
-        V(g)[which(V(g)$n == idLayer)]$color = c
+        V(g)[nodesid]$color = c
       }
     }
   }
@@ -176,7 +189,6 @@ plot3d.mully <- function(g, layers = T,
   layout = get3DLayout(g,vertex.plac)
 
   open3d()
-
   rglplot(
     g,
     vertex.color = V(g)$color,
@@ -197,18 +209,23 @@ plot3d.mully <- function(g, layers = T,
     layout1 = layout[order(V(g)$n), ]
     clrs = unique(V(g)$color[order(V(g)$n)])
     temp = 1
+    iColr=1
     for (i in 1:dim(g$layers)[1]) {
       idLayer=as.integer(g$layers$ID[i])
       nameLayer=g$layers$Name[i]
       nNodes = length(which(V(g)$n == idLayer))
-      coord = layout1[temp:(temp + length(which(V(g)$n == idLayer)) - 1), ]
-      plane = get3DPlane(coord, g$iLayer)
+      if(nNodes==0)
+        next
+      coord = layout1[temp:(temp + nNodes - 1), ]
+      if(nNodes==1)
+        coord = t(as.matrix(layout1[temp, ]))
+      plane = suppressWarnings(get3DPlane(coord, g$iLayer,nNodes))
       rgl.planes(
         0,
         b = plane[2],
         0,
         d = plane[4],
-        col = clrs[i],
+        col = clrs[iColr],
         alpha = 0.2
       )
       #Add layers' names
@@ -217,9 +234,10 @@ plot3d.mully <- function(g, layers = T,
         y = coord[1, 2],
         z = min(abs(layout[, 3])) - 2,
         texts = paste0(nameLayer," Layer",sep=""),
-        color = clrs[i],
+        color = clrs[iColr],
         alpha = 1
       )
+      iColr=iColr+1
       temp = temp + nNodes
     }
   }
@@ -231,10 +249,11 @@ get3DLayout <- function(g,plac) {
   layout = list()
   for (i in 1:length(layers)) {
     nodesID = unlist(layers[i])
-    #layer deleted
-    if(length(nodesID)==0)
-      next
+
     nodesInLayerCount = length(nodesID)
+    #layer deleted or layer empty
+    if(length(nodesID)==0 || nodesInLayerCount==0)
+      next
     xz= circpos(nodesInLayerCount, r = length(layers))
     if(plac=="disc")
       xz = discpos(nodesInLayerCount, r = length(layers))
@@ -280,9 +299,9 @@ getEquationPlane <- function(x1, y1, z1, x2, y2, z2, x3, y3, z3)
   return(c(a, b, c, d))
 }
 
-get3DPlane <- function(coord, iLayer) {
-  p = circpos(2 + dim(coord)[1], iLayer)
-  temp = cbind(p[dim(p)[1] - 1:dim(p)[1], 1], rep(coord[1, 2], 2), p[dim(p)[1] -
+get3DPlane <- function(coord, iLayer,nNodes) {
+  p = circpos(3 + nNodes, iLayer)
+  temp = cbind(p[dim(p)[1] - 1:dim(p)[1], 1], rep(coord[1, 2], 3+nNodes), p[dim(p)[1] -
                                                                        1:dim(p)[1], 2])
   coord = rbind(coord, temp)
   plane = getEquationPlane(coord[1, 1],
