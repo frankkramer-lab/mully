@@ -1,0 +1,528 @@
+Hmm ... looks like a package
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.
+cls
+Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.
+clo)) (c:/Program Files/R/R-4.0.3/share/texmf/tex/latex/Rd.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthe
+n.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/long
+table.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.s
+ty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt
+.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verb
+atim.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.st
+y)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textc
+omp.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/zi4.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xk
+eyval.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkeyval.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkvutils.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+keyval.tex)))))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/c
+olor.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/color.cfg)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-d
+ef/pdftex.def))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/
+ltxcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/if
+tex.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcm
+ds/pdftexcmds.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarer
+r/infwarerr.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkey
+s/kvsetkeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefine
+keys/kvdefinekeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescap
+e/pdfescape.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hy
+color.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacr
+o/letltxmacro.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/au
+xhook.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/
+kvoptions.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/p
+d1enc.def)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/
+intcalc.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds
+/etexcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/b
+itset.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintca
+lc/bigintcalc.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbeg
+shi-ltx.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+pdftex.def
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atver
+yend-ltx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilec
+heck/rerunfilecheck.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniqueco
+unter/uniquecounter.sty)))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makei
+dx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/input
+enc.sty)
+Writing index file Rd2.idx
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/
+l3backend-pdftex.def)
+No file Rd2.aux.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/n
+ameref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/r
+efcount.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitle
+string/gettitlestring.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ot1zi4.fd)
+
+LaTeX Font Warning: Font shape `OML/zi4/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 21.
+
+
+Overfull \hbox (17.78166pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 pack-age is im-ple-mented as a part of [the Mul-ti-path Project
+](https://www.sys-med.de/en/junior-
+
+Overfull \hbox (237.55087pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
+ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
+[1{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/up
+dmap/pdftex.map}]
+Overfull \hbox (4.72609pt too wide) in paragraph at lines 52--61
+[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
+Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
+ [][]getN-odeAt-tributes[][][]
+
+Overfull \hbox (18.08727pt too wide) in paragraph at lines 71--73
+[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
+y pa-per: https://www.mdpi.com/2073-
+[2] [3] [4] [5] [6] [7] [8] [9] [10]
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ts1zi4.fd) [11] [12] [13]
+No file Rd2.ind.
+[14] (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.rglplot} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.plot.igraph} has been referenced but does not e
+xist, replaced by a fixed one
+
+{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inco
+nsolata/i4-ts1.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/f
+onts/enc/dvips/inconsolata/i4-ot1-0.enc}<c:/Users/Administrator/AppData/Roaming
+/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><c:/Use
+rs/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/Administrator/AppData/Roaming/Ti
+nyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/Administra
+tor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
+ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
+inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti10.pfb>
+Output written on Rd2.pdf (14 pages, 142742 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2020/W32TeX] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (40 entries accepted, 0 rejected).
+Sorting entries....done (210 comparisons).
+Generating output file Rd2.ind....done (64 lines written, 1 warning).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.
+cls
+Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.
+clo)) (c:/Program Files/R/R-4.0.3/share/texmf/tex/latex/Rd.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthe
+n.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/long
+table.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.s
+ty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt
+.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verb
+atim.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.st
+y)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textc
+omp.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/zi4.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xk
+eyval.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkeyval.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkvutils.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+keyval.tex)))))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/c
+olor.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/color.cfg)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-d
+ef/pdftex.def))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/
+ltxcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/if
+tex.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcm
+ds/pdftexcmds.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarer
+r/infwarerr.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkey
+s/kvsetkeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefine
+keys/kvdefinekeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescap
+e/pdfescape.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hy
+color.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacr
+o/letltxmacro.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/au
+xhook.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/
+kvoptions.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/p
+d1enc.def)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/
+intcalc.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds
+/etexcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/b
+itset.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintca
+lc/bigintcalc.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbeg
+shi-ltx.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+pdftex.def
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atver
+yend-ltx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilec
+heck/rerunfilecheck.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniqueco
+unter/uniquecounter.sty)))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makei
+dx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/input
+enc.sty)
+Writing index file Rd2.idx
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/
+l3backend-pdftex.def) (./Rd2.aux)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/n
+ameref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/r
+efcount.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitle
+string/gettitlestring.sty)) (./Rd2.out) (./Rd2.out)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ot1zi4.fd)
+
+LaTeX Font Warning: Font shape `OML/zi4/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 21.
+
+(./Rd2.toc [1{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-var/fonts/ma
+p/pdftex/updmap/pdftex.map}])
+Overfull \hbox (17.78166pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 pack-age is im-ple-mented as a part of [the Mul-ti-path Project
+](https://www.sys-med.de/en/junior-
+
+Overfull \hbox (237.55087pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
+ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
+
+Overfull \hbox (4.72609pt too wide) in paragraph at lines 52--61
+[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
+Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
+ [][]getN-odeAt-tributes[][][]
+
+Overfull \hbox (18.08727pt too wide) in paragraph at lines 71--73
+[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
+y pa-per: https://www.mdpi.com/2073-
+[2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ts1zi4.fd) [12] [13] [14] (./Rd2.ind [15] [16]) (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.rglplot} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.plot.igraph} has been referenced but does not e
+xist, replaced by a fixed one
+
+{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inco
+nsolata/i4-ts1.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/f
+onts/enc/dvips/inconsolata/i4-ot1-0.enc}<c:/Users/Administrator/AppData/Roaming
+/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><c:/Use
+rs/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/Administrator/AppData/Roaming/Ti
+nyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/Administra
+tor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
+ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
+inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti10.pfb>
+Output written on Rd2.pdf (16 pages, 148926 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2020/W32TeX] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (40 entries accepted, 0 rejected).
+Sorting entries....done (210 comparisons).
+Generating output file Rd2.ind....done (64 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.
+cls
+Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.
+clo)) (c:/Program Files/R/R-4.0.3/share/texmf/tex/latex/Rd.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthe
+n.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/long
+table.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.s
+ty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt
+.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verb
+atim.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.st
+y)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textc
+omp.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/zi4.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xk
+eyval.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkeyval.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+xkvutils.tex
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/
+keyval.tex)))))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/c
+olor.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/color.cfg)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-d
+ef/pdftex.def))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/
+ltxcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/if
+tex.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcm
+ds/pdftexcmds.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarer
+r/infwarerr.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkey
+s/kvsetkeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefine
+keys/kvdefinekeys.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescap
+e/pdfescape.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hy
+color.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacr
+o/letltxmacro.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/au
+xhook.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/
+kvoptions.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/p
+d1enc.def)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/
+intcalc.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds
+/etexcmds.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/b
+itset.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintca
+lc/bigintcalc.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbeg
+shi-ltx.sty))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+pdftex.def
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atver
+yend-ltx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilec
+heck/rerunfilecheck.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniqueco
+unter/uniquecounter.sty)))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makei
+dx.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/input
+enc.sty)
+Writing index file Rd2.idx
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/
+l3backend-pdftex.def) (./Rd2.aux)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/n
+ameref.sty
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/r
+efcount.sty)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitle
+string/gettitlestring.sty)) (./Rd2.out) (./Rd2.out)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ot1zi4.fd)
+
+LaTeX Font Warning: Font shape `OML/zi4/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 21.
+
+(./Rd2.toc [1{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-var/fonts/ma
+p/pdftex/updmap/pdftex.map}])
+Overfull \hbox (17.78166pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 pack-age is im-ple-mented as a part of [the Mul-ti-path Project
+](https://www.sys-med.de/en/junior-
+
+Overfull \hbox (237.55087pt too wide) in paragraph at lines 44--48
+\OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
+ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
+
+Overfull \hbox (4.72609pt too wide) in paragraph at lines 52--61
+[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
+Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
+ [][]getN-odeAt-tributes[][][]
+
+Overfull \hbox (18.08727pt too wide) in paragraph at lines 71--73
+[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
+y pa-per: https://www.mdpi.com/2073-
+[2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
+a/ts1zi4.fd) [12] [13] [14] (./Rd2.ind [15] [16]) (./Rd2.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.rglplot} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.plot.igraph} has been referenced but does not e
+xist, replaced by a fixed one
+
+{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inco
+nsolata/i4-ts1.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/f
+onts/enc/dvips/inconsolata/i4-ot1-0.enc}<c:/Users/Administrator/AppData/Roaming
+/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><c:/Use
+rs/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/Administrator/AppData/Roaming/Ti
+nyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/Administra
+tor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
+ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
+inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti10.pfb>
+Output written on Rd2.pdf (16 pages, 149484 bytes).
+Transcript written on Rd2.log.
+Saving output to 'mully-manual.pdf' ...
+Done
+You may want to clean up by 'rm -Rf C:/Users/ADMINI~1/AppData/Local/Temp/RtmpQb3lJE/Rd2pdf459c50644505'

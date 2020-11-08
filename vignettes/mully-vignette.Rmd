@@ -5,9 +5,9 @@ author:
     email: "zaynabhassanhammoud@gmail.com"
     affiliations: &id IT-Infrastructure for Translational Medical Research, University of Augsburg, Germany
 date: "`r Sys.Date()`"
-output: pdf_document
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{mully-pdf Vignette}
+  %\VignetteIndexEntry{mully Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

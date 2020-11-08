@@ -5,9 +5,9 @@ author:
     email: "zaynabhassanhammoud@gmail.com"
     affiliations: &id IT-Infrastructure for Translational Medical Research, University of Augsburg, Germany
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
-  %\VignetteIndexEntry{mully Vignette}
+  %\VignetteIndexEntry{mully-pdf Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -44,91 +44,80 @@ library("mully")
 ## Test the package
 In this section, we provide a demo to test the package by calling some of the function. After running this script, you will have a graph g with 3 layers and 8 nodes. the graph can also be modified by calling other functions. Please refer to help to see the available functions.
 ### Create new mully graph
-```{r}
-  g <- mully("MyFirstMully",direct = F)
+```{r,eval=FALSE}
+g=mully("MyFirstMully",direct = F)
 ```
 ### Add Layers
-```{r}
-  g <- addLayer(g, c("Gene", "Drug", "Drug", "Disease"))
+```{r,eval=FALSE}
+g=addLayer(g, c("Gene", "Drug", "Disease"))
 ```
 ### Add/print Nodes
-```{r}
-  g=addNode(g,"d1","disease",attributes=list(type="t1"))
-  print("Node d1 added as disease")
+```{r,eval=FALSE}
+g=addNode(g,"d1","disease",attributes=list(type="t1"))
   
-  g=addNode(g,"d2","disease",attributes=list(type="t1"))
-  print("Node d2 added as disease")
+g=addNode(g,"d2","disease",attributes=list(type="t1"))
   
-  g=addNode(g,"d3","disease",attributes=list(type="t1"))
-  print("Node d3 added as disease")
+g=addNode(g,"d3","disease",attributes=list(type="t1"))
   
-  g=addNode(g,"dr1","drug",attributes=list(effect="strong"))
-  print("Node dr1 added as drug")
+g=addNode(g,"dr1","drug",attributes=list(effect="strong"))
   
-  g=addNode(g,"dr2","drug",attributes=list(effect="strong"))
-  print("Node dr2 added as drug")
-  
-  g=addNode(g,"dr3","drug",attributes=list(effect="moderate"))
-  print("Node dr3 added as drug")
-  
-  g=addNode(g,"g1","gene",attributes=list(desc="AF"))
-  print("Node g1 added as gene")
-  
-  g=addNode(g,"g2","gene",attributes=list(desc="BE"))
-  print("Node g2 added as gene")
+g=addNode(g,"dr2","drug",attributes=list(effect="strong"))
 
-  #See vertices attributes
-  print(getNodeAttributes(g))
+g=addNode(g,"dr3","drug",attributes=list(effect="moderate"))
+
+g=addNode(g,"g1","gene",attributes=list(desc="AF"))
   
+g=addNode(g,"g2","gene",attributes=list(desc="BE"))
+
+#See vertices attributes
+print(getNodeAttributes(g))
 ```
 ### Add/print/remove Edges
-```{r}
-  g=addEdge(g,"dr1","d2",list(name="treats"))
-  g=addEdge(g,"dr1","d2",list(name="extraEdge"))
-  g=addEdge(g,"d2","g1",list(name="targets"))
-  g=addEdge(g,"g2","dr3",list(name="mutates and causes"))
-  g=addEdge(g,"dr3","d3",list(name="treats"))
-  
-  print(getEdgeAttributes(g))
+```{r,eval=FALSE}
+g=addEdge(g,"dr1","d2",list(name="treats"))
+g=addEdge(g,"dr1","d2",list(name="extraEdge"))
+g=addEdge(g,"d2","g1",list(name="targets"))
+g=addEdge(g,"g2","dr3",list(name="mutates and causes"))
+g=addEdge(g,"dr3","d3",list(name="treats"))
+
+print(getEdgeAttributes(g))
         
-  removeEdge(g,"d2","dr1",multi=T)
+removeEdge(g,"d2","dr1",multi=T)
 ```
 ### Merge two graphs
-```{r}
-  #Create a Second graph
-  g1=mully()
+```{r,eval=FALSE}
+#Create a Second graph
+g1=mully()
 
-  g1=addLayer(g1,c("protein","drug","gene"))
+g1=addLayer(g1,c("protein","drug","gene"))
 
-  g1=addNode(g1,"dr4","drug",attributes=list(effect="strong"))
-  g1=addNode(g1,"dr5","drug",attributes=list(effect="strong"))
-  g1=addNode(g1,"dr6","drug",attributes=list(effect="moderate"))
+g1=addNode(g1,"dr4","drug",attributes=list(effect="strong"))
+g1=addNode(g1,"dr5","drug",attributes=list(effect="strong"))
+g1=addNode(g1,"dr6","drug",attributes=list(effect="moderate"))
 
-  g1=addNode(g1,"p1","protein")
-  g1=addNode(g1,"p2","protein")
-  g1=addNode(g1,"p3","protein")
+g1=addNode(g1,"p1","protein")
+g1=addNode(g1,"p2","protein")
+g1=addNode(g1,"p3","protein")
 
-  g1=addNode(g1,"g3","gene")
-  g1=addNode(g1,"g4","gene")
+g1=addNode(g1,"g3","gene")
+g1=addNode(g1,"g4","gene")
 
+g1=addEdge(g1,nodeStart = "p2",nodeDest = "p3",attributes = list(name="interacts"))
+g1=addEdge(g1,nodeStart = "dr6",nodeDest = "g4",attributes = list(name="targets"))
 
-  g1=addEdge(g1,nodeStart = "p2",nodeDest = "p3",attributes = list(name="interacts"))
-  g1=addEdge(g1,nodeStart = "dr6",nodeDest = "g4",attributes = list(name="targets"))
+#Merge both graphs
+g12=merge(g,g1)
 
-  #Merge both graphs
-  g12=merge(g,g1)
-
-  #Print the graph
-  print(g12)
+#Print the graph
+print(g12)
 ```
 ### Visualization
 ```{r,eval=FALSE}
-  plot(g12,layout = "scaled")
+plot(g12,layout = "scaled")
 ```
 
-
 ```{r,eval=FALSE}
-  plot3d(g12)
+plot3d(g12)
 ```
 
 ## Available Functions
@@ -184,8 +173,8 @@ The function needs the following arguments:
 The function returns the graph, with the added edge.
 
 ***Example***
-````{r}
-g=demo()
+````{r,eval=FALSE}
+g=mully::demo()
 addEdge(g,"dr3","g2",attributes=list(name="newEdge"))
 ```
 ### addLayer
@@ -200,7 +189,7 @@ The function needs the following arguments:
 The function returns the graph, with the layers added.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 addLayer(g,"Complex")
 ```
@@ -218,7 +207,7 @@ The function needs the following arguments:
 The function returns the graph, with the new node.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 attributes=list("specie"="Homo Sapiens")
 addNode(g = g,nodeName = "g3",layerName = "Gene",attributes = attributes)
@@ -250,7 +239,7 @@ The function needs the following arguments:
 The function returns a dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns the complete information on edges and their attributes.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 ##Print all Edges
 getEdgeAttributes(g)
@@ -271,7 +260,7 @@ The nodes passed to this function as arguments should be the unique names assign
 The function returns a list containing the ids of the edges connecting the nodes.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 getIDEdge(g,"d2","dr1")
 ```
@@ -298,7 +287,7 @@ The function needs the following arguments:
 The function returns a List of the nodes on the given layer.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 getLayer(g,"gene")
 ```
@@ -313,7 +302,7 @@ The function needs the following arguments:
 The function returns the count of the layers.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 getLayersCount(g)
 ```
@@ -341,7 +330,7 @@ The function needs the following arguments:
 The function returns a dataframe containing the attributes of the specified node.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 getNodeAttributes(g,layerByName = TRUE)
 ```
@@ -414,7 +403,7 @@ The function needs the following arguments:
 The function returns a boolean value.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 isLayer(g,"Gene")
 isLayer(g,"Complex")
@@ -431,7 +420,7 @@ The function needs the following arguments:
 The function returns the merge of the two graphs. The merge is based on the first given graph.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 
 #Create First Graph
 g=mully::demo()
@@ -499,7 +488,7 @@ The function needs the following arguments:
   - **edge.arrow.size** The edges' arrow size. Default set to 10
   - **edge.arrow.width** The  edges' arrow width. Default set to 1
 
-The function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
+The function can take the following arguments supported and not ignored by rglplot}:
 vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
 
 ### print,mully
@@ -511,7 +500,7 @@ The function needs the following arguments:
   - **g** - The input graph
 
 ***Example***
-```{r}
+```{r,eval=FALSE}
 g=mully::demo()
 print(g)
 ```
@@ -530,7 +519,7 @@ The function needs the following arguments:
 The function returns the graph with the deleted edges.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 removeEdge(g,"dr1","d2",multi=TRUE)
 ```
@@ -547,7 +536,7 @@ The function needs the following arguments:
 The function returns the graph, with the given layer and its corresponding nodes and edges removed.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 removeLayer(g,"gene",trans=TRUE)
 ```
@@ -565,7 +554,7 @@ The function needs the following arguments:
 The function returns the graph, with the nodes deleted.
 
 ***Example***
-````{r}
+````{r,eval=FALSE}
 g=mully::demo()
 removeNode(g,"dr1",trans=TRUE)
 ```

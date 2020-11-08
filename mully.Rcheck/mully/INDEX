@@ -1,0 +1,29 @@
+addEdge                 Add an edge
+addLayer                Add a layer or a set of layers to a graph
+addNode                 Add a node with assigned layer and attributes
+                        to a graph
+demo                    A demo function to test the package
+exportCSV               Export mully into CSV files
+getEdgeAttributes       Get the attributes of the edges connecting two
+                        nodes
+getIDEdge               Get the ids of the edges connecting two nodes
+getIDNode               Get the id of a node
+getLayer                Get the nodes on a layer in a graph
+getLayersCount          Get the number of layers in a graph
+getNode                 Get a node from a graph
+getNodeAttributes       Get the attributes of a node
+importEdgesCSV          Import Edges to a mully graph from a CSV file
+importGraphCSV          Import a mully graph from CSV files
+importLayersCSV         Import Layers to a mully graph from a CSV file
+importNodesCSV          Import Nodes to a mully graph from a CSV file
+is.mully                Is this a mully graph?
+isLayer                 Verify if the layer exists in a graph
+merge                   Merge or unite two graphs
+mully                   Create an empty multilayered graph
+mully-package           The mully package
+plot.mully              Plot the graph in 2D
+plot3d                  Plot the graph in 3D using rgl
+print.mully             Print function
+removeEdge              Delete an edge
+removeLayer             Delete a layer or a set of layers from a graph
+removeNode              Delete a node or a set of nodes from a graph

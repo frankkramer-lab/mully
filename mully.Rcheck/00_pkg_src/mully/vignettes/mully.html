@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<meta name="date" content="2020-11-08" />
+
+<title>mully - an R Package to create, modify and visualize multilayered graphs</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">mully - an R Package to create, modify and visualize multilayered graphs</h1>
+<h4 class="author">Zaynab Hammoud</h4>
+<a class="author_email" href="mailto:#"><a href="mailto:zaynabhassanhammoud@gmail.com" class="email">zaynabhassanhammoud@gmail.com</a></a>
+</address>
+<h4 class="date">2020-11-08</h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Network theory has been used for many years in the modeling and analysis of complex systems, as epidemiology, biology and biomedicine . As the data evolves and becomes more heterogeneous and complex, monoplex networks become an oversimplification of the corresponding systems. This imposes a need to go beyond traditional networks into a richer framework capable of hosting objects and relations of different scales, called Multilayered Network <strong>Mully</strong>, <strong>mul</strong>ti<strong>l</strong>a<strong>y</strong>er networks, is an R package that provides a multilayer network framework. Using this package, the user can create, modify and visualize graphs with multiple layers. This package is an extension to the <a href="https://github.com/igraph/rigraph">igraph package</a> that provides a monolayer graph framework. The package is implemented as a part of <a href="https://www.sys-med.de/en/junior-research-groups/multipath/">the Multipath Project</a> directed by <a href="https://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/">Dr. Frank Kramer</a> . ## Publication More information and references can be found in the mully paper:</p>
+<p><a href="https://www.mdpi.com/2073-4425/9/11/519" class="uri">https://www.mdpi.com/2073-4425/9/11/519</a></p>
+</div>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<div id="installation-via-github" class="section level3">
+<h3>Installation via Github</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">require</span>(devtools)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">install_github</span>(<span class="st">&quot;frankkramer-lab/mully&quot;</span>)</span></code></pre></div>
+</div>
+<div id="load-the-package" class="section level3">
+<h3>Load the package</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(<span class="st">&quot;mully&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="test-the-package" class="section level2">
+<h2>Test the package</h2>
+<p>In this section, we provide a demo to test the package by calling some of the function. After running this script, you will have a graph g with 3 layers and 8 nodes. the graph can also be modified by calling other functions. Please refer to help to see the available functions. ### Create new mully graph</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>  g &lt;-<span class="st"> </span><span class="kw">mully</span>(<span class="st">&quot;MyFirstMully&quot;</span>,<span class="dt">direct =</span> F)</span></code></pre></div>
+<div id="add-layers" class="section level3">
+<h3>Add Layers</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>  g &lt;-<span class="st"> </span><span class="kw">addLayer</span>(g, <span class="kw">c</span>(<span class="st">&quot;Gene&quot;</span>, <span class="st">&quot;Drug&quot;</span>, <span class="st">&quot;Drug&quot;</span>, <span class="st">&quot;Disease&quot;</span>))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Exists and will be skipped</span></span></code></pre></div>
+</div>
+<div id="addprint-nodes" class="section level3">
+<h3>Add/print Nodes</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;d1&quot;</span>,<span class="st">&quot;disease&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Node d1 added as disease&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;disease&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="kw">print</span>(<span class="st">&quot;Node d2 added as disease&quot;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;d3&quot;</span>,<span class="st">&quot;disease&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="kw">print</span>(<span class="st">&quot;Node d3 added as disease&quot;</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>  </span>
+<span id="cb5-13"><a href="#cb5-13"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;dr1&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="kw">print</span>(<span class="st">&quot;Node dr1 added as drug&quot;</span>)</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>  </span>
+<span id="cb5-17"><a href="#cb5-17"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;dr2&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="kw">print</span>(<span class="st">&quot;Node dr2 added as drug&quot;</span>)</span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>  </span>
+<span id="cb5-21"><a href="#cb5-21"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;dr3&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;moderate&quot;</span>))</span>
+<span id="cb5-22"><a href="#cb5-22"></a>  <span class="kw">print</span>(<span class="st">&quot;Node dr3 added as drug&quot;</span>)</span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  </span>
+<span id="cb5-25"><a href="#cb5-25"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;g1&quot;</span>,<span class="st">&quot;gene&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">desc=</span><span class="st">&quot;AF&quot;</span>))</span>
+<span id="cb5-26"><a href="#cb5-26"></a>  <span class="kw">print</span>(<span class="st">&quot;Node g1 added as gene&quot;</span>)</span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>  </span>
+<span id="cb5-29"><a href="#cb5-29"></a>  g=<span class="kw">addNode</span>(g,<span class="st">&quot;g2&quot;</span>,<span class="st">&quot;gene&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">desc=</span><span class="st">&quot;BE&quot;</span>))</span>
+<span id="cb5-30"><a href="#cb5-30"></a>  <span class="kw">print</span>(<span class="st">&quot;Node g2 added as gene&quot;</span>)</span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a></span>
+<span id="cb5-33"><a href="#cb5-33"></a>  <span class="co">#See vertices attributes</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>  <span class="kw">print</span>(<span class="kw">getNodeAttributes</span>(g))</span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">#&gt; 1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">#&gt; 2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="co">#&gt; 3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="co">#&gt; 4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="co">#&gt; 5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="co">#&gt; 6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="co">#&gt; 7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="co">#&gt; 8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span></code></pre></div>
+</div>
+<div id="addprintremove-edges" class="section level3">
+<h3>Add/print/remove Edges</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  g=<span class="kw">addEdge</span>(g,<span class="st">&quot;dr1&quot;</span>,<span class="st">&quot;d2&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;treats&quot;</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  g=<span class="kw">addEdge</span>(g,<span class="st">&quot;dr1&quot;</span>,<span class="st">&quot;d2&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;extraEdge&quot;</span>))</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  g=<span class="kw">addEdge</span>(g,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;g1&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;targets&quot;</span>))</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  g=<span class="kw">addEdge</span>(g,<span class="st">&quot;g2&quot;</span>,<span class="st">&quot;dr3&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;mutates and causes&quot;</span>))</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  g=<span class="kw">addEdge</span>(g,<span class="st">&quot;dr3&quot;</span>,<span class="st">&quot;d3&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;treats&quot;</span>))</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="kw">print</span>(<span class="kw">getEdgeAttributes</span>(g))</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>        </span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="kw">removeEdge</span>(g,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;dr1&quot;</span>,<span class="dt">multi=</span>T)</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; </span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt;  8 Nodes:</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; </span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt;  3 Edges:</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt;  1  d2  g1            targets</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt;  2 dr3  g2 mutates and causes</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt;  3  d3 dr3             treats</span></span></code></pre></div>
+</div>
+<div id="merge-two-graphs" class="section level3">
+<h3>Merge two graphs</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="co">#Create a Second graph</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  g1=<span class="kw">mully</span>()</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  g1=<span class="kw">addLayer</span>(g1,<span class="kw">c</span>(<span class="st">&quot;protein&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="st">&quot;gene&quot;</span>))</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr4&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr5&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr6&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;moderate&quot;</span>))</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p1&quot;</span>,<span class="st">&quot;protein&quot;</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p2&quot;</span>,<span class="st">&quot;protein&quot;</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p3&quot;</span>,<span class="st">&quot;protein&quot;</span>)</span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;g3&quot;</span>,<span class="st">&quot;gene&quot;</span>)</span>
+<span id="cb7-15"><a href="#cb7-15"></a>  g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;g4&quot;</span>,<span class="st">&quot;gene&quot;</span>)</span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  g1=<span class="kw">addEdge</span>(g1,<span class="dt">nodeStart =</span> <span class="st">&quot;p2&quot;</span>,<span class="dt">nodeDest =</span> <span class="st">&quot;p3&quot;</span>,<span class="dt">attributes =</span> <span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;interacts&quot;</span>))</span>
+<span id="cb7-19"><a href="#cb7-19"></a>  g1=<span class="kw">addEdge</span>(g1,<span class="dt">nodeStart =</span> <span class="st">&quot;dr6&quot;</span>,<span class="dt">nodeDest =</span> <span class="st">&quot;g4&quot;</span>,<span class="dt">attributes =</span> <span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;targets&quot;</span>))</span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="co">#Merge both graphs</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>  g12=<span class="kw">merge</span>(g,g1)</span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; Warning in addLayer(g1, g2$layers$Name): Layer drug Already Exists and will be</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; skipped</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; Warning in addLayer(g1, g2$layers$Name): Layer gene Already Exists and will be</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; skipped</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a></span>
+<span id="cb7-28"><a href="#cb7-28"></a>  <span class="co">#Print the graph</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a>  <span class="kw">print</span>(g12)</span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt;  4 Layers:</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt;  4  4 protein   protein</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; </span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt;  16 Nodes:</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt;    name n type   effect desc</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt;  1    d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt;  2    d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt;  3    d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt;  4   dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt;  5   dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt;  6   dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt;  7    g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt;  8    g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt;  9   dr4 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt;  10  dr5 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#&gt;  11  dr6 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="co">#&gt;  12   p1 4 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="co">#&gt;  13   p2 4 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="co">#&gt;  14   p3 4 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="co">#&gt;  15   g3 1 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="co">#&gt;  16   g4 1 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a><span class="co">#&gt; </span></span>
+<span id="cb7-57"><a href="#cb7-57"></a><span class="co">#&gt;  7 Edges:</span></span>
+<span id="cb7-58"><a href="#cb7-58"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb7-60"><a href="#cb7-60"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co">#&gt;  6  p2  p3          interacts</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="co">#&gt;  7 dr6  g4            targets</span></span></code></pre></div>
+</div>
+<div id="visualization" class="section level3">
+<h3>Visualization</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="kw">plot</span>(g12,<span class="dt">layout =</span> <span class="st">&quot;scaled&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="kw">plot3d</span>(g12)</span></code></pre></div>
+</div>
+</div>
+<div id="available-functions" class="section level2">
+<h2>Available Functions</h2>
+<p>mully functions are divided into different files depending on their functionnality range: <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_constructor.R">Constructor</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_layer.R">Layers Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_node.R">Node Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_edge.R">Edge Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_merge.R">Merge Function</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_visualization.R">Visualization Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_import.R">Import Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_export.R">Export Functions</a> , <a href="https://github.com/frankkramer-lab/mully/blob/master/R/mully_demo.R">Demo</a>.</p>
+<table>
+<colgroup>
+<col width="57%"></col>
+<col width="42%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mully(name,direct)</code></td>
+<td>Constructor Function, Create an empty multilayered graph</td>
+</tr>
+<tr class="even">
+<td><code>print(g)</code></td>
+<td>Print function</td>
+</tr>
+<tr class="odd">
+<td><code>addLayer(g, nameLayer)</code></td>
+<td>Add a layer or a set of layers to a graph</td>
+</tr>
+<tr class="even">
+<td><code>removeLayer(g, name,trans)</code></td>
+<td>Delete a layer or a set of layers from a graph</td>
+</tr>
+<tr class="odd">
+<td><code>isLayer(g, name)</code></td>
+<td>Verify if the layer exists in a graph</td>
+</tr>
+<tr class="even">
+<td><code>getLayersCount(g)</code></td>
+<td>Get the number of layers in a graph</td>
+</tr>
+<tr class="odd">
+<td><code>getLayer(g, nameLayer)</code></td>
+<td>Get the nodes on a layer in a graph</td>
+</tr>
+<tr class="even">
+<td><code>getNode(g,nameNode)</code></td>
+<td>Get a node from a graph</td>
+</tr>
+<tr class="odd">
+<td><code>getIDNode(g,nameNode)</code></td>
+<td>Get the id of a node</td>
+</tr>
+<tr class="even">
+<td><code>addNode(g, nodeName, layerName, attributes)</code></td>
+<td>Add a node with assigned layer and attributes to a graph</td>
+</tr>
+<tr class="odd">
+<td><code>removeNode(g, name,trans)</code></td>
+<td>Delete a node or a set of nodes from a graph</td>
+</tr>
+<tr class="even">
+<td><code>getNodeAttributes(g,nameNode)</code></td>
+<td>Get the attributes of one or all nodes</td>
+</tr>
+<tr class="odd">
+<td><code>addEdge(g, nodeStart, nodeDest, attributes)</code></td>
+<td>Add an edge</td>
+</tr>
+<tr class="even">
+<td><code>removeEdge(g, nodeStart, nodeDest,attributes, multi)</code></td>
+<td>Delete an edge</td>
+</tr>
+<tr class="odd">
+<td><code>getEdgeAttributes(g,nodeStart,nodeDest)</code></td>
+<td>Get the attributes of the edges connecting two nodes or all the edges in the graph</td>
+</tr>
+<tr class="even">
+<td><code>getIDEdge(g,nodeStart,nodeDest)</code></td>
+<td>Get the ids of the edges connecting two nodes</td>
+</tr>
+<tr class="odd">
+<td><code>merge(g1,g2)</code></td>
+<td>Merge or unite two graphs</td>
+</tr>
+<tr class="even">
+<td><code>plot(g,layout)</code></td>
+<td>Plot the graph in 2D</td>
+</tr>
+<tr class="odd">
+<td><code>plot3d(g)</code></td>
+<td>Plot the graph in 3D using rgl</td>
+</tr>
+<tr class="even">
+<td><code>importGraphCSV(name,direct,layers,nodes,edges)</code></td>
+<td>Import a mully graph from csv files</td>
+</tr>
+<tr class="odd">
+<td><code>importLayersCSV(g,file)</code></td>
+<td>Import layers to a mully graph from a CSV file</td>
+</tr>
+<tr class="even">
+<td><code>importNodesCSV(g,file)</code></td>
+<td>Import nodes to a mully graph from a CSV file</td>
+</tr>
+<tr class="odd">
+<td><code>importEdgesCSV(g,file)</code></td>
+<td>Import edges to a mully graph from a CSV file</td>
+</tr>
+</tbody>
+</table>
+<div id="addedge" class="section level3">
+<h3>addEdge</h3>
+<p><strong>Add an edge</strong></p>
+<p>The function is used to add an edge to a given mully graph. mully supports multi-edges, i.e. two nodes can be connected with multiple edges. The uniqueness of the edges is based on the connection with the attributes. When adding a new connection between two nodes that are already cnnected, the new edge should have different attributes. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nodeStart</strong> - The first endpoint of the edge</li>
+<li><strong>nodeDest</strong> - The second endpoint of the edge</li>
+<li><strong>attributes</strong> - A named list, the attributes to assign to the edge</li>
+</ul>
+<p>The function returns the graph, with the added edge.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>g=<span class="kw">demo</span>()</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="kw">addEdge</span>(g,<span class="st">&quot;dr3&quot;</span>,<span class="st">&quot;g2&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;newEdge&quot;</span>))</span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; </span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt;  8 Nodes:</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="co">#&gt; </span></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="co">#&gt;  6 Edges:</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="co">#&gt;  6 dr3  g2            newEdge</span></span></code></pre></div>
+</div>
+<div id="addlayer" class="section level3">
+<h3>addLayer</h3>
+<p><strong>Add a layer or a set of layers to a graph</strong></p>
+<p>The function is used to add a new layer to a given mully graph. The layer name should be unique and should not already exist in the graph. The names are not case-sensitive. the function has an internal count, and assigns new IDs to new layers. The internal counr number only increases, i.e. it does not change after deleting a lyer. Therefore the ID of the last added layer is not necessarily the number of layers in the mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nameLayer</strong> - The name or the list of the names of the layers to be added. The layer names must be unique</li>
+</ul>
+<p>The function returns the graph, with the layers added.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="kw">addLayer</span>(g,<span class="st">&quot;Complex&quot;</span>)</span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt;  4 Layers:</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt;  4  4 Complex   complex</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt; </span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;  8 Nodes:</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb11-36"><a href="#cb11-36"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a><span class="co">#&gt; </span></span>
+<span id="cb11-38"><a href="#cb11-38"></a><span class="co">#&gt;  5 Edges:</span></span>
+<span id="cb11-39"><a href="#cb11-39"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb11-40"><a href="#cb11-40"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb11-41"><a href="#cb11-41"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb11-42"><a href="#cb11-42"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb11-43"><a href="#cb11-43"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb11-44"><a href="#cb11-44"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span></code></pre></div>
+</div>
+<div id="addnode" class="section level3">
+<h3>addNode</h3>
+<p><strong>Add a node with assigned layer and attributes to a graph</strong></p>
+<p>The function is used to add a node to a given mully graph. The layer to which this node should be added is required. Nodes on single layers should be unique, but can not be on different layers. Layer Names are not case-sensitive. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nodeName</strong> - The name of the node to add</li>
+<li><strong>layerName</strong> - The name of the layer to be assigned to the node</li>
+<li><strong>attributes</strong> - The attributes of the node to add. This argument must be a named list</li>
+</ul>
+<p>The function returns the graph, with the new node.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>attributes=<span class="kw">list</span>(<span class="st">&quot;specie&quot;</span>=<span class="st">&quot;Homo Sapiens&quot;</span>)</span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="kw">addNode</span>(<span class="dt">g =</span> g,<span class="dt">nodeName =</span> <span class="st">&quot;g3&quot;</span>,<span class="dt">layerName =</span> <span class="st">&quot;Gene&quot;</span>,<span class="dt">attributes =</span> attributes)</span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="co">#&gt; </span></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="co">#&gt;  9 Nodes:</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="co">#&gt;   name n type   effect desc       specie</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF         &lt;NA&gt;</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE         &lt;NA&gt;</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="co">#&gt;  9   g3 1 &lt;NA&gt;     &lt;NA&gt; &lt;NA&gt; Homo Sapiens</span></span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="co">#&gt; </span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="co">#&gt;  5 Edges:</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb12-44"><a href="#cb12-44"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span></code></pre></div>
+</div>
+<div id="exportcsv" class="section level3">
+<h3>exportCSV</h3>
+<p><strong>Export mully into CSV files</strong></p>
+<p>The function is used to export a given mully graph in the CSV Format. Three files will be generated, respectively containing the layers’, nodes’ and edges’ information. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>target</strong> - The target file in which the files will be generated. By default the WD.</li>
+</ul>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">exportCSV</span>(g)</span></code></pre></div>
+</div>
+<div id="getedgeattributes" class="section level3">
+<h3>getEdgeAttributes</h3>
+<p><strong>Get the attributes of the edges connecting two nodes</strong></p>
+<p>The function is used to obtain information on the edges in a given mully graph. The information can be on a single edge or all the edges in the graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nodeStart</strong> - The first endpoint of the edge</li>
+<li><strong>nodeDest</strong> - The second endpoint of the edge</li>
+</ul>
+<p>The function returns a dataframe containing the edges with their attributes. If both nodes’ arguments are missing, it returns the complete information on edges and their attributes.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co">##Print all Edges</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="kw">getEdgeAttributes</span>(g)</span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co">##Get a Single Edge</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="kw">getEdgeAttributes</span>(g,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;g1&quot;</span>)</span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt;   V1 V2    name</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt; 3 d2 g1 targets</span></span></code></pre></div>
+</div>
+<div id="getidedge" class="section level3">
+<h3>getIDEdge</h3>
+<p><strong>Get the ids of the edges connecting two nodes</strong></p>
+<p>The function is used to get the internal ID of an edge in a given mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nodeStart</strong> - The first endpoint of the edge</li>
+<li><strong>nodeDest</strong> - The second endpoint of the edge</li>
+</ul>
+<p>The nodes passed to this function as arguments should be the unique names assigned to the nodes upon addition. mully supports multi-edges, therefore this function may return a list of edges connecting two nodes. The function returns a list containing the ids of the edges connecting the nodes.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="kw">getIDEdge</span>(g,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;dr1&quot;</span>)</span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="co">#&gt; [1] 1 2</span></span></code></pre></div>
+</div>
+<div id="getidnode" class="section level3">
+<h3>getIDNode</h3>
+<p><strong>Get the id of a node</strong></p>
+<p>The function is used to get the internal ID of a given node in a given mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nameNode</strong> - The name of the node</li>
+</ul>
+<p>The function returns the id of the specified node.</p>
+</div>
+<div id="getlayer" class="section level3">
+<h3>getLayer</h3>
+<p><strong>Get the nodes on a layer in a graph</strong></p>
+<p>The function is used to get the nodes on a given layer in a given mully graph. The layer name is not case-sensitive. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nameLayer</strong> - The name of the layer</li>
+</ul>
+<p>The function returns a List of the nodes on the given layer.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="kw">getLayer</span>(g,<span class="st">&quot;gene&quot;</span>)</span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="co">#&gt; + 2/8 vertices, named, from 923fa54:</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="co">#&gt; [1] g1 g2</span></span></code></pre></div>
+</div>
+<div id="getlayerscount" class="section level3">
+<h3>getLayersCount</h3>
+<p><strong>Get the number of layers in a graph</strong></p>
+<p>The function is used to get the number of layers in a given mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+</ul>
+<p>The function returns the count of the layers.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="kw">getLayersCount</span>(g)</span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+</div>
+<div id="getnode" class="section level3">
+<h3>getNode</h3>
+<p><strong>Get a node from a graph</strong></p>
+<p>The function is used to get a node from a given mully graph as an igraph.vs object. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>name</strong> - The name of the node</li>
+</ul>
+<p>The function returns the node as igraph.vs.</p>
+</div>
+<div id="getnodeattributes" class="section level3">
+<h3>getNodeAttributes</h3>
+<p><strong>Get the attributes of a node</strong></p>
+<p>The function is used to get a node or a list of nodes with corresponding attributes from a given mully graph. If the node name is missing, the complete node information is extracted. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nameNode</strong> - The name of the node</li>
+<li><strong>layerByName</strong> - A boolean to specify whether to export the layers by name or by ID</li>
+</ul>
+<p>The function returns a dataframe containing the attributes of the specified node.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="kw">getNodeAttributes</span>(g,<span class="dt">layerByName =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co">#&gt;   name       n type   effect desc</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co">#&gt; 1   d1 Disease   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="co">#&gt; 2   d2 Disease   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co">#&gt; 3   d3 Disease   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="co">#&gt; 4  dr1    Drug &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="co">#&gt; 5  dr2    Drug &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="co">#&gt; 6  dr3    Drug &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="co">#&gt; 7   g1    Gene &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a><span class="co">#&gt; 8   g2    Gene &lt;NA&gt;     &lt;NA&gt;   BE</span></span></code></pre></div>
+</div>
+<div id="importedgescsv" class="section level3">
+<h3>importEdgesCSV</h3>
+<p><strong>Import Edges to a mully graph from a CSV file</strong></p>
+<p>The function is used to import edges to a mully graph. The function reads a CSV file and adds edges between existing nodes to the graph. The graph should already contain layers and nodes. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The mully graph to which the nodes will be added. The graph should already have the layers and the nodes.</li>
+<li><strong>file</strong> - The path to the CSV file containing the edges’ information</li>
+</ul>
+<p>The function returns the mully graph with the added edges.</p>
+</div>
+<div id="importgraphcsv" class="section level3">
+<h3>importGraphCSV</h3>
+<p><strong>Import a mully graph from CSV files</strong></p>
+<p>The function is used to create a graph from CSV files. To create the graph, three files are needed: the layers, nodes and edges. mully also offers functions to import individual files containing nodes’, edges’ and layers information. See Functions <code>importLayersCSV()</code>, <code>importNodesCSV()</code> and <code>importEdgesCSV()</code>. The function needs the following arguments:</p>
+<ul>
+<li><strong>name</strong> - The name of the graph</li>
+<li><strong>direct</strong> - A boolean to indicate if the graph is directed or not</li>
+<li><strong>layers</strong> - The path to the CSV file containing the layers’ information</li>
+<li><strong>nodes</strong> - The path to the CSV file containing the nodes’ information</li>
+<li><strong>edges</strong> - The path to the CSV file containing the edges’ information</li>
+</ul>
+<p>The function returns a new mully graph.</p>
+</div>
+<div id="importlayerscsv" class="section level3">
+<h3>importLayersCSV</h3>
+<p><strong>Import Layers to a mully graph from a CSV file</strong></p>
+<p>The function is used to add layers to a mully graph. The function reads a CSV file and adds the layers to the graph. The file should contain the layers’ names. Layer IDs are assigned automatically. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The mully graph to which the layers will be added. If missing, a new mully graph is created</li>
+<li><strong>file</strong> - The path to the CSV file containing the layers’ information</li>
+</ul>
+<p>The function returns the mully graph with the added layers.</p>
+</div>
+<div id="importnodescsv" class="section level3">
+<h3>importNodesCSV</h3>
+<p><strong>Import Nodes to a mully graph from a CSV file</strong></p>
+<p>The function is used to import nodes into an existing mully graph. The function reads a CSV file and adds the nodes with the attributes to the graph. The graph should already contain layers, and the nodes in the file should have an attribute n referring to the layer assignment. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The mully graph to which the nodes will be added. The graph should already have the layers</li>
+<li><strong>file</strong> - The path to the CSV file containing the nodes’ information</li>
+<li><strong>name</strong> - The name of the column containing the names of the nodes</li>
+</ul>
+<p>The function returns the mully graph with the added nodes.</p>
+</div>
+<div id="is.mully" class="section level3">
+<h3>is.mully</h3>
+<p><strong>Is this a mully graph?</strong></p>
+<p>The function check if a given graph is a mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+</ul>
+<p>The function returns a boolean indicating whether the graph is or not a mully object. ### isLayer <strong>Verify if the layer exists in a graph</strong></p>
+<p>This function is used to check if a given mully graph contains a given layer. The layer name is not case-sensitive. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>name</strong> - The name of the layer</li>
+</ul>
+<p>The function returns a boolean value.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="kw">isLayer</span>(g,<span class="st">&quot;Gene&quot;</span>)</span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="kw">isLayer</span>(g,<span class="st">&quot;Complex&quot;</span>)</span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+</div>
+<div id="merge" class="section level3">
+<h3>merge</h3>
+<p><strong>Merge or unite two graphs</strong></p>
+<p>The function is used to merge two mully graphs. The merge is layer based, i.e. nodes belonging to similar layers in both graphs will be combined in the returned graph. The node names are unique on single layers but can be redundant over different layers. The merge is based on the first arguments, therefore all elements of the second argument will be added to the first. The function needs the following arguments:</p>
+<ul>
+<li><strong>g1</strong> - The first graph to merge. This is the base of the merge.</li>
+<li><strong>g2</strong> - The second graph to merge. All of its elements are added to the first graph.</li>
+</ul>
+<p>The function returns the merge of the two graphs. The merge is based on the first given graph.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#Create First Graph</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a></span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="co">#Create Second Graph</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>g1 &lt;-<span class="st"> </span><span class="kw">mully</span>(<span class="st">&quot;MySecondMully&quot;</span>,<span class="dt">direct =</span> F)</span>
+<span id="cb20-23"><a href="#cb20-23"></a></span>
+<span id="cb20-24"><a href="#cb20-24"></a>g1 &lt;-<span class="st"> </span><span class="kw">addLayer</span>(g1, <span class="kw">c</span>(<span class="st">&quot;gene&quot;</span>, <span class="st">&quot;Protein&quot;</span>, <span class="st">&quot;Drug&quot;</span>))</span>
+<span id="cb20-25"><a href="#cb20-25"></a></span>
+<span id="cb20-26"><a href="#cb20-26"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p1&quot;</span>,<span class="st">&quot;Protein&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb20-27"><a href="#cb20-27"></a></span>
+<span id="cb20-28"><a href="#cb20-28"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p2&quot;</span>,<span class="st">&quot;Protein&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb20-29"><a href="#cb20-29"></a></span>
+<span id="cb20-30"><a href="#cb20-30"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;p3&quot;</span>,<span class="st">&quot;Protein&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">type=</span><span class="st">&quot;t1&quot;</span>))</span>
+<span id="cb20-31"><a href="#cb20-31"></a></span>
+<span id="cb20-32"><a href="#cb20-32"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr6&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb20-33"><a href="#cb20-33"></a></span>
+<span id="cb20-34"><a href="#cb20-34"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr7&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;strong&quot;</span>))</span>
+<span id="cb20-35"><a href="#cb20-35"></a></span>
+<span id="cb20-36"><a href="#cb20-36"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;dr8&quot;</span>,<span class="st">&quot;drug&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">effect=</span><span class="st">&quot;moderate&quot;</span>))</span>
+<span id="cb20-37"><a href="#cb20-37"></a></span>
+<span id="cb20-38"><a href="#cb20-38"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;g3&quot;</span>,<span class="st">&quot;gene&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">desc=</span><span class="st">&quot;AF&quot;</span>))</span>
+<span id="cb20-39"><a href="#cb20-39"></a></span>
+<span id="cb20-40"><a href="#cb20-40"></a>g1=<span class="kw">addNode</span>(g1,<span class="st">&quot;g9&quot;</span>,<span class="st">&quot;gene&quot;</span>,<span class="dt">attributes=</span><span class="kw">list</span>(<span class="dt">desc=</span><span class="st">&quot;BE&quot;</span>))</span>
+<span id="cb20-41"><a href="#cb20-41"></a></span>
+<span id="cb20-42"><a href="#cb20-42"></a>g1=<span class="kw">addEdge</span>(g1,<span class="st">&quot;dr8&quot;</span>,<span class="st">&quot;g9&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;targets&quot;</span>))</span>
+<span id="cb20-43"><a href="#cb20-43"></a></span>
+<span id="cb20-44"><a href="#cb20-44"></a>g1=<span class="kw">addEdge</span>(g1,<span class="st">&quot;p3&quot;</span>,<span class="st">&quot;p2&quot;</span>,<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;interactWith&quot;</span>))</span>
+<span id="cb20-45"><a href="#cb20-45"></a></span>
+<span id="cb20-46"><a href="#cb20-46"></a><span class="co">#Merge Graphs</span></span>
+<span id="cb20-47"><a href="#cb20-47"></a><span class="kw">merge</span>(g,g1)</span>
+<span id="cb20-48"><a href="#cb20-48"></a><span class="co">#&gt; Warning in addLayer(g1, g2$layers$Name): Layer gene Already Exists and will be</span></span>
+<span id="cb20-49"><a href="#cb20-49"></a><span class="co">#&gt; skipped</span></span>
+<span id="cb20-50"><a href="#cb20-50"></a><span class="co">#&gt; Warning in addLayer(g1, g2$layers$Name): Layer Drug Already Exists and will be</span></span>
+<span id="cb20-51"><a href="#cb20-51"></a><span class="co">#&gt; skipped</span></span>
+<span id="cb20-52"><a href="#cb20-52"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb20-53"><a href="#cb20-53"></a><span class="co">#&gt;  4 Layers:</span></span>
+<span id="cb20-54"><a href="#cb20-54"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb20-55"><a href="#cb20-55"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb20-56"><a href="#cb20-56"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb20-57"><a href="#cb20-57"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb20-58"><a href="#cb20-58"></a><span class="co">#&gt;  4  4 Protein   protein</span></span>
+<span id="cb20-59"><a href="#cb20-59"></a><span class="co">#&gt; </span></span>
+<span id="cb20-60"><a href="#cb20-60"></a><span class="co">#&gt;  16 Nodes:</span></span>
+<span id="cb20-61"><a href="#cb20-61"></a><span class="co">#&gt;    name n type   effect desc</span></span>
+<span id="cb20-62"><a href="#cb20-62"></a><span class="co">#&gt;  1    d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-63"><a href="#cb20-63"></a><span class="co">#&gt;  2    d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-64"><a href="#cb20-64"></a><span class="co">#&gt;  3    d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-65"><a href="#cb20-65"></a><span class="co">#&gt;  4   dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb20-66"><a href="#cb20-66"></a><span class="co">#&gt;  5   dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb20-67"><a href="#cb20-67"></a><span class="co">#&gt;  6   dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb20-68"><a href="#cb20-68"></a><span class="co">#&gt;  7    g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb20-69"><a href="#cb20-69"></a><span class="co">#&gt;  8    g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb20-70"><a href="#cb20-70"></a><span class="co">#&gt;  9    p1 4   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-71"><a href="#cb20-71"></a><span class="co">#&gt;  10   p2 4   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-72"><a href="#cb20-72"></a><span class="co">#&gt;  11   p3 4   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb20-73"><a href="#cb20-73"></a><span class="co">#&gt;  12  dr6 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb20-74"><a href="#cb20-74"></a><span class="co">#&gt;  13  dr7 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb20-75"><a href="#cb20-75"></a><span class="co">#&gt;  14  dr8 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb20-76"><a href="#cb20-76"></a><span class="co">#&gt;  15   g3 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb20-77"><a href="#cb20-77"></a><span class="co">#&gt;  16   g9 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb20-78"><a href="#cb20-78"></a><span class="co">#&gt; </span></span>
+<span id="cb20-79"><a href="#cb20-79"></a><span class="co">#&gt;  7 Edges:</span></span>
+<span id="cb20-80"><a href="#cb20-80"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb20-81"><a href="#cb20-81"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb20-82"><a href="#cb20-82"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb20-83"><a href="#cb20-83"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb20-84"><a href="#cb20-84"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb20-85"><a href="#cb20-85"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span>
+<span id="cb20-86"><a href="#cb20-86"></a><span class="co">#&gt;  6 dr8  g9            targets</span></span>
+<span id="cb20-87"><a href="#cb20-87"></a><span class="co">#&gt;  7  p2  p3       interactWith</span></span></code></pre></div>
+</div>
+<div id="mully" class="section level3">
+<h3>mully</h3>
+<p><strong>Create an empty multilayered graph</strong></p>
+<p>The function create an empty mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>name</strong> - The name to be assigned to the graph.</li>
+<li><strong>direct</strong> - A boolean value, if the graph is directed or not. By default TRUE.</li>
+</ul>
+<p>The function returns the created multilayered graph. ### plot,mully <strong>Plot the graph in 2D</strong></p>
+<p>The function is used to plot the mully graph. It uses the plot function from igraph. We do not recommend using this function to plot big graphs, and use plot3d instead. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> The input graph</li>
+<li><strong>layout</strong> The layout. Can either be random or scaled</li>
+</ul>
+</div>
+<div id="plot3d" class="section level3">
+<h3>plot3d</h3>
+<p><strong>Plot the graph in 3D using rgl</strong></p>
+<p>The funstion is used to generate 3D interactive plots of a mully graph. The 3D plot is generated using the R Package rgl, and uses some of the arguments passed to the igraph function rgl.plot. Most of the arguments are set to default values, but can be changed. The layout is calculated internally based on the layers. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> The input graph</li>
+<li><strong>layers</strong> A boolean whether to add the layers or not</li>
+<li><strong>vertex.label</strong> The vertices’ labels</li>
+<li><strong>vertex.label.color</strong> The vertices’ colors. If not specified, the colors will be chosen randomly</li>
+<li><strong>vertex.plac</strong> The placement form of the vertices on the layer. Can either be “circle” which will place them on a circle, or “disc” which will place them randomly on a disc. The default is “circle”</li>
+<li><strong>edge.color</strong> The edges’ colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer</li>
+<li><strong>edge.width</strong> The edge width. Default set to 5.</li>
+<li><strong>edge.arrow.size</strong> The edges’ arrow size. Default set to 10</li>
+<li><strong>edge.arrow.width</strong> The edges’ arrow width. Default set to 1</li>
+</ul>
+<p>The function can take the following arguments supported and not ignored by : vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.</p>
+</div>
+<div id="printmully" class="section level3">
+<h3>print,mully</h3>
+<p><strong>Print a mully graph</strong></p>
+<p>The function prints a mully graph. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+</ul>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="kw">print</span>(g)</span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb21-25"><a href="#cb21-25"></a><span class="co">#&gt; </span></span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="co">#&gt;  8 Nodes:</span></span>
+<span id="cb21-27"><a href="#cb21-27"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb21-28"><a href="#cb21-28"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb21-33"><a href="#cb21-33"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb21-34"><a href="#cb21-34"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb21-35"><a href="#cb21-35"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb21-36"><a href="#cb21-36"></a><span class="co">#&gt; </span></span>
+<span id="cb21-37"><a href="#cb21-37"></a><span class="co">#&gt;  5 Edges:</span></span>
+<span id="cb21-38"><a href="#cb21-38"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb21-39"><a href="#cb21-39"></a><span class="co">#&gt;  1  d2 dr1             treats</span></span>
+<span id="cb21-40"><a href="#cb21-40"></a><span class="co">#&gt;  2  d2 dr1          extraEdge</span></span>
+<span id="cb21-41"><a href="#cb21-41"></a><span class="co">#&gt;  3  d2  g1            targets</span></span>
+<span id="cb21-42"><a href="#cb21-42"></a><span class="co">#&gt;  4 dr3  g2 mutates and causes</span></span>
+<span id="cb21-43"><a href="#cb21-43"></a><span class="co">#&gt;  5  d3 dr3             treats</span></span></code></pre></div>
+</div>
+<div id="removeedge" class="section level3">
+<h3>removeEdge</h3>
+<p><strong>Delete an edge</strong></p>
+<p>The function is used to remove an edge from a given mully graph. Since mully supports multi-edges, a boolean <em>multi</em> is needed to specify whether to delete multiple edges or a single edge. In case one edge should be deleted, the named list of attributes of the edge is required. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>nodeStart</strong> - The first endpoint of the edge</li>
+<li><strong>nodeDest</strong> - The second endpoint of the edge</li>
+<li><strong>attributes</strong> - The attributes of the edge to delete. Required if the nodes are multi-connected</li>
+<li><strong>multi</strong> - A boolean. Specifies whether to delete multiple edges or not, in case they exist.</li>
+</ul>
+<p>The function returns the graph with the deleted edges.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="kw">removeEdge</span>(g,<span class="st">&quot;dr1&quot;</span>,<span class="st">&quot;d2&quot;</span>,<span class="dt">multi=</span><span class="ot">TRUE</span>)</span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb22-22"><a href="#cb22-22"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb22-23"><a href="#cb22-23"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a><span class="co">#&gt; </span></span>
+<span id="cb22-26"><a href="#cb22-26"></a><span class="co">#&gt;  8 Nodes:</span></span>
+<span id="cb22-27"><a href="#cb22-27"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb22-28"><a href="#cb22-28"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb22-29"><a href="#cb22-29"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb22-30"><a href="#cb22-30"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb22-31"><a href="#cb22-31"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb22-32"><a href="#cb22-32"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb22-33"><a href="#cb22-33"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb22-34"><a href="#cb22-34"></a><span class="co">#&gt;  7   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb22-35"><a href="#cb22-35"></a><span class="co">#&gt;  8   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb22-36"><a href="#cb22-36"></a><span class="co">#&gt; </span></span>
+<span id="cb22-37"><a href="#cb22-37"></a><span class="co">#&gt;  3 Edges:</span></span>
+<span id="cb22-38"><a href="#cb22-38"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb22-39"><a href="#cb22-39"></a><span class="co">#&gt;  1  d2  g1            targets</span></span>
+<span id="cb22-40"><a href="#cb22-40"></a><span class="co">#&gt;  2 dr3  g2 mutates and causes</span></span>
+<span id="cb22-41"><a href="#cb22-41"></a><span class="co">#&gt;  3  d3 dr3             treats</span></span></code></pre></div>
+</div>
+<div id="removelayer" class="section level3">
+<h3>removeLayer</h3>
+<p><strong>Delete a layer or a set of layers from a graph</strong></p>
+<p>The function is used to remove a layer from a given mully graph. Removing a layer results deleting all nodes assigned to the layer, and the edges connecting these nodes to other nodes in the graph. Transitive edges between nodes can be added by setting trans to TRUE. The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>name</strong> - The name or the list of the names of the layers to be deleted</li>
+<li><strong>trans</strong> - A boolean whether to insert transitive edges or not</li>
+</ul>
+<p>The function returns the graph, with the given layer and its corresponding nodes and edges removed.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="kw">removeLayer</span>(g,<span class="st">&quot;gene&quot;</span>,<span class="dt">trans=</span><span class="ot">TRUE</span>)</span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a><span class="co">#&gt; [1] ID        Name      NameLower</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="co">#&gt;  &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="co">#&gt; </span></span>
+<span id="cb23-24"><a href="#cb23-24"></a><span class="co">#&gt;  6 Nodes:</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb23-26"><a href="#cb23-26"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a><span class="co">#&gt;  4  dr1 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb23-30"><a href="#cb23-30"></a><span class="co">#&gt;  5  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="co">#&gt;  6  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb23-32"><a href="#cb23-32"></a><span class="co">#&gt; </span></span>
+<span id="cb23-33"><a href="#cb23-33"></a><span class="co">#&gt;  3 Edges:</span></span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="co">#&gt;   V1  V2      name</span></span>
+<span id="cb23-35"><a href="#cb23-35"></a><span class="co">#&gt;  1 d2 dr1    treats</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a><span class="co">#&gt;  2 d2 dr1 extraEdge</span></span>
+<span id="cb23-37"><a href="#cb23-37"></a><span class="co">#&gt;  3 d3 dr3    treats</span></span></code></pre></div>
+</div>
+<div id="removenode" class="section level3">
+<h3>removeNode</h3>
+<p><strong>Delete a node or a set of nodes from a graph</strong></p>
+<p>The function is used to remove a node from a given mully graph. Removing a node results removing the edges connecting this node to other nodes in the graph. Transitive edges can also be added after deletion by setting trans to TRUE (a-&gt;b, b-&gt;c, removing b with trans=TRUE will add a-&gt;c). The function needs the following arguments:</p>
+<ul>
+<li><strong>g</strong> - The input graph</li>
+<li><strong>name</strong> - The name or the list of names of the nodes to be deleted</li>
+<li><strong>trans</strong> - A boolean whether to insert transitive edges or not</li>
+</ul>
+<p>The function returns the graph, with the nodes deleted.</p>
+<p><strong><em>Example</em></strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>g=mully<span class="op">::</span><span class="kw">demo</span>()</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co">#&gt; Warning in addLayer(g, c(&quot;Gene&quot;, &quot;Drug&quot;, &quot;Drug&quot;, &quot;Disease&quot;)): Layer Drug Already</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co">#&gt; Exists and will be skipped</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#&gt; [1] &quot;Node d1 added as disease&quot;</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#&gt; [1] &quot;Node d2 added as disease&quot;</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#&gt; [1] &quot;Node d3 added as disease&quot;</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co">#&gt; [1] &quot;Node dr1 added as drug&quot;</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co">#&gt; [1] &quot;Node dr2 added as drug&quot;</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="co">#&gt; [1] &quot;Node dr3 added as drug&quot;</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co">#&gt; [1] &quot;Node g1 added as gene&quot;</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co">#&gt; [1] &quot;Node g2 added as gene&quot;</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co">#&gt; 1  d2 dr1             treats</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="co">#&gt; 2  d2 dr1          extraEdge</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="co">#&gt; 3  d2  g1            targets</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="co">#&gt; 4 dr3  g2 mutates and causes</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="co">#&gt; 5  d3 dr3             treats</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="kw">removeNode</span>(g,<span class="st">&quot;dr1&quot;</span>,<span class="dt">trans=</span><span class="ot">TRUE</span>)</span>
+<span id="cb24-19"><a href="#cb24-19"></a><span class="co">#&gt; mully --  MyFirstMully</span></span>
+<span id="cb24-20"><a href="#cb24-20"></a><span class="co">#&gt;  3 Layers:</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a><span class="co">#&gt;   ID    Name NameLower</span></span>
+<span id="cb24-22"><a href="#cb24-22"></a><span class="co">#&gt;  1  1    Gene      gene</span></span>
+<span id="cb24-23"><a href="#cb24-23"></a><span class="co">#&gt;  2  2    Drug      drug</span></span>
+<span id="cb24-24"><a href="#cb24-24"></a><span class="co">#&gt;  3  3 Disease   disease</span></span>
+<span id="cb24-25"><a href="#cb24-25"></a><span class="co">#&gt; </span></span>
+<span id="cb24-26"><a href="#cb24-26"></a><span class="co">#&gt;  7 Nodes:</span></span>
+<span id="cb24-27"><a href="#cb24-27"></a><span class="co">#&gt;   name n type   effect desc</span></span>
+<span id="cb24-28"><a href="#cb24-28"></a><span class="co">#&gt;  1   d1 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb24-29"><a href="#cb24-29"></a><span class="co">#&gt;  2   d2 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb24-30"><a href="#cb24-30"></a><span class="co">#&gt;  3   d3 3   t1     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span id="cb24-31"><a href="#cb24-31"></a><span class="co">#&gt;  4  dr2 2 &lt;NA&gt;   strong &lt;NA&gt;</span></span>
+<span id="cb24-32"><a href="#cb24-32"></a><span class="co">#&gt;  5  dr3 2 &lt;NA&gt; moderate &lt;NA&gt;</span></span>
+<span id="cb24-33"><a href="#cb24-33"></a><span class="co">#&gt;  6   g1 1 &lt;NA&gt;     &lt;NA&gt;   AF</span></span>
+<span id="cb24-34"><a href="#cb24-34"></a><span class="co">#&gt;  7   g2 1 &lt;NA&gt;     &lt;NA&gt;   BE</span></span>
+<span id="cb24-35"><a href="#cb24-35"></a><span class="co">#&gt; </span></span>
+<span id="cb24-36"><a href="#cb24-36"></a><span class="co">#&gt;  3 Edges:</span></span>
+<span id="cb24-37"><a href="#cb24-37"></a><span class="co">#&gt;    V1  V2               name</span></span>
+<span id="cb24-38"><a href="#cb24-38"></a><span class="co">#&gt;  1  d2  g1            targets</span></span>
+<span id="cb24-39"><a href="#cb24-39"></a><span class="co">#&gt;  2 dr3  g2 mutates and causes</span></span>
+<span id="cb24-40"><a href="#cb24-40"></a><span class="co">#&gt;  3  d3 dr3             treats</span></span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
