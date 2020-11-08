@@ -55,7 +55,10 @@ getMarkGroups <- function(g) {
 #' @param  ... Other arguments to be passed to \link[igraph]{plot.igraph}
 #'
 #' @export
-#'
+#' @import igraph
+#' @importFrom randomcoloR randomColor
+#' @importFrom stats runif
+#' @importFrom graphics plot.new
 plot.mully <- function(x, layout,...) {
   gps = getMarkGroups(x)
 
@@ -82,8 +85,8 @@ plot.mully <- function(x, layout,...) {
   plot.new()
   # filledrectangle(wx = 1, wy = 0.5, col = "gray",mid = c(0, 0), angle = 0)
   plot.igraph(x,
-              vertex.color = V(g)$color,
-              layout = getLayout(g, layout))
+              vertex.color = V(x)$color,
+              layout = getLayout(x, layout))
 }
 
 #Create 3d coordinates of the network layout on a circle
@@ -129,8 +132,13 @@ discpos = function(n, r = 1) {
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
 #' @param edge.arrow.width The  edges' arrow width. Default set to 1
 #'
-#' @export
 #'
+#'
+#' @export
+#' @import igraph
+#' @import rgl
+#' @importFrom randomcoloR randomColor
+#' @importFrom stats runif
 #' @note
 #' This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
 #' vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
@@ -190,7 +198,7 @@ plot3d <- function(g, layers = T,
   layout = get3DLayout(g,vertex.plac)
 
   open3d()
-  rglplot(
+  igraph::rglplot(
     g,
     vertex.color = V(g)$color,
     layout = layout,
@@ -204,7 +212,7 @@ plot3d <- function(g, layers = T,
     edge.arrow.width=edge.arrow.width,
     grouplist = unlist(gps)
   )
-  aspect3d(1, 1, 1)
+  rgl::aspect3d(1, 1, 1)
   #Add layers
   if (layers == T) {
     layout1 = layout[order(V(g)$n), ]

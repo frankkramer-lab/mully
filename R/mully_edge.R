@@ -9,7 +9,9 @@
 #' @param nodeDest The second endpoint of the edge
 #'
 #' @return A list containing the ids of the edges connecting the nodes
+#'
 #' @export
+#' @import igraph
 getIDEdge <- function(g, nodeStart, nodeDest) {
   if(missing(g) || !is.mully(g) || missing(nodeStart) || missing(nodeDest)){
     stop("Invalid Arguments")
@@ -40,6 +42,7 @@ getIDEdge <- function(g, nodeStart, nodeDest) {
 #'
 #' @return A dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns all the edges with their attributes.
 #' @export
+#' @import igraph
 getEdgeAttributes<-function(g,nodeStart,nodeDest){
 
   if(missing(g) || !is.mully(g)){
@@ -73,7 +76,9 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
 #' @param attributes The attributes to assign to the edge
 #'
 #' @return The graph, with the added edge
+#'
 #' @export
+#' @import igraph
 addEdge <- function(g, nodeStart, nodeDest, attributes) {
   #Check arguments
   if (missing(g) || missing(nodeStart) || missing(nodeDest)) {
@@ -120,7 +125,9 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
 #' @param multi A boolean. Specifies whether to delete multiple edges or not, in case they exist.
 #'
 #' @return The graph with the deleted edges
+#'
 #' @export
+#' @import igraph
 removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
 
   if (!are.connected(g,nodeStart,nodeDest)) {
