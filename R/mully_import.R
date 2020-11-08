@@ -17,9 +17,9 @@ importGraphCSV<-function(name,direct="F",layers,nodes,edges){
     stop("Invalid arguments")
   }
   g=mully(name,direct)
-  g=importLayers(g,layers)
-  g=importNodes(g,nodes)
-  g=importEdges(g,edges)
+  g=importLayersCSV(g,layers)
+  g=importNodesCSV(g,nodes)
+  g=importEdgesCSV(g,edges)
 
   #name the class
   class(g) = c("mully",class(g))

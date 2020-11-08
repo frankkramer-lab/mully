@@ -134,7 +134,7 @@ discpos = function(n, r = 1) {
 #' This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
 #' vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
 #'
-plot3d.mully <- function(g, layers = T,
+plot3d <- function(g, layers = T,
                          vertex.label=NA,vertex.label.color = NA,vertex.plac="circle",
                          edge.color=NA,edge.width=5,
                          edge.arrow.size=10,edge.arrow.width=1) {

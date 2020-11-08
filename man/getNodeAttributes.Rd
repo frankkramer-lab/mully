@@ -14,7 +14,7 @@ getNodeAttributes(g, nameNode, layerByName = F)
 \item{layerByName}{A boolean to specify whether to export the layers by name or by ID}
 }
 \value{
-A framework containing the attributes of the specified node
+A dataframe containing the attributes of the specified node
 }
 \description{
 Get the attributes of a node

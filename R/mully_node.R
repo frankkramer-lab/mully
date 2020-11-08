@@ -137,7 +137,7 @@ removeNode <- function(g, name,trans=F) {
 #' @param nameNode The name of the node
 #' @param layerByName A boolean to specify whether to export the layers by name or by ID
 #'
-#' @return A framework containing the attributes of the specified node
+#' @return A dataframe containing the attributes of the specified node
 #' @export
 getNodeAttributes<-function(g,nameNode,layerByName=F){
 

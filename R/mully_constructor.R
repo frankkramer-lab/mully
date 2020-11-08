@@ -33,6 +33,13 @@ mully <- function(name = NA, direct = TRUE) {
   return(g)
 }
 
+#' Is this a mully graph?
+#'
+#' @param g The input graph
+#'
+#' @return A boolean whether the graph is or not a mully object
+#' @export
+#'
 is.mully<-function(g){
   if(!is.igraph(g) || is.null(g$layers) || is.null(g$iLayer))
     return(F)
