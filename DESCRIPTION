@@ -1,7 +1,7 @@
 Package: mully
 Type: Package
-Title: Create, Modify and Visualize Multi-layered Networks
-Version: 2.1.21
+Title: Create, Modify and Visualize Multi-Layered Networks
+Version: 2.1.22
 Author: Zaynab Hammoud
 Maintainer: Zaynab Hammoud <zaynabhassanhammoud@gmail.com>
 Description: Allows the user to create graph with multiple layers. The user can also modify the layers, the nodes, and the edges. The graph can also be visualized.
@@ -20,3 +20,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Reference: Zaynab Hammoud and Frank Kramer (2018) <https://doi.org/10.3390/genes9110519>
