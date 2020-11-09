@@ -8,7 +8,6 @@
 #'
 #' @return A new mully graph
 #' @export
-#'
 importGraphCSV<-function(name,direct="F",layers,nodes,edges){
   if(missing(name) || name=="" ||
      missing(layers) || !file.exists(layers) ||
@@ -33,7 +32,9 @@ importGraphCSV<-function(name,direct="F",layers,nodes,edges){
 #'
 #' @return The mully graph with the added layers
 #' @export
-#'
+#' @import igraph
+#' @importFrom utils read.csv
+#' @import igraph
 importLayersCSV<-function(g,file){
   if(missing(g) || missing(file) || !file.exists(file)){
     stop("Invalid arguments")
@@ -51,7 +52,8 @@ importLayersCSV<-function(g,file){
 #'
 #' @return The mully graph with the added nodes
 #' @export
-#'
+#' @importFrom utils read.csv
+#' @import igraph
 importNodesCSV<-function(g,file,name="name"){
   if(missing(g) || missing(file) || !file.exists(file)){
     stop("Invalid arguments")
@@ -81,8 +83,10 @@ importNodesCSV<-function(g,file,name="name"){
 #' @param file The path to the CSV file containing the edges' information
 #'
 #' @return The mully graph with the added edges
-#' @export
 #'
+#'
+#' @export
+#' @importFrom utils read.csv
 importEdgesCSV<-function(g,file){
   if(missing(g) || missing(file) || !file.exists(file)){
     stop("Invalid arguments")

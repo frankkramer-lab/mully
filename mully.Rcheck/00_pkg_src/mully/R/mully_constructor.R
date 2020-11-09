@@ -6,7 +6,9 @@
 #' @param direct A boolean value, if the graph is directed or not. By default TRUE.
 #'
 #' @return The created multilayered graph.
+#'
 #' @export
+#' @import igraph
 mully <- function(name = NA, direct = TRUE) {
   #Create the layers Indexation Table
   #Vector for the layers indexation
@@ -39,7 +41,7 @@ mully <- function(name = NA, direct = TRUE) {
 #'
 #' @return A boolean whether the graph is or not a mully object
 #' @export
-#'
+#' @import igraph
 is.mully<-function(g){
   if(!is.igraph(g) || is.null(g$layers) || is.null(g$iLayer))
     return(F)
@@ -51,9 +53,9 @@ is.mully<-function(g){
 #'
 #' @param x The input graph
 #' @param ... Other arguments to be passed to \code{print}
-#'
 #' @export
-#'
+#' @import igraph
+#' @importFrom utils capture.output
 print.mully<-function(x,...){
   if(missing(x) || !is.mully(x)){
    stop("Invalid Arguments")
@@ -73,8 +75,8 @@ print.mully<-function(x,...){
     cat(olayers)
   }
 
-  if(length(V(g))!=0){
-    nodes=getNodeAttributes(g)
+  if(length(V(x))!=0){
+    nodes=getNodeAttributes(x)
     onodes=capture.output(print.data.frame(nodes))
     onodes <- paste(onodes, "\n", sep="")
     cat("\n",dim(nodes)[1],"Nodes:\n")
@@ -83,8 +85,8 @@ print.mully<-function(x,...){
   else{
     cat("\nNo Nodes\n")
   }
-  if(length(E(g))!=0){
-    edges=getEdgeAttributes(g)
+  if(length(E(x))!=0){
+    edges=getEdgeAttributes(x)
     oedges=capture.output(print.data.frame(edges))
     oedges <- paste(oedges, "\n", sep="")
     cat("\n",dim(edges)[1],"Edges:\n")

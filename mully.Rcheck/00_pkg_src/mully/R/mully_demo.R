@@ -1,8 +1,8 @@
 #' A demo function to test the package
 #'
 #' @return A mully graph
-#' @export
 #'
+#' @export
 demo <- function() {
 
   g <- mully("MyFirstMully",direct = F)

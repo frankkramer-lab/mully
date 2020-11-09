@@ -8,7 +8,10 @@
 #' @param nameNode The name of the node.
 #'
 #' @return The node as igraph.vs
+#'
+#'
 #' @export
+#' @import igraph
 getNode <- function(g, nameNode) {
   if (missing(g) || !is.mully(g) || missing(nameNode)) {
     stop("Invalid Arguments")
@@ -28,6 +31,7 @@ getNode <- function(g, nameNode) {
 #'
 #' @return The id of the specified node
 #' @export
+#' @import igraph
 getIDNode <- function(g, nameNode) {
   if (missing(g) ||
       missing(nameNode) || nameNode == "" ||
@@ -51,6 +55,7 @@ getIDNode <- function(g, nameNode) {
 #'
 #' @return The graph, with the new node.
 #' @export
+#' @import igraph
 addNode <- function(g, nodeName, layerName, attributes = NA) {
   #Check Arguments
   if (missing(g) ||
@@ -104,6 +109,7 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
 #'
 #' @return The graph, with the nodes deleted.
 #' @export
+#' @import igraph
 removeNode <- function(g, name,trans=F) {
   #Check arguments
   if (missing(g) ||
@@ -139,6 +145,7 @@ removeNode <- function(g, name,trans=F) {
 #'
 #' @return A dataframe containing the attributes of the specified node
 #' @export
+#' @import igraph
 getNodeAttributes<-function(g,nameNode,layerByName=F){
 
   if(missing(g) || !is.mully(g)){

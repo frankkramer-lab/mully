@@ -5,15 +5,12 @@
 * using option '--as-cran'
 * checking for file 'mully/DESCRIPTION' ... OK
 * checking extension type ... Package
-* this is package 'mully' version '2.1.1'
+* this is package 'mully' version '2.1.25'
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Zaynab Hammoud <zaynabhassanhammoud@gmail.com>'
 
 New submission
-
-The Description field should not start with the package name,
-  'This package' or similar.
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -42,97 +39,11 @@ Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installe
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking use of S3 registration ... OK
-* checking dependencies in R code ... NOTE
-Packages in Depends field not imported from:
-  'igraph' 'randomcoloR' 'rgl' 'shape'
-  These packages need to be imported from (in the NAMESPACE file)
-  for when this namespace is loaded but not attached.
+* checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-addEdge: no visible global function definition for 'are.connected'
-addEdge: no visible global function definition for 'is.directed'
-addEdge: no visible global function definition for 'edge'
-addEdge: no visible global function definition for 'set.edge.attribute'
-addNode: no visible global function definition for 'vertices'
-addNode: no visible global function definition for
-  'set.vertex.attribute'
-addTransEdges: no visible global function definition for 'get.edgelist'
-addTransEdges: no visible global function definition for 'is.directed'
-circpos: no visible global function definition for 'runif'
-demo: no visible global function definition for 'get.vertex.attribute'
-discpos: no visible global function definition for 'runif'
-exportCSV: no visible global function definition for 'write.csv'
-exportCSV: no visible global function definition for 'V'
-exportCSV: no visible global function definition for 'E'
-exportRCX: no visible global function definition for 'rcx_new'
-get3DLayout: no visible global function definition for 'runif'
-getEdgeAttributes: no visible global function definition for
-  'get.edgelist'
-getEdgeAttributes: no visible global function definition for
-  'get.edge.attribute'
-getEdgeAttributes: no visible global function definition for 'V'
-getIDEdge: no visible global function definition for 'are.connected'
-getIDEdge: no visible global function definition for 'get.edgelist'
-getIDEdge: no visible global function definition for 'is.directed'
-getIDNode: no visible global function definition for 'V'
-getLayer: no visible global function definition for 'V'
-getLayerByID: no visible global function definition for 'V'
-getMarkGroups: no visible global function definition for 'V'
-getNode: no visible global function definition for 'V'
-getNodeAttributes: no visible global function definition for
-  'get.vertex.attribute'
-getNodeAttributes: no visible global function definition for 'V'
-getRandomLayout: no visible global function definition for 'V'
-getRandomLayout: no visible global function definition for 'runif'
-getRandomLayout: no visible global function definition for 'V<-'
-getScaledLayout: no visible global function definition for 'V'
-getScaledLayout: no visible global function definition for 'V<-'
-importEdgesCSV: no visible global function definition for 'read.csv'
-importLayersCSV: no visible global function definition for 'read.csv'
-importNodesCSV: no visible global function definition for 'read.csv'
-importNodesCSV: no visible global function definition for 'V'
-importNodesCSV: no visible global function definition for 'V<-'
-is.mully: no visible global function definition for 'is.igraph'
-merge: no visible global function definition for 'V'
-mully: no visible global function definition for 'graph.empty'
-plot.mully: no visible global function definition for 'randomColor'
-plot.mully: no visible global function definition for 'V'
-plot.mully: no visible global function definition for 'V<-'
-plot.mully: no visible global function definition for 'plot.new'
-plot.mully: no visible global function definition for 'plot.igraph'
-plot.mully: no visible binding for global variable 'g'
-plot3d: no visible global function definition for 'rgl.open'
-plot3d: no visible global function definition for 'rgl.bg'
-plot3d: no visible global function definition for 'randomColor'
-plot3d: no visible global function definition for 'V'
-plot3d: no visible global function definition for 'V<-'
-plot3d: no visible global function definition for 'open3d'
-plot3d: no visible global function definition for 'rglplot'
-plot3d: no visible global function definition for 'aspect3d'
-plot3d: no visible global function definition for 'rgl.planes'
-plot3d: no visible global function definition for 'text3d'
-print.mully: no visible global function definition for 'capture.output'
-print.mully: no visible global function definition for 'V'
-print.mully: no visible binding for global variable 'g'
-print.mully: no visible global function definition for 'E'
-removeEdge: no visible global function definition for 'are.connected'
-removeEdge: no visible global function definition for 'edge'
-removeEdge: no visible global function definition for 'is.directed'
-removeNode: no visible global function definition for 'V'
-removeNode: no visible global function definition for 'vertices'
-Undefined global functions or variables:
-  E V V<- are.connected aspect3d capture.output edge g
-  get.edge.attribute get.edgelist get.vertex.attribute graph.empty
-  is.directed is.igraph open3d plot.igraph plot.new randomColor rcx_new
-  read.csv rgl.bg rgl.open rgl.planes rglplot runif set.edge.attribute
-  set.vertex.attribute text3d vertices write.csv
-Consider adding
-  importFrom("graphics", "plot.new")
-  importFrom("stats", "runif")
-  importFrom("utils", "capture.output", "read.csv", "write.csv")
-to your NAMESPACE file.
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -142,13 +53,9 @@ to your NAMESPACE file.
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking sizes of PDF files under 'inst/doc' ... NOTE
-Unable to find GhostScript executable to run checks on size reduction
+* checking sizes of PDF files under 'inst/doc' ... OK
 * checking installed files from 'inst/doc' ... OK
-* checking files in 'vignettes' ... NOTE
-The following files look like leftovers/mistakes:
-  'mully.log'
-Please remove them from your package.
+* checking files in 'vignettes' ... OK
 * checking examples ... NONE
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in 'inst/doc' ... OK
@@ -157,4 +64,4 @@ Please remove them from your package.
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 6 NOTEs
+Status: 2 NOTEs

@@ -4,7 +4,9 @@
 #' @param g2 The second graph to merge. All of its elements are added to the first graph.
 #'
 #' @return The merge of the two graphs. The merge is based on the first given graph
+#'
 #' @export
+#' @import igraph
 merge<-function(g1,g2){
   if(!is.mully(g1) || !is.mully(g2))
     stop("Invalid Arguments")

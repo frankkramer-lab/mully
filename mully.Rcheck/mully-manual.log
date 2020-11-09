@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.3)  8 NOV 2020 18:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.3)  9 NOV 2020 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,9 +358,9 @@ LaTeX Font Warning: Font shape `OML/zi4/m/n' undefined
 (Font)              for symbol `textless' on input line 21.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 23.
+(Font)              <7> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 23.
+(Font)              <5> on input line 26.
 (./Rd2.toc [1
 
 
@@ -370,40 +370,40 @@ ap/pdftex.map}])
 \openout5 = `Rd2.toc'.
 
 
-Overfull \hbox (17.78166pt too wide) in paragraph at lines 44--48
+Overfull \hbox (17.78166pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/n/10 pack-age is im-ple-mented as a part of [the Mul-ti-path Project
 ](https://www.sys-med.de/en/junior-
  []
 
 
-Overfull \hbox (237.55087pt too wide) in paragraph at lines 44--48
+Overfull \hbox (237.55087pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
 ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
  []
 
 
-Overfull \hbox (4.72609pt too wide) in paragraph at lines 52--61
+Overfull \hbox (4.72609pt too wide) in paragraph at lines 55--64
 [][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
 Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
  [][]getN-odeAt-tributes[][][]
  []
 
 
-Overfull \hbox (18.08727pt too wide) in paragraph at lines 71--73
+Overfull \hbox (18.08727pt too wide) in paragraph at lines 74--76
 []\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
 y pa-per: https://www.mdpi.com/2073-
  []
 
 [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
 LaTeX Font Info:    Trying to load font information for TS1+zi4 on input line 5
-69.
+72.
 
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
 a/ts1zi4.fd
 File: ts1zi4.fd 2018/01/14 TS1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 569.
+(Font)              scaled to size 10.0pt on input line 572.
  [12] [13] [14] (./Rd2.ind [15] [16
 
 
@@ -444,7 +444,7 @@ t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
 ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
 inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb>
-Output written on Rd2.pdf (16 pages, 149484 bytes).
+Output written on Rd2.pdf (16 pages, 149823 bytes).
 PDF statistics:
  489 PDF objects out of 1000 (max. 8388607)
  457 compressed objects within 5 object streams

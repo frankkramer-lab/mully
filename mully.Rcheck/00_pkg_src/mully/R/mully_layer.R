@@ -9,7 +9,9 @@
 #' @param nameLayer The name or the list of the names of the layers to be added. The layer names must be unique.
 #'
 #' @return The graph, with the layers added.
+#'
 #' @export
+#' @import igraph
 addLayer <- function(g, nameLayer) {
   if (missing(g) || !is.mully(g) || missing(nameLayer) || nameLayer == "") {
     stop("Invalid Argument")
@@ -36,7 +38,9 @@ addLayer <- function(g, nameLayer) {
 #' @param name The name of the layer.
 #'
 #' @return A boolean value.
+#'
 #' @export
+#' @import igraph
 isLayer <- function(g, name) {
   nameLayerLowerCase = casefold(name, upper = FALSE)
   if (nameLayerLowerCase %in% g$layers$NameLower) {
@@ -51,7 +55,9 @@ isLayer <- function(g, name) {
 #' @param g The input graph.
 #'
 #' @return The count of the layers.
+#'
 #' @export
+#' @import igraph
 getLayersCount <- function(g) {
   return(dim(g$layers)[1])
 }
@@ -77,6 +83,8 @@ getIDLayer <- function(g, nameLayer) {
 #' @param nameLayer The name of the layer.
 #'
 #' @return A List of the nodes on the given layer.
+#'
+#' @import igraph
 #' @export
 getLayer <- function(g, nameLayer) {
   if (missing(g) || !is.mully(g) || missing(nameLayer)) {
@@ -102,7 +110,9 @@ getLayerByID <- function(g, id) {
 #' @param trans A boolean whether to insert transitive edges or not
 #'
 #' @return The graph, with the given layer and its corresponding nodes and edges removed.
+#'
 #' @export
+#' @import igraph
 removeLayer <- function(g, name,trans=F) {
   if (missing(g) ||
       missing(name) || name == "" || !is.mully(g)) {

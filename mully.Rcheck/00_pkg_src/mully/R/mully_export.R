@@ -3,8 +3,10 @@
 #' @param g The input graph
 #' @param target The target file in which the files will be generated. By default the WD.
 #'
-#' @export
 #'
+#' @export
+#' @import igraph
+#' @importFrom utils write.csv
 exportCSV<-function(g,target){
   if(missing(g)){
     stop("invalid argument")
@@ -38,29 +40,4 @@ exportCSV<-function(g,target){
   }
 
   print(paste("Files generated successfully under",target,sep=""))
-}
-
-
-exportRCX<-function(g){
-  if(missing(g) || !is.mully(g) || !"mully" %in% class(g)){
-    stop("Invalid mully object!")
-  }
-
-  if(g$iLayer==0){
-    stop("mully object is empty!")
-  }
-
-  if(!is.na(g$name)){
-    rcx=rcx_new()
-  }
-
-  #Create the RCX Object
-  rcx=rcx_new()
-
-
-  nodes=getNodeAttributes(g)
-  edges=getEdgeAttributes(g)
-
-
-  return(rcx)
 }
