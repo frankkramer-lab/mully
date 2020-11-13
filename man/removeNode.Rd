@@ -4,7 +4,7 @@
 \alias{removeNode}
 \title{Delete a node or a set of nodes from a graph}
 \usage{
-removeNode(g, name, trans = F)
+removeNode(g, name, trans = FALSE)
 }
 \arguments{
 \item{g}{The input graph.}
@@ -18,4 +18,8 @@ The graph, with the nodes deleted.
 }
 \description{
 Delete a node or a set of nodes from a graph
+}
+\examples{
+g=mully::demo()
+removeNode(g,"dr1",trans=TRUE)
 }

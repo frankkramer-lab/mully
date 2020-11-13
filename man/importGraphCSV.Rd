@@ -4,7 +4,7 @@
 \alias{importGraphCSV}
 \title{Import a mully graph from CSV files}
 \usage{
-importGraphCSV(name, direct = "F", layers, nodes, edges)
+importGraphCSV(name, direct = FALSE, layers, nodes, edges)
 }
 \arguments{
 \item{name}{The name of the graph}

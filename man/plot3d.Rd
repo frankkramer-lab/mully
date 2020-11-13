@@ -6,7 +6,7 @@
 \usage{
 plot3d(
   g,
-  layers = T,
+  layers = TRUE,
   vertex.label = NA,
   vertex.label.color = NA,
   vertex.plac = "circle",
@@ -41,4 +41,9 @@ Plot the graph in 3D using rgl
 \note{
 This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
 vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
+}
+\examples{
+g=mully::demo()
+labels=getNodeAttributes(g)$name
+plot3d(g, layers=TRUE, vertex.label=labels,edge.width=6)
 }

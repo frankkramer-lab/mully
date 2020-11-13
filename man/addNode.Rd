@@ -21,3 +21,8 @@ The graph, with the new node.
 \description{
 Add a node with assigned layer and attributes to a graph
 }
+\examples{
+g=mully::demo()
+attributes=list("specie"="Homo Sapiens")
+addNode(g = g,nodeName = "g3",layerName = "Gene",attributes = attributes)
+}

@@ -17,3 +17,8 @@ A boolean value.
 \description{
 Verify if the layer exists in a graph
 }
+\examples{
+g = mully("MyFirstMully",direct = FALSE)
+g = addLayer(g, c("Gene", "Drug", "Disease"))
+isLayer(g,"Drug")
+}

@@ -19,3 +19,10 @@ A dataframe containing the edges with their attributes. If both nodes' arguments
 \description{
 Get the attributes of the edges connecting two nodes
 }
+\examples{
+g=mully::demo()
+#Print all Edges
+getEdgeAttributes(g)
+#Get a Single Edge
+getEdgeAttributes(g,"d2","g1")
+}

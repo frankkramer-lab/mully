@@ -17,26 +17,27 @@ The package is implemented as a part of [the Multipath Project](https://www.sys-
 
 \section{Creating graphs}{
 
-\link[mully]{mully}
-\link[mully]{addLayer}
-\link[mully]{addNode}
-\link[mully]{addEdge}
-\link[mully]{removeLayer}
-\link[mully]{removeNode}
-\link[mully]{removeEdge}
-\link[mully]{getNodeAttributes}
+\link[mully]{mully},
+\link[mully]{addLayer},
+\link[mully]{addNode},
+\link[mully]{addEdge},
+\link[mully]{removeLayer},
+\link[mully]{removeNode},
+\link[mully]{removeEdge},
+\link[mully]{getNodeAttributes},
 \link[mully]{getEdgeAttributes}
 }
 
 \section{Visualization}{
 
-\link[mully]{plot.mully}
+\link[mully]{plot.mully},
 \link[mully]{plot3d}
 }
 
 \section{Further information}{
 
 More information and references can be found in the mully paper:
+
 https://www.mdpi.com/2073-4425/9/11/519
 }
 

@@ -4,7 +4,7 @@
 \alias{getNodeAttributes}
 \title{Get the attributes of a node}
 \usage{
-getNodeAttributes(g, nameNode, layerByName = F)
+getNodeAttributes(g, nameNode, layerByName = FALSE)
 }
 \arguments{
 \item{g}{The input graph}
@@ -18,4 +18,8 @@ A dataframe containing the attributes of the specified node
 }
 \description{
 Get the attributes of a node
+}
+\examples{
+g=mully::demo()
+getNodeAttributes(g,layerByName = TRUE)
 }

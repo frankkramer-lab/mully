@@ -12,6 +12,9 @@
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' getIDEdge(g,"d2","dr1")
 getIDEdge <- function(g, nodeStart, nodeDest) {
   if(missing(g) || !is.mully(g) || missing(nodeStart) || missing(nodeDest)){
     stop("Invalid Arguments")
@@ -43,6 +46,12 @@ getIDEdge <- function(g, nodeStart, nodeDest) {
 #' @return A dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns all the edges with their attributes.
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' #Print all Edges
+#' getEdgeAttributes(g)
+#' #Get a Single Edge
+#' getEdgeAttributes(g,"d2","g1")
 getEdgeAttributes<-function(g,nodeStart,nodeDest){
 
   if(missing(g) || !is.mully(g)){
@@ -79,6 +88,9 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' addEdge(g,"dr3","g2",attributes=list(name="newEdge"))
 addEdge <- function(g, nodeStart, nodeDest, attributes) {
   #Check arguments
   if (missing(g) || missing(nodeStart) || missing(nodeDest)) {
@@ -128,6 +140,9 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' removeEdge(g,"dr1","d2",multi=TRUE)
 removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
 
   if (!are.connected(g,nodeStart,nodeDest)) {
@@ -142,7 +157,7 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
     stop()
   }
 
-  if(multi==T && is.na(attributes)){
+  if(multi==TRUE && is.na(attributes)){
     g <- g - edge(idEdge)
     #name the class
     class(g) = c("mully",class(g))

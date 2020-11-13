@@ -7,6 +7,11 @@
 #' @export
 #' @import igraph
 #' @importFrom utils write.csv
+#' @examples
+#' \dontrun{
+#' g=mully::demo()
+#' exportCSV(g)
+#' }
 exportCSV<-function(g,target){
   if(missing(g)){
     stop("invalid argument")

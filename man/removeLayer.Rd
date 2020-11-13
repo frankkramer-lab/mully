@@ -4,7 +4,7 @@
 \alias{removeLayer}
 \title{Delete a layer or a set of layers from a graph}
 \usage{
-removeLayer(g, name, trans = F)
+removeLayer(g, name, trans = FALSE)
 }
 \arguments{
 \item{g}{The input graph.}
@@ -18,4 +18,8 @@ The graph, with the given layer and its corresponding nodes and edges removed.
 }
 \description{
 Delete a layer or a set of layers from a graph
+}
+\examples{
+g = mully::demo()
+removeLayer(g,"gene",trans=TRUE)
 }

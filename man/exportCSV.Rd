@@ -14,3 +14,9 @@ exportCSV(g, target)
 \description{
 Export mully into CSV files
 }
+\examples{
+\dontrun{
+g=mully::demo()
+exportCSV(g)
+}
+}

@@ -5,9 +5,9 @@
 #' @export
 demo <- function() {
 
-  g <- mully("MyFirstMully",direct = F)
+  g <- mully("MyFirstMully",direct = FALSE)
 
-  g <- addLayer(g, c("Gene", "Drug", "Drug", "Disease"))
+  g <- addLayer(g, c("Gene", "Drug", "Disease"))
 
   g=addNode(g,"d1","disease",attributes=list(type="t1"))
   print("Node d1 added as disease")
@@ -37,7 +37,7 @@ demo <- function() {
   g=addEdge(g,"dr3","d3",list(name="treats"))
   print(getEdgeAttributes(g))
 
-  removeEdge(g,"d2","dr1",multi=T)
+  removeEdge(g,"d2","dr1",multi=TRUE)
 
   return(g)
 

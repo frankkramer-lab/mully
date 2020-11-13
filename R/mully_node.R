@@ -12,6 +12,9 @@
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' getNode(g,"g1")
 getNode <- function(g, nameNode) {
   if (missing(g) || !is.mully(g) || missing(nameNode)) {
     stop("Invalid Arguments")
@@ -32,6 +35,9 @@ getNode <- function(g, nameNode) {
 #' @return The id of the specified node
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' getIDNode(g,"g1")
 getIDNode <- function(g, nameNode) {
   if (missing(g) ||
       missing(nameNode) || nameNode == "" ||
@@ -56,6 +62,10 @@ getIDNode <- function(g, nameNode) {
 #' @return The graph, with the new node.
 #' @export
 #' @import igraph
+#' @examples
+#' g=mully::demo()
+#' attributes=list("specie"="Homo Sapiens")
+#' addNode(g = g,nodeName = "g3",layerName = "Gene",attributes = attributes)
 addNode <- function(g, nodeName, layerName, attributes = NA) {
   #Check Arguments
   if (missing(g) ||
@@ -110,7 +120,10 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
 #' @return The graph, with the nodes deleted.
 #' @export
 #' @import igraph
-removeNode <- function(g, name,trans=F) {
+#' @examples
+#' g=mully::demo()
+#' removeNode(g,"dr1",trans=TRUE)
+removeNode <- function(g, name,trans=FALSE) {
   #Check arguments
   if (missing(g) ||
       missing(name) || !is.mully(g)) {
@@ -146,7 +159,10 @@ removeNode <- function(g, name,trans=F) {
 #' @return A dataframe containing the attributes of the specified node
 #' @export
 #' @import igraph
-getNodeAttributes<-function(g,nameNode,layerByName=F){
+#' @examples
+#' g=mully::demo()
+#' getNodeAttributes(g,layerByName = TRUE)
+getNodeAttributes<-function(g,nameNode,layerByName=FALSE){
 
   if(missing(g) || !is.mully(g)){
     stop("Invalid Arguments")

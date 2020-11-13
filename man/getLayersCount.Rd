@@ -15,3 +15,8 @@ The count of the layers.
 \description{
 Get the number of layers in a graph
 }
+\examples{
+g = mully("MyFirstMully",direct = FALSE)
+g = addLayer(g, c("Gene", "Drug", "Disease"))
+getLayersCount(g)
+}
