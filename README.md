@@ -11,6 +11,13 @@ More information and references can be found in the mully paper:
 https://www.mdpi.com/2073-4425/9/11/519
 
 ## Installation
+
+### Installation from CRAN
+
+mully is now available on CRAN !! 
+
+[mully on CRAN](https://cran.r-project.org/web/packages/mully/index.html)
+
 ### Installation via Github
 
 ```R
