@@ -35,6 +35,6 @@ merge<-function(g1,g2){
   }
 
   #name the class
-  class(g) = c("mully",class(g))
+  class(g1) = c("mully",class(g1))
   return(g1)
 }
