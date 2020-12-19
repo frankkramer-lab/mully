@@ -1,0 +1,815 @@
+
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "mully"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> base::assign(".ExTimings", "mully-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('mully')
+
+Attaching package: 'mully'
+
+The following object is masked from 'package:utils':
+
+    demo
+
+The following object is masked from 'package:base':
+
+    merge
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("addEdge")
+> ### * addEdge
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: addEdge
+> ### Title: Add an edge
+> ### Aliases: addEdge
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> addEdge(g,"dr3","g2",attributes=list(name="newEdge"))
+mully --  MyFirstMully
+ 3 Layers:
+  ID    Name NameLower
+ 1  1    Gene      gene
+ 2  2    Drug      drug
+ 3  3 Disease   disease
+
+ 8 Nodes:
+  name n type   effect desc
+ 1   d1 3   t1     <NA> <NA>
+ 2   d2 3   t1     <NA> <NA>
+ 3   d3 3   t1     <NA> <NA>
+ 4  dr1 2 <NA>   strong <NA>
+ 5  dr2 2 <NA>   strong <NA>
+ 6  dr3 2 <NA> moderate <NA>
+ 7   g1 1 <NA>     <NA>   AF
+ 8   g2 1 <NA>     <NA>   BE
+
+ 6 Edges:
+   V1  V2               name
+ 1  d2 dr1             treats
+ 2  d2 dr1          extraEdge
+ 3  d2  g1            targets
+ 4 dr3  g2 mutates and causes
+ 5  d3 dr3             treats
+ 6 dr3  g2            newEdge
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("addEdge", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("addLayer")
+> ### * addLayer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: addLayer
+> ### Title: Add a layer or a set of layers to a graph
+> ### Aliases: addLayer
+> 
+> ### ** Examples
+> 
+> g = mully("MyFirstMully",direct = FALSE)
+> g = addLayer(g, c("Gene", "Drug", "Disease"))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("addLayer", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("addNode")
+> ### * addNode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: addNode
+> ### Title: Add a node with assigned layer and attributes to a graph
+> ### Aliases: addNode
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> attributes=list("specie"="Homo Sapiens")
+> addNode(g = g,nodeName = "g3",layerName = "Gene",attributes = attributes)
+mully --  MyFirstMully
+ 3 Layers:
+  ID    Name NameLower
+ 1  1    Gene      gene
+ 2  2    Drug      drug
+ 3  3 Disease   disease
+
+ 9 Nodes:
+  name n type   effect desc       specie
+ 1   d1 3   t1     <NA> <NA>         <NA>
+ 2   d2 3   t1     <NA> <NA>         <NA>
+ 3   d3 3   t1     <NA> <NA>         <NA>
+ 4  dr1 2 <NA>   strong <NA>         <NA>
+ 5  dr2 2 <NA>   strong <NA>         <NA>
+ 6  dr3 2 <NA> moderate <NA>         <NA>
+ 7   g1 1 <NA>     <NA>   AF         <NA>
+ 8   g2 1 <NA>     <NA>   BE         <NA>
+ 9   g3 1 <NA>     <NA> <NA> Homo Sapiens
+
+ 5 Edges:
+   V1  V2               name
+ 1  d2 dr1             treats
+ 2  d2 dr1          extraEdge
+ 3  d2  g1            targets
+ 4 dr3  g2 mutates and causes
+ 5  d3 dr3             treats
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("addNode", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("exportCSV")
+> ### * exportCSV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: exportCSV
+> ### Title: Export mully into CSV files
+> ### Aliases: exportCSV
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D g=mully::demo()
+> ##D exportCSV(g)
+> ## End(Not run)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("exportCSV", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getEdgeAttributes")
+> ### * getEdgeAttributes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getEdgeAttributes
+> ### Title: Get the attributes of the edges connecting two nodes
+> ### Aliases: getEdgeAttributes
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> #Print all Edges
+> getEdgeAttributes(g)
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> #Get a Single Edge
+> getEdgeAttributes(g,"d2","g1")
+  V1 V2    name
+3 d2 g1 targets
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getEdgeAttributes", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getIDEdge")
+> ### * getIDEdge
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getIDEdge
+> ### Title: Get the ids of the edges connecting two nodes
+> ### Aliases: getIDEdge
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> getIDEdge(g,"d2","dr1")
+[1] 1 2
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getIDEdge", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getIDNode")
+> ### * getIDNode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getIDNode
+> ### Title: Get the id of a node
+> ### Aliases: getIDNode
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> getIDNode(g,"g1")
+[1] 7
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getIDNode", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getLayer")
+> ### * getLayer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getLayer
+> ### Title: Get the nodes on a layer in a graph
+> ### Aliases: getLayer
+> 
+> ### ** Examples
+> 
+> g = mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> getLayer(g,"gene")
++ 2/8 vertices, named, from 3cba9c9:
+[1] g1 g2
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getLayer", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getLayersCount")
+> ### * getLayersCount
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getLayersCount
+> ### Title: Get the number of layers in a graph
+> ### Aliases: getLayersCount
+> 
+> ### ** Examples
+> 
+> g = mully("MyFirstMully",direct = FALSE)
+> g = addLayer(g, c("Gene", "Drug", "Disease"))
+> getLayersCount(g)
+[1] 3
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getLayersCount", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getNode")
+> ### * getNode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getNode
+> ### Title: Get a node from a graph
+> ### Aliases: getNode
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> getNode(g,"g1")
++ 1/8 vertex, named, from 3cd42ee:
+[1] g1
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getNode", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getNodeAttributes")
+> ### * getNodeAttributes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getNodeAttributes
+> ### Title: Get the attributes of a node
+> ### Aliases: getNodeAttributes
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> getNodeAttributes(g,layerByName = TRUE)
+  name       n type   effect desc
+1   d1 Disease   t1     <NA> <NA>
+2   d2 Disease   t1     <NA> <NA>
+3   d3 Disease   t1     <NA> <NA>
+4  dr1    Drug <NA>   strong <NA>
+5  dr2    Drug <NA>   strong <NA>
+6  dr3    Drug <NA> moderate <NA>
+7   g1    Gene <NA>     <NA>   AF
+8   g2    Gene <NA>     <NA>   BE
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getNodeAttributes", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("isLayer")
+> ### * isLayer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: isLayer
+> ### Title: Verify if the layer exists in a graph
+> ### Aliases: isLayer
+> 
+> ### ** Examples
+> 
+> g = mully("MyFirstMully",direct = FALSE)
+> g = addLayer(g, c("Gene", "Drug", "Disease"))
+> isLayer(g,"Drug")
+[1] TRUE
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("isLayer", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("mully")
+> ### * mully
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: mully
+> ### Title: Create an empty multilayered graph
+> ### Aliases: mully
+> 
+> ### ** Examples
+> 
+> g = mully("MyFirstMully",direct = FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("mully", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot.mully")
+> ### * plot.mully
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot.mully
+> ### Title: Plot the graph in 2D
+> ### Aliases: plot.mully
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> plot(g,"Scaled")
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot.mully", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot3d")
+> ### * plot3d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot3d
+> ### Title: Plot the graph in 3D using rgl
+> ### Aliases: plot3d
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> labels=getNodeAttributes(g)$name
+> plot3d(g, layers=TRUE, vertex.label=labels,edge.width=6)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot3d", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("print.mully")
+> ### * print.mully
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.mully
+> ### Title: Print function
+> ### Aliases: print.mully
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> print(g)
+mully --  MyFirstMully
+ 3 Layers:
+  ID    Name NameLower
+ 1  1    Gene      gene
+ 2  2    Drug      drug
+ 3  3 Disease   disease
+
+ 8 Nodes:
+  name n type   effect desc
+ 1   d1 3   t1     <NA> <NA>
+ 2   d2 3   t1     <NA> <NA>
+ 3   d3 3   t1     <NA> <NA>
+ 4  dr1 2 <NA>   strong <NA>
+ 5  dr2 2 <NA>   strong <NA>
+ 6  dr3 2 <NA> moderate <NA>
+ 7   g1 1 <NA>     <NA>   AF
+ 8   g2 1 <NA>     <NA>   BE
+
+ 5 Edges:
+   V1  V2               name
+ 1  d2 dr1             treats
+ 2  d2 dr1          extraEdge
+ 3  d2  g1            targets
+ 4 dr3  g2 mutates and causes
+ 5  d3 dr3             treats
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.mully", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("removeEdge")
+> ### * removeEdge
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: removeEdge
+> ### Title: Delete an edge
+> ### Aliases: removeEdge
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> removeEdge(g,"dr1","d2",multi=TRUE)
+mully --  MyFirstMully
+ 3 Layers:
+  ID    Name NameLower
+ 1  1    Gene      gene
+ 2  2    Drug      drug
+ 3  3 Disease   disease
+
+ 8 Nodes:
+  name n type   effect desc
+ 1   d1 3   t1     <NA> <NA>
+ 2   d2 3   t1     <NA> <NA>
+ 3   d3 3   t1     <NA> <NA>
+ 4  dr1 2 <NA>   strong <NA>
+ 5  dr2 2 <NA>   strong <NA>
+ 6  dr3 2 <NA> moderate <NA>
+ 7   g1 1 <NA>     <NA>   AF
+ 8   g2 1 <NA>     <NA>   BE
+
+ 3 Edges:
+   V1  V2               name
+ 1  d2  g1            targets
+ 2 dr3  g2 mutates and causes
+ 3  d3 dr3             treats
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("removeEdge", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("removeLayer")
+> ### * removeLayer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: removeLayer
+> ### Title: Delete a layer or a set of layers from a graph
+> ### Aliases: removeLayer
+> 
+> ### ** Examples
+> 
+> g = mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> removeLayer(g,"gene",trans=TRUE)
+mully --  MyFirstMully
+ 3 Layers:
+[1] ID        Name      NameLower
+ <0 rows> (or 0-length row.names)
+
+ 6 Nodes:
+  name n type   effect desc
+ 1   d1 3   t1     <NA> <NA>
+ 2   d2 3   t1     <NA> <NA>
+ 3   d3 3   t1     <NA> <NA>
+ 4  dr1 2 <NA>   strong <NA>
+ 5  dr2 2 <NA>   strong <NA>
+ 6  dr3 2 <NA> moderate <NA>
+
+ 3 Edges:
+  V1  V2      name
+ 1 d2 dr1    treats
+ 2 d2 dr1 extraEdge
+ 3 d3 dr3    treats
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("removeLayer", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("removeNode")
+> ### * removeNode
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: removeNode
+> ### Title: Delete a node or a set of nodes from a graph
+> ### Aliases: removeNode
+> 
+> ### ** Examples
+> 
+> g=mully::demo()
+[1] "Node d1 added as disease"
+[1] "Node d2 added as disease"
+[1] "Node d3 added as disease"
+[1] "Node dr1 added as drug"
+[1] "Node dr2 added as drug"
+[1] "Node dr3 added as drug"
+[1] "Node g1 added as gene"
+[1] "Node g2 added as gene"
+   V1  V2               name
+1  d2 dr1             treats
+2  d2 dr1          extraEdge
+3  d2  g1            targets
+4 dr3  g2 mutates and causes
+5  d3 dr3             treats
+> removeNode(g,"dr1",trans=TRUE)
+mully --  MyFirstMully
+ 3 Layers:
+  ID    Name NameLower
+ 1  1    Gene      gene
+ 2  2    Drug      drug
+ 3  3 Disease   disease
+
+ 7 Nodes:
+  name n type   effect desc
+ 1   d1 3   t1     <NA> <NA>
+ 2   d2 3   t1     <NA> <NA>
+ 3   d3 3   t1     <NA> <NA>
+ 4  dr2 2 <NA>   strong <NA>
+ 5  dr3 2 <NA> moderate <NA>
+ 6   g1 1 <NA>     <NA>   AF
+ 7   g2 1 <NA>     <NA>   BE
+
+ 3 Edges:
+   V1  V2               name
+ 1  d2  g1            targets
+ 2 dr3  g2 mutates and causes
+ 3  d3 dr3             treats
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("removeNode", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  2.86 0.34 3.24 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -16,3 +16,7 @@
 \description{
 Plot the graph in 2D
 }
+\examples{
+g=mully::demo()
+plot(g,"Scaled")
+}

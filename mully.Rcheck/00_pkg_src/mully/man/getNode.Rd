@@ -17,3 +17,7 @@ The node as igraph.vs
 \description{
 Get a node from a graph
 }
+\examples{
+g=mully::demo()
+getNode(g,"g1")
+}

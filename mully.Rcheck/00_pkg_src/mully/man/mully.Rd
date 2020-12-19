@@ -17,3 +17,6 @@ The created multilayered graph.
 \description{
 Create an empty multilayered graph
 }
+\examples{
+g = mully("MyFirstMully",direct = FALSE)
+}

@@ -16,7 +16,7 @@ https://www.mdpi.com/2073-4425/9/11/519
 
 mully is now available on CRAN !! 
 
-[mully on CRAN](https://cran.r-project.org/web/packages/mully/index.html)
+[mully on CRAN](https://CRAN.R-project.org/package=mully)
 
 ### Installation via Github
 

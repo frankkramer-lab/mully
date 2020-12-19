@@ -12,8 +12,11 @@
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g = mully("MyFirstMully",direct = FALSE)
+#' g = addLayer(g, c("Gene", "Drug", "Disease"))
 addLayer <- function(g, nameLayer) {
-  if (missing(g) || !is.mully(g) || missing(nameLayer) || nameLayer == "") {
+  if (missing(g) || !is.mully(g) || missing(nameLayer)) {
     stop("Invalid Argument")
   }
   for (layer in nameLayer) {
@@ -21,6 +24,10 @@ addLayer <- function(g, nameLayer) {
       warning(paste(c(
         "Layer ", layer, " Already Exists and will be skipped"
       )))
+      next
+    }
+    if (layer == "") {
+      warning("Empty string and will be skipped")
       next
     }
     g$iLayer = g$iLayer + 1
@@ -41,6 +48,10 @@ addLayer <- function(g, nameLayer) {
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g = mully("MyFirstMully",direct = FALSE)
+#' g = addLayer(g, c("Gene", "Drug", "Disease"))
+#' isLayer(g,"Drug")
 isLayer <- function(g, name) {
   nameLayerLowerCase = casefold(name, upper = FALSE)
   if (nameLayerLowerCase %in% g$layers$NameLower) {
@@ -58,10 +69,13 @@ isLayer <- function(g, name) {
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g = mully("MyFirstMully",direct = FALSE)
+#' g = addLayer(g, c("Gene", "Drug", "Disease"))
+#' getLayersCount(g)
 getLayersCount <- function(g) {
   return(dim(g$layers)[1])
 }
-
 
 getIDLayer <- function(g, nameLayer) {
   if (missing(g) || !is.mully(g) ||
@@ -86,6 +100,9 @@ getIDLayer <- function(g, nameLayer) {
 #'
 #' @import igraph
 #' @export
+#' @examples
+#' g = mully::demo()
+#' getLayer(g,"gene")
 getLayer <- function(g, nameLayer) {
   if (missing(g) || !is.mully(g) || missing(nameLayer)) {
     stop("Invalid Argument")
@@ -113,7 +130,10 @@ getLayerByID <- function(g, id) {
 #'
 #' @export
 #' @import igraph
-removeLayer <- function(g, name,trans=F) {
+#' @examples
+#' g = mully::demo()
+#' removeLayer(g,"gene",trans=TRUE)
+removeLayer <- function(g, name,trans=FALSE) {
   if (missing(g) ||
       missing(name) || name == "" || !is.mully(g)) {
     stop("Invalid Arguments")

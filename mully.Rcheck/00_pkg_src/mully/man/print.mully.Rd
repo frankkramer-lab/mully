@@ -14,3 +14,7 @@
 \description{
 Print function
 }
+\examples{
+g=mully::demo()
+print(g)
+}

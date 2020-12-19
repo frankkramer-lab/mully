@@ -131,7 +131,7 @@ discpos = function(n, r = 1) {
 #' @param vertex.label The vertices' labels
 #' @param vertex.label.color The vertices' colors. If not specified, the colors will be chosen randomly
 #' @param vertex.plac The placement form of the vertices on the layer. Can either be "circle" which will place them on a circle, or "disc" which will place them randomly on a disc. The default is "circle"
-#' @param edge.color The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
+#' @param edge.color The edges' colors. If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
 #' @param edge.width The edge width. Default set to 5.
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
 #' @param edge.arrow.width The  edges' arrow width. Default set to 1
@@ -193,10 +193,15 @@ plot3d <- function(g, layers = TRUE,
   if(length(originalColors)!=0)
     V(g)[which(!is.na(assignedColors))]$color=originalColors
   #Add edge colors
+  if (is.null(E(g)$color))
+    E(g)$color = NA
   if(is.na(edge.color)){
     edgecolors = c()
     AllEdges = getEdgeAttributes(g)
     for (i in 1:dim(AllEdges)[1]) {
+      #Pre-assigned color
+      if(!is.na(E(g)$color[i]))
+        edgecolors=c(edgecolors,E(g)$color[i])
       V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
       V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
       if (V1$n == V2$n)

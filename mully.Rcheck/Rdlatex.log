@@ -128,20 +128,11 @@ Overfull \hbox (237.55087pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
 ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
 [1{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/up
-dmap/pdftex.map}]
-Overfull \hbox (4.72609pt too wide) in paragraph at lines 55--64
-[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
-Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
- [][]getN-odeAt-tributes[][][]
-
-Overfull \hbox (18.08727pt too wide) in paragraph at lines 74--76
-[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
-y pa-per: https://www.mdpi.com/2073-
-[2] [3] [4] [5] [6] [7] [8] [9] [10]
+dmap/pdftex.map}] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
-a/ts1zi4.fd) [11] [12] [13]
+a/ts1zi4.fd) [12] [13] [14]
 No file Rd2.ind.
-[14] (./Rd2.aux)
+[15] (./Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -172,7 +163,7 @@ t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
 ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
 inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb>
-Output written on Rd2.pdf (14 pages, 143003 bytes).
+Output written on Rd2.pdf (15 pages, 146154 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020/W32TeX] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (40 entries accepted, 0 rejected).
@@ -307,18 +298,9 @@ Overfull \hbox (17.78166pt too wide) in paragraph at lines 47--51
 Overfull \hbox (237.55087pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
 ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
-
-Overfull \hbox (4.72609pt too wide) in paragraph at lines 55--64
-[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
-Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
- [][]getN-odeAt-tributes[][][]
-
-Overfull \hbox (18.08727pt too wide) in paragraph at lines 74--76
-[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
-y pa-per: https://www.mdpi.com/2073-
 [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
-a/ts1zi4.fd) [12] [13] [14] (./Rd2.ind [15] [16]) (./Rd2.aux)
+a/ts1zi4.fd) [12] [13] [14] [15] (./Rd2.ind [16] [17]) (./Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -349,7 +331,7 @@ t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
 ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
 inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb>
-Output written on Rd2.pdf (16 pages, 149228 bytes).
+Output written on Rd2.pdf (17 pages, 152397 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020/W32TeX] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (40 entries accepted, 0 rejected).
@@ -484,18 +466,9 @@ Overfull \hbox (17.78166pt too wide) in paragraph at lines 47--51
 Overfull \hbox (237.55087pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
 ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
-
-Overfull \hbox (4.72609pt too wide) in paragraph at lines 55--64
-[][][]\OT1/cmr/m/n/10 mully[][][] [][]add-Layer[][][] [][]addNode[][][] [][]add
-Edge[][][] [][]re-move-Layer[][][] [][]re-moveN-ode[][][] [][]re-moveEdge[][][]
- [][]getN-odeAt-tributes[][][]
-
-Overfull \hbox (18.08727pt too wide) in paragraph at lines 74--76
-[]\OT1/cmr/m/n/10 More in-for-ma-tion and ref-er-ences can be found in the mull
-y pa-per: https://www.mdpi.com/2073-
 [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
-a/ts1zi4.fd) [12] [13] [14] (./Rd2.ind [15] [16]) (./Rd2.aux)
+a/ts1zi4.fd) [12] [13] [14] [15] (./Rd2.ind [16] [17]) (./Rd2.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -521,8 +494,8 @@ t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
 ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
 inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb>
-Output written on Rd2.pdf (16 pages, 149823 bytes).
+Output written on Rd2.pdf (17 pages, 153210 bytes).
 Transcript written on Rd2.log.
 Saving output to 'mully-manual.pdf' ...
 Done
-You may want to clean up by 'rm -Rf C:/Users/ADMINI~1/AppData/Local/Temp/Rtmpmk4rQA/Rd2pdf28f0dc2244e'
+You may want to clean up by 'rm -Rf C:/Users/ADMINI~1/AppData/Local/Temp/RtmpoVsoqC/Rd2pdf3a4876c4985'

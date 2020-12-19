@@ -9,6 +9,8 @@
 #'
 #' @export
 #' @import igraph
+#' @examples
+#' g = mully("MyFirstMully",direct = FALSE)
 mully <- function(name = NA, direct = TRUE) {
   #Create the layers Indexation Table
   #Vector for the layers indexation
@@ -44,8 +46,8 @@ mully <- function(name = NA, direct = TRUE) {
 #' @import igraph
 is.mully<-function(g){
   if(!is.igraph(g) || is.null(g$layers) || is.null(g$iLayer))
-    return(F)
-  return(T)
+    return(FALSE)
+  return(TRUE)
 }
 
 
@@ -56,6 +58,9 @@ is.mully<-function(g){
 #' @export
 #' @import igraph
 #' @importFrom utils capture.output
+#' @examples
+#' g=mully::demo()
+#' print(g)
 print.mully<-function(x,...){
   if(missing(x) || !is.mully(x)){
    stop("Invalid Arguments")

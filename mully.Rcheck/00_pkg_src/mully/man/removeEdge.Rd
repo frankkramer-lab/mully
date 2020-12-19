@@ -23,3 +23,7 @@ The graph with the deleted edges
 \description{
 Delete an edge
 }
+\examples{
+g=mully::demo()
+removeEdge(g,"dr1","d2",multi=TRUE)
+}

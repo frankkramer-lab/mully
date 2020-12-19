@@ -19,3 +19,7 @@ A list containing the ids of the edges connecting the nodes
 \description{
 Get the ids of the edges connecting two nodes
 }
+\examples{
+g=mully::demo()
+getIDEdge(g,"d2","dr1")
+}

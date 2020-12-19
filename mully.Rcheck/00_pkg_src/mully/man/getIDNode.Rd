@@ -17,3 +17,7 @@ The id of the specified node
 \description{
 Get the id of a node
 }
+\examples{
+g=mully::demo()
+getIDNode(g,"g1")
+}

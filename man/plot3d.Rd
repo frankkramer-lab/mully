@@ -27,7 +27,7 @@ plot3d(
 
 \item{vertex.plac}{The placement form of the vertices on the layer. Can either be "circle" which will place them on a circle, or "disc" which will place them randomly on a disc. The default is "circle"}
 
-\item{edge.color}{The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer}
+\item{edge.color}{The edges' colors. If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer}
 
 \item{edge.width}{The edge width. Default set to 5.}
 

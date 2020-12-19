@@ -8,7 +8,7 @@
 #'
 #' @return A new mully graph
 #' @export
-importGraphCSV<-function(name,direct="F",layers,nodes,edges){
+importGraphCSV<-function(name,direct=FALSE,layers,nodes,edges){
   if(missing(name) || name=="" ||
      missing(layers) || !file.exists(layers) ||
      missing(nodes) || !file.exists(nodes) ||

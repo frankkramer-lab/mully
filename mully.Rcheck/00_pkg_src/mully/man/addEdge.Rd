@@ -21,3 +21,7 @@ The graph, with the added edge
 \description{
 Add an edge
 }
+\examples{
+g=mully::demo()
+addEdge(g,"dr3","g2",attributes=list(name="newEdge"))
+}

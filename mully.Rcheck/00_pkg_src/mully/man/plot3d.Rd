@@ -6,7 +6,7 @@
 \usage{
 plot3d(
   g,
-  layers = T,
+  layers = TRUE,
   vertex.label = NA,
   vertex.label.color = NA,
   vertex.plac = "circle",
@@ -27,7 +27,7 @@ plot3d(
 
 \item{vertex.plac}{The placement form of the vertices on the layer. Can either be "circle" which will place them on a circle, or "disc" which will place them randomly on a disc. The default is "circle"}
 
-\item{edge.color}{The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer}
+\item{edge.color}{The edges' colors. If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer}
 
 \item{edge.width}{The edge width. Default set to 5.}
 
@@ -41,4 +41,9 @@ Plot the graph in 3D using rgl
 \note{
 This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
 vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
+}
+\examples{
+g=mully::demo()
+labels=getNodeAttributes(g)$name
+plot3d(g, layers=TRUE, vertex.label=labels,edge.width=6)
 }

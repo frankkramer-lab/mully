@@ -59,6 +59,9 @@ getMarkGroups <- function(g) {
 #' @importFrom randomcoloR randomColor
 #' @importFrom stats runif
 #' @importFrom graphics plot.new
+#' @examples
+#' g=mully::demo()
+#' plot(g,"Scaled")
 plot.mully <- function(x, layout,...) {
   gps = getMarkGroups(x)
 
@@ -67,9 +70,10 @@ plot.mully <- function(x, layout,...) {
   if (is.null(V(x)$color))
     V(x)$color = NA
   for (i in 1:dim(x$layers)[1]) {
-    if (is.na(V(x)[which(V(x)$n == i)]$color)) {
+    nodesinlayer=getLayerByID(x,i)
+    if (NA %in%nodesinlayer$color) {
       if (!cols[i] %in% usedCols) {
-        V(x)[which(V(x)$n == i)]$color = cols[i]
+        nodesinlayer$color[which(is.na(nodesinlayer$color))] = cols[i]
         usedCols = c(usedCols, cols[i])
       }
       else{
@@ -127,7 +131,7 @@ discpos = function(n, r = 1) {
 #' @param vertex.label The vertices' labels
 #' @param vertex.label.color The vertices' colors. If not specified, the colors will be chosen randomly
 #' @param vertex.plac The placement form of the vertices on the layer. Can either be "circle" which will place them on a circle, or "disc" which will place them randomly on a disc. The default is "circle"
-#' @param edge.color The edges' colors.If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
+#' @param edge.color The edges' colors. If not specified, inter-edges are black, and intra-edges have the same color as the nodes on the layer
 #' @param edge.width The edge width. Default set to 5.
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
 #' @param edge.arrow.width The  edges' arrow width. Default set to 1
@@ -142,8 +146,11 @@ discpos = function(n, r = 1) {
 #' @note
 #' This function can take the following arguments supported and not ignored by \link[igraph]{rglplot}:
 #' vertex.label, vertex.label.color, edge.color, edge.width, edge.arrow.size,edge.arrow.width.
-#'
-plot3d <- function(g, layers = T,
+#' @examples
+#' g=mully::demo()
+#' labels=getNodeAttributes(g)$name
+#' plot3d(g, layers=TRUE, vertex.label=labels,edge.width=6)
+plot3d <- function(g, layers = TRUE,
                          vertex.label=NA,vertex.label.color = NA,vertex.plac="circle",
                          edge.color=NA,edge.width=5,
                          edge.arrow.size=10,edge.arrow.width=1) {
@@ -157,15 +164,16 @@ plot3d <- function(g, layers = T,
   gps = getMarkGroups(g)
 
   colrs = randomColor(count = g$iLayer)
-  usedCols = unique(V(g)$color)
+  assignedColors=V(g)$color
+  usedCols = unique(assignedColors)
   if (is.null(V(g)$color))
     V(g)$color = NA
   for (i in 1:dim(g$layers)[1]) {
     idLayer=as.integer(g$layers$ID[i])
     nodesid=which(V(g)$n == idLayer)
-    if(is.null(nodesid) || is.na(nodesid) || length(nodesid)==0)
+    if(is.null(nodesid) || length(nodesid)==0)
       next
-    if (is.na(V(g)[nodesid]$color)) {
+    if (NA%in%V(g)[nodesid]$color) {
       if (!colrs[idLayer] %in% usedCols) {
         V(g)[nodesid]$color = colrs[idLayer]
         usedCols = c(usedCols, colrs[idLayer])
@@ -180,11 +188,20 @@ plot3d <- function(g, layers = T,
       }
     }
   }
+  #Re-add assigned colors
+  originalColors=assignedColors[which(!is.na(assignedColors))]
+  if(length(originalColors)!=0)
+    V(g)[which(!is.na(assignedColors))]$color=originalColors
   #Add edge colors
+  if (is.null(E(g)$color))
+    E(g)$color = NA
   if(is.na(edge.color)){
     edgecolors = c()
     AllEdges = getEdgeAttributes(g)
     for (i in 1:dim(AllEdges)[1]) {
+      #Pre-assigned color
+      if(!is.na(E(g)$color[i]))
+        edgecolors=c(edgecolors,E(g)$color[i])
       V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
       V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
       if (V1$n == V2$n)
@@ -202,7 +219,7 @@ plot3d <- function(g, layers = T,
     g,
     vertex.color = V(g)$color,
     layout = layout,
-    rescale = F,
+    rescale = FALSE,
     vertex.label=vertex.label,
     vertex.label.color = V(g)$color,
     vertex.label.dist = 0,
@@ -214,7 +231,7 @@ plot3d <- function(g, layers = T,
   )
   rgl::aspect3d(1, 1, 1)
   #Add layers
-  if (layers == T) {
+  if (layers == TRUE) {
     layout1 = layout[order(V(g)$n), ]
     clrs = unique(V(g)$color[order(V(g)$n)])
     temp = 1
