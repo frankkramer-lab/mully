@@ -154,6 +154,14 @@ plot3d <- function(g, layers = TRUE,
                          vertex.label=NA,vertex.label.color = NA,vertex.plac="circle",
                          edge.color=NA,edge.width=5,
                          edge.arrow.size=10,edge.arrow.width=1) {
+  #Check if Graph is Empty
+  if(dim(g$layers)[1]==0){
+    stop("This mully Graph is empty.")
+  }
+  #Check if Graph has no nodes
+  if(length(V(g))==0){
+    stop("This mully Graph has no nodes.")
+  }
   rgl.open()
   rgl.bg(
     sphere = TRUE,
@@ -192,25 +200,28 @@ plot3d <- function(g, layers = TRUE,
   originalColors=assignedColors[which(!is.na(assignedColors))]
   if(length(originalColors)!=0)
     V(g)[which(!is.na(assignedColors))]$color=originalColors
-  #Add edge colors
-  if (is.null(E(g)$color))
-    E(g)$color = NA
-  if(is.na(edge.color)){
-    edgecolors = c()
-    AllEdges = getEdgeAttributes(g)
-    for (i in 1:dim(AllEdges)[1]) {
-      #Pre-assigned color
-      if(!is.na(E(g)$color[i]))
-        edgecolors=c(edgecolors,E(g)$color[i])
-      V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
-      V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
-      if (V1$n == V2$n)
-        edgecolors = c(edgecolors, V1$color)
-      else
-        edgecolors = c(edgecolors, "black")
+  edgecolors=NULL
+  if(length(E(g))!=0){
+    #Add edge colors
+    if (is.null(E(g)$color))
+      E(g)$color = NA
+    if(is.na(edge.color)){
+      edgecolors = c()
+      AllEdges = getEdgeAttributes(g)
+      for (i in 1:dim(AllEdges)[1]) {
+        #Pre-assigned color
+        if(!is.na(E(g)$color[i]))
+          edgecolors=c(edgecolors,E(g)$color[i])
+        V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
+        V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
+        if (V1$n == V2$n)
+          edgecolors = c(edgecolors, V1$color)
+        else
+          edgecolors = c(edgecolors, "black")
+      }
+      edge.color=edgecolors
+      }
     }
-    edge.color=edgecolors
-  }
 
   layout = get3DLayout(g,vertex.plac)
 
@@ -232,7 +243,10 @@ plot3d <- function(g, layers = TRUE,
   rgl::aspect3d(1, 1, 1)
   #Add layers
   if (layers == TRUE) {
-    layout1 = layout[order(V(g)$n), ]
+    layout1=as.matrix(layout)
+    if(dim(layout1)[1]>1){
+      layout1 = layout[order(V(g)$n), ]
+    }
     clrs = unique(V(g)$color[order(V(g)$n)])
     temp = 1
     iColr=1
@@ -242,10 +256,11 @@ plot3d <- function(g, layers = TRUE,
       nNodes = length(which(V(g)$n == idLayer))
       if(nNodes==0)
         next
-      coord = layout1[temp:(temp + nNodes - 1), ]
       if(nNodes==1)
         coord = t(as.matrix(layout1[temp, ]))
-      plane = suppressWarnings(get3DPlane(coord, g$iLayer,nNodes))
+      else
+        coord = as.matrix(layout1[temp:(temp + nNodes - 1), ])
+      plane = suppressWarnings(get3DPlane(coord, dim(g$layers)[1],nNodes))
       rgl.planes(
         0,
         b = plane[2],
@@ -300,8 +315,8 @@ get3DLayout <- function(g,plac) {
     z = unlist(dfLayout$z)
   ))
 }
-getEquationPlane <- function(x1, y1, z1, x2, y2, z2, x3, y3, z3)
-{
+getEquationPlane <- function(x1, y1, z1, x2, y2, z2, x3, y3, z3){
+
   a1 = x2 - x1
 
   b1 = y2 - y1

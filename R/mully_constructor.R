@@ -69,7 +69,7 @@ print.mully<-function(x,...){
   if(!is.na(x$name)){
     cat(paste(" -- ",x$name))
   }
-  if(x$iLayer==0){
+  if(dim(x$layers)[1]==0){
     cat("\nEmpty Graph")
     return()
   }

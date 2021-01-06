@@ -163,10 +163,16 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
     class(g) = c("mully",class(g))
     return(g)
   }
-
-  df=cbind(as.data.frame(list(V1=nodeStart,V2=nodeDest),stringsAsFactors = FALSE),as.data.frame(attributes))
-  df1=cbind(as.data.frame(list(V1=nodeDest,V2=nodeStart),stringsAsFactors = FALSE),as.data.frame(attributes))
   allEdges=getEdgeAttributes(g,nodeStart,nodeDest)
+  df=as.data.frame(list(V1=nodeStart,V2=nodeDest),stringsAsFactors = FALSE)
+  df1=as.data.frame(list(V1=nodeDest,V2=nodeStart),stringsAsFactors = FALSE)
+
+  if(!is.na(attributes)){
+    df=cbind(df,as.data.frame(attributes))
+    df1=cbind(df1,as.data.frame(attributes))
+    colnames(df)=c(c("V1","V2",names(attributes)))
+    colnames(df1)=c(c("V1","V2",names(attributes)))
+  }
 
   c1=getIDCommonDF(allEdges,df)
   c2=getIDCommonDF(allEdges,df1)
