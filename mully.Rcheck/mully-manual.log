@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.3)  15 DEC 2020 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.3)  2 JUN 2021 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,30 +370,30 @@ ap/pdftex.map}])
 \openout5 = `Rd2.toc'.
 
 
-Overfull \hbox (17.78166pt too wide) in paragraph at lines 47--51
+Overfull \hbox (17.78166pt too wide) in paragraph at lines 46--50
 \OT1/cmr/m/n/10 pack-age is im-ple-mented as a part of [the Mul-ti-path Project
 ](https://www.sys-med.de/en/junior-
  []
 
 
-Overfull \hbox (237.55087pt too wide) in paragraph at lines 47--51
+Overfull \hbox (237.55087pt too wide) in paragraph at lines 46--50
 \OT1/cmr/m/n/10 research-groups/multipath/) di-rected by [Dr. Frank Kramer](htt
 ps://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/misit/mitarbeiter/)
  []
 
 [2]
 LaTeX Font Info:    Font shape `OT1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 108.
+(Font)              scaled to size 9.0pt on input line 107.
  [3] [4] [5] [6] [7] [8] [9] [10] [11]
 LaTeX Font Info:    Trying to load font information for TS1+zi4 on input line 6
-72.
+71.
 
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolat
 a/ts1zi4.fd
 File: ts1zi4.fd 2018/01/14 TS1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 672.
+(Font)              scaled to size 10.0pt on input line 671.
  [12] [13] [14] [15] (./Rd2.ind [16] [17
 
 
@@ -434,7 +434,7 @@ t/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/Users/Administrator/AppData/Roa
 ming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/Adm
 inistrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb>
-Output written on Rd2.pdf (17 pages, 153210 bytes).
+Output written on Rd2.pdf (17 pages, 152519 bytes).
 PDF statistics:
  516 PDF objects out of 1000 (max. 8388607)
  483 compressed objects within 5 object streams

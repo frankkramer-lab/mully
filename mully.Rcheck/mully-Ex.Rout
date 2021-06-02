@@ -355,7 +355,7 @@ mully --  MyFirstMully
 4 dr3  g2 mutates and causes
 5  d3 dr3             treats
 > getLayer(g,"gene")
-+ 2/8 vertices, named, from 3cba9c9:
++ 2/8 vertices, named, from 59f30b3:
 [1] g1 g2
 > 
 > 
@@ -413,7 +413,7 @@ mully --  MyFirstMully
 4 dr3  g2 mutates and causes
 5  d3 dr3             treats
 > getNode(g,"g1")
-+ 1/8 vertex, named, from 3cd42ee:
++ 1/8 vertex, named, from 5a0b3db:
 [1] g1
 > 
 > 
@@ -720,8 +720,9 @@ mully --  MyFirstMully
 > removeLayer(g,"gene",trans=TRUE)
 mully --  MyFirstMully
  3 Layers:
-[1] ID        Name      NameLower
- <0 rows> (or 0-length row.names)
+  ID    Name NameLower
+ 2  2    Drug      drug
+ 3  3 Disease   disease
 
  6 Nodes:
   name n type   effect desc
@@ -803,7 +804,7 @@ mully --  MyFirstMully
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.86 0.34 3.24 NA NA 
+Time elapsed:  2.49 0.31 2.99 NA NA 
 > grDevices::dev.off()
 null device 
           1 

@@ -139,7 +139,8 @@ removeLayer <- function(g, name,trans=FALSE) {
     stop("Invalid Arguments")
   }
   for (layer in name) {
-    if (!isLayer(g, name)) {
+    layer=tolower(layer)
+    if (!isLayer(g, layer)) {
       message(paste(c(
         "Layer ", layer, " Does Not Exist and will be skipped"
       )))
@@ -148,7 +149,7 @@ removeLayer <- function(g, name,trans=FALSE) {
     nodes = getLayer(g, layer)$name
     for(j in 1:length(nodes))
       g <- removeNode(g, nodes[j],trans)
-    g$layers=g$layers[-which(g$layers$Name==name),]
+    g$layers=g$layers[-which(g$layers$NameLower==layer),]
   }
   return(g)
 }
