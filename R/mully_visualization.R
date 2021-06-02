@@ -248,6 +248,7 @@ plot3d <- function(g, layers = TRUE,
       layout1 = layout[order(V(g)$n), ]
     }
     clrs = unique(V(g)$color[order(V(g)$n)])
+    clrs=clrs[-which(clrs%in%assignedColors)]
     temp = 1
     iColr=1
     for (i in 1:dim(g$layers)[1]) {
