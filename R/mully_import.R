@@ -8,9 +8,8 @@
 #'
 #' @return A new mully graph
 #' @export
-importGraphCSV<-function(name,direct=FALSE,layers,nodes,edges){
-  if(missing(name) || name=="" ||
-     missing(layers) || !file.exists(layers) ||
+importGraphCSV<-function(name=NA,direct=FALSE,layers,nodes,edges){
+  if(missing(layers) || !file.exists(layers) ||
      missing(nodes) || !file.exists(nodes) ||
      missing(edges) || !file.exists(edges)){
     stop("Invalid arguments")
@@ -62,7 +61,7 @@ importNodesCSV<-function(g,file,name="name"){
   rows=dim(nodes)[1]
   for(i in 1:rows){
     node=nodes[i,]
-    attr=node
+    attr=node[3:length(node)]
     attr$n=NULL
     attr$name=NULL
     attr=as.list(attr)
@@ -70,9 +69,8 @@ importNodesCSV<-function(g,file,name="name"){
       next
       g=addLayer(g,node$n)
     }
-    g=addNode(g,nodeName = as.character(node$name),layerName = node$n,attributes = attr)
+    g=addNode(g,nodeName = as.character(node$name),layerName = as.character(node$n),attributes = attr)
   }
-  V(g)$n=g$layers[V(g)$n]
   class(g)=c("mully",class(g))
   return(g)
 }
