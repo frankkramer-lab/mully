@@ -172,10 +172,12 @@ plot3d <- function(g, layers = TRUE,
   gps = getMarkGroups(g)
 
   colrs = randomColor(count = g$iLayer)
+
   assignedColors=V(g)$color
   usedCols = unique(assignedColors)
   if (is.null(V(g)$color))
     V(g)$color = NA
+
   for (i in 1:dim(g$layers)[1]) {
     idLayer=as.integer(g$layers$ID[i])
     nodesid=which(V(g)$n == idLayer)
@@ -196,6 +198,16 @@ plot3d <- function(g, layers = TRUE,
       }
     }
   }
+  #List of Assigned Colors
+  clrs = unique(V(g)$color[order(V(g)$n)])
+
+  #Check redundant colors
+  indexesAC=which(clrs%in%assignedColors)
+  if(length(assignedColors)!=0 && length(indexesAC)!=0)
+    clrs=clrs[-which(clrs%in%assignedColors)]
+  #Add colors to the layers
+  g$layers$color=clrs[as.numeric(g$layers$ID)]
+
   #Re-add assigned colors
   originalColors=assignedColors[which(!is.na(assignedColors))]
   if(length(originalColors)!=0)
@@ -215,7 +227,7 @@ plot3d <- function(g, layers = TRUE,
         V1 = V(g)[which(V(g)$name == AllEdges[i, 1])]
         V2 = V(g)[which(V(g)$name == AllEdges[i, 2])]
         if (V1$n == V2$n)
-          edgecolors = c(edgecolors, V1$color)
+          edgecolors = c(edgecolors, clrs[which(g$layers==V1$n)])
         else
           edgecolors = c(edgecolors, "black")
       }
@@ -247,8 +259,6 @@ plot3d <- function(g, layers = TRUE,
     if(dim(layout1)[1]>1){
       layout1 = layout[order(V(g)$n), ]
     }
-    clrs = unique(V(g)$color[order(V(g)$n)])
-    clrs=clrs[-which(clrs%in%assignedColors)]
     temp = 1
     iColr=1
     for (i in 1:dim(g$layers)[1]) {
@@ -267,7 +277,7 @@ plot3d <- function(g, layers = TRUE,
         b = plane[2],
         0,
         d = plane[4],
-        col = clrs[iColr],
+        col = g$layers$color[i],
         alpha = 0.2
       )
       #Add layers' names
