@@ -26,6 +26,8 @@ mully <- function(name = NA, direct = TRUE) {
   g <- graph.empty(directed = direct)
 
   #Assign the attributes to the igraph instance
+  if(is.na(name))
+    name=paste0("mully",as.character(sample(1:100000,1)))
   g$name = name
   #Last inserted layer number
   g$iLayer = 0
