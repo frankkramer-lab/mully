@@ -65,16 +65,22 @@ getMarkGroups <- function(g) {
 plot.mully <- function(x, layout,...) {
   gps = getMarkGroups(x)
 
-  cols = randomColor(count = x$iLayer)
-  usedCols = unique(V(x)$color)
+  colrs = randomColor(count = x$iLayer)
+
+  assignedColors=V(x)$color
+  usedCols = unique(assignedColors)
   if (is.null(V(x)$color))
     V(x)$color = NA
+
   for (i in 1:dim(x$layers)[1]) {
-    nodesinlayer=getLayerByID(x,i)
-    if (NA %in%nodesinlayer$color) {
-      if (!cols[i] %in% usedCols) {
-        nodesinlayer$color[which(is.na(nodesinlayer$color))] = cols[i]
-        usedCols = c(usedCols, cols[i])
+    idLayer=as.integer(x$layers$ID[i])
+    nodesid=which(V(x)$n == idLayer)
+    if(is.null(nodesid) || length(nodesid)==0)
+      next
+    if (NA%in%V(x)[nodesid]$color) {
+      if (!colrs[idLayer] %in% usedCols) {
+        V(x)[nodesid]$color = colrs[idLayer]
+        usedCols = c(usedCols, colrs[idLayer])
       }
       else{
         c = randomColor(count = 1)
@@ -82,7 +88,7 @@ plot.mully <- function(x, layout,...) {
           c = randomColor(count = 1)
         }
         usedCols = c(usedCols, c)
-        V(x)[which(V(x)$n == i)]$color = c
+        V(x)[nodesid]$color = c
       }
     }
   }
