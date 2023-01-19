@@ -162,8 +162,7 @@ plot3d <- function(g, layers = TRUE,
   if(length(V(g))==0){
     stop("This mully Graph has no nodes.")
   }
-  rgl.open()
-  rgl.bg(
+  rgl::bg3d(
     sphere = TRUE,
     color = c("white", "blue"),
     lit = FALSE,
@@ -225,7 +224,7 @@ plot3d <- function(g, layers = TRUE,
 
   layout = get3DLayout(g,vertex.plac)
 
-  open3d()
+  rgl::open3d()
   igraph::rglplot(
     g,
     vertex.color = V(g)$color,
@@ -262,7 +261,7 @@ plot3d <- function(g, layers = TRUE,
       else
         coord = as.matrix(layout1[temp:(temp + nNodes - 1), ])
       plane = suppressWarnings(get3DPlane(coord, dim(g$layers)[1],nNodes))
-      rgl.planes(
+      rgl::planes3d(
         0,
         b = plane[2],
         0,
@@ -271,7 +270,7 @@ plot3d <- function(g, layers = TRUE,
         alpha = 0.2
       )
       #Add layers' names
-      text3d(
+      rgl::texts3d(
         x = -max(abs(layout[, 1]))-1,
         y = coord[1, 2],
         z = min(abs(layout[, 3])) - 2,

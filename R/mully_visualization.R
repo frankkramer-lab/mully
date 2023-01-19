@@ -168,15 +168,15 @@ plot3d <- function(g, layers = TRUE,
   if(length(V(g))==0){
     stop("This mully Graph has no nodes.")
   }
-  open3d()
-  bg3d(
+  rgl::open3d()
+  rgl::bg3d(
     sphere = TRUE,
     color = c("white", "blue"),
     lit = FALSE,
     back = "lines"
   )
   gps = getMarkGroups(g)
-
+  nLayers=dim(g$layers)[1]
   colrs = randomColor(count = g$iLayer)
 
   assignedColors=V(g)$color
@@ -184,7 +184,7 @@ plot3d <- function(g, layers = TRUE,
   if (is.null(V(g)$color))
     V(g)$color = NA
 
-  for (i in 1:dim(g$layers)[1]) {
+  for (i in 1:nLayers) {
     idLayer=as.integer(g$layers$ID[i])
     nodesid=which(V(g)$n == idLayer)
     if(is.null(nodesid) || length(nodesid)==0)
@@ -277,7 +277,7 @@ plot3d <- function(g, layers = TRUE,
         coord = t(as.matrix(layout1[temp, ]))
       else
         coord = as.matrix(layout1[temp:(temp + nNodes - 1), ])
-      plane = suppressWarnings(get3DPlane(coord, dim(g$layers)[1],nNodes))
+      plane = get3DPlane(coord, nLayers,nNodes)
       planes3d(
         0,
         b = plane[2],
@@ -287,13 +287,12 @@ plot3d <- function(g, layers = TRUE,
         alpha = 0.2
       )
       #Add layers' names
-      text3d(
+      rgl::text3d(
         x = -max(abs(layout[, 1]))-1,
         y = coord[1, 2],
         z = min(abs(layout[, 3])) - 2,
         texts = paste0(nameLayer," Layer",sep=""),
         color = clrs[iColr],
-        alpha = 1
       )
       iColr=iColr+1
       temp = temp + nNodes
