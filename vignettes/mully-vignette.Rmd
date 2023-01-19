@@ -173,7 +173,7 @@ The function needs the following arguments:
 The function returns the graph, with the added edge.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 addEdge(g,"dr3","g2",attributes=list(name="newEdge"))
 ```
@@ -189,7 +189,7 @@ The function needs the following arguments:
 The function returns the graph, with the layers added.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 addLayer(g,"Complex")
 ```
@@ -207,7 +207,7 @@ The function needs the following arguments:
 The function returns the graph, with the new node.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 attributes=list("specie"="Homo Sapiens")
 addNode(g = g,nodeName = "g3",layerName = "Gene",attributes = attributes)
@@ -222,7 +222,7 @@ The function needs the following arguments:
   - **target** - The target file in which the files will be generated. By default the WD.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 exportCSV(g)
 ```
@@ -239,7 +239,7 @@ The function needs the following arguments:
 The function returns a dataframe containing the edges with their attributes. If both nodes' arguments are missing, it returns the complete information on edges and their attributes.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 ##Print all Edges
 getEdgeAttributes(g)
@@ -260,7 +260,7 @@ The nodes passed to this function as arguments should be the unique names assign
 The function returns a list containing the ids of the edges connecting the nodes.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 getIDEdge(g,"d2","dr1")
 ```
@@ -287,7 +287,7 @@ The function needs the following arguments:
 The function returns a List of the nodes on the given layer.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 getLayer(g,"gene")
 ```
@@ -302,7 +302,7 @@ The function needs the following arguments:
 The function returns the count of the layers.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 getLayersCount(g)
 ```
@@ -330,7 +330,7 @@ The function needs the following arguments:
 The function returns a dataframe containing the attributes of the specified node.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 getNodeAttributes(g,layerByName = TRUE)
 ```
@@ -403,7 +403,7 @@ The function needs the following arguments:
 The function returns a boolean value.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 isLayer(g,"Gene")
 isLayer(g,"Complex")
@@ -420,7 +420,7 @@ The function needs the following arguments:
 The function returns the merge of the two graphs. The merge is based on the first given graph.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 
 #Create First Graph
 g=mully::demo()
@@ -519,7 +519,7 @@ The function needs the following arguments:
 The function returns the graph with the deleted edges.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 removeEdge(g,"dr1","d2",multi=TRUE)
 ```
@@ -536,7 +536,7 @@ The function needs the following arguments:
 The function returns the graph, with the given layer and its corresponding nodes and edges removed.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 removeLayer(g,"gene",trans=TRUE)
 ```
@@ -554,7 +554,7 @@ The function needs the following arguments:
 The function returns the graph, with the nodes deleted.
 
 ***Example***
-````{r,eval=FALSE}
+```{r,eval=FALSE}
 g=mully::demo()
 removeNode(g,"dr1",trans=TRUE)
 ```
