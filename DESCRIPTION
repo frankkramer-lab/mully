@@ -1,8 +1,8 @@
 Package: mully
 Type: Package
 Title: Create, Modify and Visualize Multi-Layered Networks
-Version: 2.1.37
-Authors@R: c(person("Dr. Zaynab Hammoud","Developer",role=c("aut","cre"),email="zaynabhassanhammoud@gmail.com"))
+Version: 2.1.38
+Authors@R: c(person("Zaynab","Hammoud",role=c("aut","cre"),email="zaynabhassanhammoud@gmail.com"))
 Maintainer: Zaynab Hammoud <zaynabhassanhammoud@gmail.com>
 Description: Allows the user to create graphs with multiple layers. The user can also modify the layers, the nodes, and the edges. The graph can also be visualized.
     Zaynab Hammoud and Frank Kramer (2018) <doi:10.3390/genes9110519>.
