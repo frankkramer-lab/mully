@@ -12,7 +12,7 @@ getIDNode(g, nameNode)
 \item{nameNode}{The name of the node}
 }
 \value{
-The id of the specified node
+The id of the specified node as an integer
 }
 \description{
 Get the id of a node

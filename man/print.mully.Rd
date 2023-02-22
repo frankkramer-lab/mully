@@ -11,6 +11,9 @@
 
 \item{...}{Other arguments to be passed to \code{print}}
 }
+\value{
+No return value. The given graph is printed
+}
 \description{
 Print function
 }

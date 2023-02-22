@@ -14,7 +14,7 @@ removeLayer(g, name, trans = FALSE)
 \item{trans}{A boolean whether to insert transitive edges or not}
 }
 \value{
-The graph, with the given layer and its corresponding nodes and edges removed.
+The mully graph, with the given layer and its corresponding nodes and edges removed.
 }
 \description{
 Delete a layer or a set of layers from a graph

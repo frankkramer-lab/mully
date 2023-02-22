@@ -35,6 +35,9 @@ plot3d(
 
 \item{edge.arrow.width}{The  edges' arrow width. Default set to 1}
 }
+\value{
+No return value. A 3D plot of the given graph is created.
+}
 \description{
 Plot the graph in 3D using rgl
 }

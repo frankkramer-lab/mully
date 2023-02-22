@@ -4,10 +4,13 @@
 \alias{demo}
 \title{A demo function to test the package}
 \usage{
-demo()
+demo(name = "MyFirstMully")
+}
+\arguments{
+\item{name}{Optional name for the graph to be created. By default set to "MyFirstMully"}
 }
 \value{
-A mully graph
+A mully test graph with few layers, nodes and edges
 }
 \description{
 A demo function to test the package

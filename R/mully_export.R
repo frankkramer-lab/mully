@@ -1,8 +1,8 @@
 #' Export mully into CSV files
 #'
 #' @param g The input graph
-#' @param target The target file in which the files will be generated. By default the WD.
-#'
+#' @param target The target file in which the files will be generated.
+#' @return No return value. Exports the given graph into different CSV files saved in the target folder
 #'
 #' @export
 #' @import igraph
@@ -10,14 +10,14 @@
 #' @examples
 #' \dontrun{
 #' g=mully::demo()
-#' exportCSV(g)
+#' exportCSV(g,directory)
 #' }
 exportCSV<-function(g,target){
   if(missing(g)){
     stop("invalid argument")
   }
   if(missing(target)){
-    target=getwd()
+    stop("Please provide a target directory to export the files in")
   }
   if(!dir.exists(target)){
     stop("target directory doesn't exist")
@@ -44,5 +44,5 @@ exportCSV<-function(g,target){
     write.csv(edges, file = paste(target,"/","Edges-",now,".csv",sep=""),row.names=FALSE)
   }
 
-  print(paste("Files generated successfully under",target,sep=""))
+  message(paste("Files generated successfully under",target,sep=""))
 }

@@ -12,7 +12,7 @@ merge(g1, g2)
 \item{g2}{The second graph to merge. All of its elements are added to the first graph.}
 }
 \value{
-The merge of the two graphs. The merge is based on the first given graph
+The merge of the two graphs as a mully object. The merge is based on the first given graph
 }
 \description{
 Merge or unite two graphs

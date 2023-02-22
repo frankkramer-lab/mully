@@ -12,7 +12,7 @@ mully(name = NA, direct = TRUE)
 \item{direct}{A boolean value, if the graph is directed or not. By default TRUE.}
 }
 \value{
-The created multilayered graph.
+The created multilayered graph, a mully object.
 }
 \description{
 Create an empty multilayered graph

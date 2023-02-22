@@ -13,6 +13,9 @@
 
 \item{...}{Other arguments to be passed to \link[igraph]{plot.igraph}}
 }
+\value{
+No return value. A 2D plot of the given graph is created.
+}
 \description{
 Plot the graph in 2D
 }

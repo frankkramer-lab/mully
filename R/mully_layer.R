@@ -126,7 +126,7 @@ getLayerByID <- function(g, id) {
 #' @param name The name or the list of the names of the layers to be deleted.
 #' @param trans A boolean whether to insert transitive edges or not
 #'
-#' @return The graph, with the given layer and its corresponding nodes and edges removed.
+#' @return The mully graph, with the given layer and its corresponding nodes and edges removed.
 #'
 #' @export
 #' @import igraph

@@ -84,7 +84,7 @@ getEdgeAttributes<-function(g,nodeStart,nodeDest){
 #' @param nodeDest The second endpoint of the edge
 #' @param attributes The attributes to assign to the edge
 #'
-#' @return The graph, with the added edge
+#' @return The mully graph, with the added edge
 #'
 #' @export
 #' @import igraph
@@ -136,7 +136,7 @@ addEdge <- function(g, nodeStart, nodeDest, attributes) {
 #' @param attributes The attributes of the edge to delete. Required if the nodes are multi-connected
 #' @param multi A boolean. Specifies whether to delete multiple edges or not, in case they exist.
 #'
-#' @return The graph with the deleted edges
+#' @return The mully graph with the deleted edges
 #'
 #' @export
 #' @import igraph
@@ -152,8 +152,8 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
   idEdge = as.numeric(getIDEdge(g, nodeStart, nodeDest))
 
   if(length(idEdge)>1 && missing(attributes) && multi==FALSE){
-    print("Nodes have multiple Edges. Please provide specific attributes.")
-    print(getEdgeAttributes(g,nodeStart,nodeDest))
+    message("Nodes have multiple Edges. Please provide specific attributes.")
+    message(getEdgeAttributes(g,nodeStart,nodeDest))
     stop()
   }
 
@@ -191,8 +191,8 @@ removeEdge <- function(g, nodeStart, nodeDest,attributes=NA, multi=FALSE) {
   }
 
   if(length(comAll)>1 && multi==FALSE){
-    print("Nodes have multiple Edges. Please provide specific attributes.")
-    print(getEdgeAttributes(g,nodeStart,nodeDest))
+    message("Nodes have multiple Edges. Please provide specific attributes.")
+    message(getEdgeAttributes(g,nodeStart,nodeDest))
     stop()
   }
 
@@ -225,20 +225,19 @@ addTransEdges<-function(g,nodes){
     if(is.directed(g)){
     for(inNode in inN){
       for(outNode in outN){
-        print(paste("The edge ",inN,"-->",outN," will be added.",sep=""))
+        message(paste("The edge ",inN,"-->",outN," will be added.",sep=""))
         g<-addEdge(g,inNode,outNode,attributes)
       }
     }
     }
     else{
       all=append(inN,outN)
-      print(all)
       for(i in 1:(length(all)-1)){
         for(j in i+1:(length(all))){
           if(j>length(all)){
             break
           }
-          print(paste("The edge ",all[i],"--",all[j]," will be added.",sep=""))
+          message(paste("The edge ",all[i],"--",all[j]," will be added.",sep=""))
           g<-addEdge(g,all[i],all[j],attributes)
         }
       }

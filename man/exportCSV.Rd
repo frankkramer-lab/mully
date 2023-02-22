@@ -9,7 +9,10 @@ exportCSV(g, target)
 \arguments{
 \item{g}{The input graph}
 
-\item{target}{The target file in which the files will be generated. By default the WD.}
+\item{target}{The target file in which the files will be generated.}
+}
+\value{
+No return value. Exports the given graph into different CSV files saved in the target folder
 }
 \description{
 Export mully into CSV files
@@ -17,6 +20,6 @@ Export mully into CSV files
 \examples{
 \dontrun{
 g=mully::demo()
-exportCSV(g)
+exportCSV(g,directory)
 }
 }

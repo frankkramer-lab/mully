@@ -18,7 +18,7 @@ removeEdge(g, nodeStart, nodeDest, attributes = NA, multi = FALSE)
 \item{multi}{A boolean. Specifies whether to delete multiple edges or not, in case they exist.}
 }
 \value{
-The graph with the deleted edges
+The mully graph with the deleted edges
 }
 \description{
 Delete an edge

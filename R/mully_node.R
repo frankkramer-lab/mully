@@ -32,7 +32,7 @@ getNode <- function(g, nameNode) {
 #' @param g The input graph
 #' @param nameNode The name of the node
 #'
-#' @return The id of the specified node
+#' @return The id of the specified node as an integer
 #' @export
 #' @import igraph
 #' @examples
@@ -45,7 +45,7 @@ getIDNode <- function(g, nameNode) {
     stop("Invalid Arguments")
   }
   if(!nameNode%in%V(g)$name){
-    print("Node Does not Exist")
+    message("Node Does not Exist")
     return(NULL)
   }
   return(which(V(g)$name == nameNode))
@@ -59,7 +59,7 @@ getIDNode <- function(g, nameNode) {
 #' @param layerName The name of the layer to be assigned to the node.
 #' @param attributes The attributes of the node to add. This argument must be a named list.
 #'
-#' @return The graph, with the new node.
+#' @return The mully graph, with the new node.
 #' @export
 #' @import igraph
 #' @examples
@@ -117,7 +117,7 @@ addNode <- function(g, nodeName, layerName, attributes = NA) {
 #' @param name The name or the list of names of the nodes to be deleted.
 #' @param trans A boolean whether to insert transitive edges or not
 #'
-#' @return The graph, with the nodes deleted.
+#' @return The mully graph, with the nodes deleted.
 #' @export
 #' @import igraph
 #' @examples

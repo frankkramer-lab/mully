@@ -1,30 +1,29 @@
 #' A demo function to test the package
-#'
-#' @return A mully graph
-#'
+#' @param name Optional name for the graph to be created. By default set to "MyFirstMully"
+#' @return A mully test graph with few layers, nodes and edges
 #' @export
-demo <- function() {
+demo <- function(name="MyFirstMully") {
 
-  g <- mully("MyFirstMully",direct = FALSE)
+  g <- mully(name,direct = FALSE)
 
   g <- addLayer(g, c("Gene", "Drug", "Disease"))
 
   g=addNode(g,"d1","disease",attributes=list(type="t1"))
-  print("Node d1 added as disease")
+  message("Node d1 added as disease")
   g=addNode(g,"d2","disease",attributes=list(type="t1"))
-  print("Node d2 added as disease")
+  message("Node d2 added as disease")
   g=addNode(g,"d3","disease",attributes=list(type="t1"))
-  print("Node d3 added as disease")
+  message("Node d3 added as disease")
   g=addNode(g,"dr1","drug",attributes=list(effect="strong"))
-  print("Node dr1 added as drug")
+  message("Node dr1 added as drug")
   g=addNode(g,"dr2","drug",attributes=list(effect="strong"))
-  print("Node dr2 added as drug")
+  message("Node dr2 added as drug")
   g=addNode(g,"dr3","drug",attributes=list(effect="moderate"))
-  print("Node dr3 added as drug")
+  message("Node dr3 added as drug")
   g=addNode(g,"g1","gene",attributes=list(desc="AF"))
-  print("Node g1 added as gene")
+  message("Node g1 added as gene")
   g=addNode(g,"g2","gene",attributes=list(desc="BE"))
-  print("Node g2 added as gene")
+  message("Node g2 added as gene")
 
   #See vertices attributes
   as.data.frame(get.vertex.attribute(g))

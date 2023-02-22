@@ -5,7 +5,7 @@
 #' @param name The name to be assigned to the graph.
 #' @param direct A boolean value, if the graph is directed or not. By default TRUE.
 #'
-#' @return The created multilayered graph.
+#' @return The created multilayered graph, a mully object.
 #'
 #' @export
 #' @import igraph
@@ -57,6 +57,7 @@ is.mully<-function(g){
 #'
 #' @param x The input graph
 #' @param ... Other arguments to be passed to \code{print}
+#' @return No return value. The given graph is printed
 #' @export
 #' @import igraph
 #' @importFrom utils capture.output

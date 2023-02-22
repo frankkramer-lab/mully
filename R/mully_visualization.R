@@ -53,7 +53,7 @@ getMarkGroups <- function(g) {
 #' @param x The input graph
 #' @param layout The layout. Can either be random or scaled
 #' @param  ... Other arguments to be passed to \link[igraph]{plot.igraph}
-#'
+#' @return No return value. A 2D plot of the given graph is created.
 #' @export
 #' @import igraph
 #' @importFrom randomcoloR randomColor
@@ -141,7 +141,7 @@ discpos = function(n, r = 1) {
 #' @param edge.width The edge width. Default set to 5.
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
 #' @param edge.arrow.width The  edges' arrow width. Default set to 1
-#'
+#' @return No return value. A 3D plot of the given graph is created.
 #'
 #'
 #' @export

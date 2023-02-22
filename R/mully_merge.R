@@ -3,7 +3,7 @@
 #' @param g1 The first graph to merge. This is the base of the merge.
 #' @param g2 The second graph to merge. All of its elements are added to the first graph.
 #'
-#' @return The merge of the two graphs. The merge is based on the first given graph
+#' @return The merge of the two graphs as a mully object. The merge is based on the first given graph
 #'
 #' @export
 #' @import igraph

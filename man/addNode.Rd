@@ -16,7 +16,7 @@ addNode(g, nodeName, layerName, attributes = NA)
 \item{attributes}{The attributes of the node to add. This argument must be a named list.}
 }
 \value{
-The graph, with the new node.
+The mully graph, with the new node.
 }
 \description{
 Add a node with assigned layer and attributes to a graph

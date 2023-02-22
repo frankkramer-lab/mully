@@ -16,7 +16,7 @@ addEdge(g, nodeStart, nodeDest, attributes)
 \item{attributes}{The attributes to assign to the edge}
 }
 \value{
-The graph, with the added edge
+The mully graph, with the added edge
 }
 \description{
 Add an edge

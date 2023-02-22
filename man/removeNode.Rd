@@ -14,7 +14,7 @@ removeNode(g, name, trans = FALSE)
 \item{trans}{A boolean whether to insert transitive edges or not}
 }
 \value{
-The graph, with the nodes deleted.
+The mully graph, with the nodes deleted.
 }
 \description{
 Delete a node or a set of nodes from a graph

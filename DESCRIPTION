@@ -1,10 +1,10 @@
 Package: mully
 Type: Package
 Title: Create, Modify and Visualize Multi-Layered Networks
-Version: 2.1.36
-Author: Zaynab Hammoud
+Version: 2.1.37
+Authors@R: c(person("Dr. Zaynab Hammoud","Developer",role=c("aut","cre"),email="zaynabhassanhammoud@gmail.com"))
 Maintainer: Zaynab Hammoud <zaynabhassanhammoud@gmail.com>
-Description: Allows the user to create graph with multiple layers. The user can also modify the layers, the nodes, and the edges. The graph can also be visualized.
+Description: Allows the user to create graphs with multiple layers. The user can also modify the layers, the nodes, and the edges. The graph can also be visualized.
     Zaynab Hammoud and Frank Kramer (2018) <doi:10.3390/genes9110519>.
     More about multilayered graphs and their usage can be found in our review paper:
     Zaynab Hammoud and Frank Kramer (2020) <doi:10.1186/s41044-020-00046-0>.
